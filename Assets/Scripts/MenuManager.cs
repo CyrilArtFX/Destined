@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 public class MenuManager : MonoBehaviour
 {
     List<PlayerInput> playersInStartZone = new();
-    List<GameObject> playersInMenu = new();
 
     [SerializeField]
     private float timeForStart;
@@ -27,7 +26,7 @@ public class MenuManager : MonoBehaviour
 
     public void PlayerLeaveStartZone(PlayerInput player)
     {
-        if(playersInStartZone.Contains(player))
+        if (playersInStartZone.Contains(player))
         {
             playersInStartZone.Remove(player);
         }
@@ -35,30 +34,15 @@ public class MenuManager : MonoBehaviour
         ResetProgressBar();
     }
 
-    public void PlayerEnterMenuZone(GameObject player)
-    {
-        playersInMenu.Add(player);
-
-        ResetProgressBar();
-    }
-
-    public void PlayerLeaveMenuZone(GameObject player)
-    {
-        if (playersInMenu.Contains(player))
-        {
-            playersInMenu.Remove(player);
-        }
-    }
-
     void Update()
     {
-        if(playersInStartZone.Count > 1 && playersInStartZone.Count == playersInMenu.Count)
+        if (playersInStartZone.Count > 1 && playersInStartZone.Count == PlayersManager.instance.GetNumberOfPlayers())
         {
             timer += Time.deltaTime;
             startZone.ChangeProgressBar(timer / timeForStart);
         }
 
-        if(timer > timeForStart)
+        if (timer > timeForStart)
         {
             //  start game
         }
