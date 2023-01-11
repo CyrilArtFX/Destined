@@ -82,4 +82,9 @@ public class PlayersManager : MonoBehaviour
         players.Clear();
         players = playersReorganized;
     }
+
+    public int GetNumberOfPlayers()
+    {
+        return players.Count;
+    }
 }
