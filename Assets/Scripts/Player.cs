@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.UI;
 
 public class Player : MonoBehaviour
 {
@@ -12,15 +13,20 @@ public class Player : MonoBehaviour
 
     private string controllerName;
     private Sprite sprite;
+    private int playerIndex;
 
-    public void InitializePlayer(string newControllerName, int playerIndex)
+    private bool menuMode = true;
+
+    public void InitializePlayer(string newControllerName, int newPlayerIndex)
     {
         controllerName = newControllerName;
+        playerIndex = newPlayerIndex;
         nameText.text = "Player " + playerIndex;
     }
 
-    public void ChangePlayerIndex(int playerIndex)
+    public void ChangePlayerIndex(int newPlayerIndex)
     {
+        playerIndex = newPlayerIndex;
         nameText.text = "Player " + playerIndex;
     }
 
@@ -30,16 +36,40 @@ public class Player : MonoBehaviour
         spriteRenderer.sprite = sprite;
     }
 
+    public void SetToPlayMode()
+    {
+        menuMode = false;
+    }
+
     public void Deconnect(InputAction.CallbackContext ctx)
     {
+        if (!menuMode) return;
+
         PlayersManager.instance.PlayerLeft(this);
         Destroy(gameObject);
     }
 
     public void Deconnect()
     {
+        if(!menuMode)
+        {
+            nameText.text = "Disconnected";
+            PlayersManager.instance.PlayerDeconnexion(controllerName);
+
+            return;
+        }
+
         PlayersManager.instance.PlayerLeft(this);
         Destroy(gameObject);
+    }
+
+    public void Reconnect()
+    {
+        if(!menuMode)
+        {
+            nameText.text = "Player " + playerIndex;
+            PlayersManager.instance.PlayerReconnexion(controllerName);
+        }
     }
 
     public string GetControllerName()

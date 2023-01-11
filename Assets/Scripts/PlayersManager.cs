@@ -1,11 +1,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
+using UnityEngine.InputSystem.XR;
 
 public class PlayersManager : MonoBehaviour
 {
     private Dictionary<string, PlayerInput> controllers = new();
     private List<Player> players = new();
+
+    private List<string> disconnectedControllers = new();
 
 
     [SerializeField]
@@ -14,6 +18,12 @@ public class PlayersManager : MonoBehaviour
     private Dictionary<Sprite, bool> sprites = new();
 
     public static PlayersManager instance;
+
+    private bool menuMode = true;
+
+
+    [SerializeField]
+    private TextMeshProUGUI disconnectedControllersText;
 
     void Awake()
     {
@@ -30,17 +40,24 @@ public class PlayersManager : MonoBehaviour
 
     public void PlayerJoin(PlayerInput playerInput)
     {
+        if(!menuMode)
+        {
+            Destroy(playerInput.gameObject);
+        }
+
         int sameTypeIndex = 1;
         string deviceName = playerInput.devices[0].displayName;
-        foreach(string controller in controllers.Keys)
+        print(playerInput.devices[0]);
+        foreach (string controller in controllers.Keys)
         {
-            if(deviceName + " " + sameTypeIndex == controller)
+            if (deviceName + " " + sameTypeIndex == controller)
             {
                 sameTypeIndex++;
             }
         }
 
         deviceName += " " + sameTypeIndex;
+
         controllers.Add(deviceName, playerInput);
 
         Player player = playerInput.gameObject.GetComponent<Player>();
@@ -69,6 +86,67 @@ public class PlayersManager : MonoBehaviour
         sprites[player.GetSprite()] = false;
     }
 
+    public void PlayerDeconnexion(string controllerName)
+    {
+        if(menuMode)
+        {
+            return;
+        }
+
+        disconnectedControllers.Add(controllerName);
+
+        UpdateDisconnectedControllersText();
+    }
+
+    public void PlayerReconnexion(string controllerName)
+    {
+        if(menuMode)
+        {
+            return;
+        }
+
+        disconnectedControllers.Remove(controllerName);
+
+        UpdateDisconnectedControllersText();
+    }
+
+    private void UpdateDisconnectedControllersText()
+    {
+        int numberOfDisconnectedControllers = disconnectedControllers.Count;
+
+        string str = "";
+
+        if(numberOfDisconnectedControllers > 0)
+        {
+            str = "Controller";
+            if (numberOfDisconnectedControllers > 1)
+            {
+                str += "s";
+            }
+
+            for (int i = 0; i  < numberOfDisconnectedControllers; i++)
+            {
+                str += " " + disconnectedControllers[i];
+
+                if (i < numberOfDisconnectedControllers - 1)
+                {
+                    str += " and";
+                }
+            }
+
+            if (numberOfDisconnectedControllers > 1)
+            {
+                str += " are disconnected.";
+            }
+            else
+            {
+                str += " is disconnected.";
+            }
+        }
+
+        disconnectedControllersText.text = str;
+    }
+
     private void ReorganizePlayers()
     {
         List<Player> playersReorganized = new();
@@ -86,5 +164,14 @@ public class PlayersManager : MonoBehaviour
     public int GetNumberOfPlayers()
     {
         return players.Count;
+    }
+
+    public void SwitchToPlayMode()
+    {
+        menuMode = false;
+        foreach(Player player in players)
+        {
+            player.SetToPlayMode();
+        }
     }
 }

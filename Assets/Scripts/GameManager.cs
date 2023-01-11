@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+        PlayersManager.instance.SwitchToPlayMode();
         SceneManager.UnloadSceneAsync(1);
         SceneManager.LoadSceneAsync("GameScene", LoadSceneMode.Additive);
     }
