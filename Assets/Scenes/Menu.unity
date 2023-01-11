@@ -179,6 +179,7 @@ GameObject:
   - component: {fileID: 304513229}
   - component: {fileID: 304513231}
   - component: {fileID: 304513232}
+  - component: {fileID: 304513233}
   m_Layer: 0
   m_Name: StartZone
   m_TagString: Untagged
@@ -292,6 +293,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menuManager: {fileID: 8387651}
+--- !u!95 &304513233
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 304513228}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &581799797
 GameObject:
   m_ObjectHideFlags: 0

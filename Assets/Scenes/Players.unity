@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_NotificationBehavior: 2
-  m_MaxPlayerCount: -1
+  m_MaxPlayerCount: 4
   m_AllowJoining: 1
   m_JoinBehavior: 0
   m_PlayerJoinedEvent:
@@ -236,3 +236,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c00348f748e71845b3a4b7e1e1dafea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerSprites:
+  - {fileID: 594728411, guid: 3874231f39c342a45a67d266f5a7a537, type: 3}
+  - {fileID: 1042768307, guid: 3874231f39c342a45a67d266f5a7a537, type: 3}
+  - {fileID: 1336306107, guid: 3874231f39c342a45a67d266f5a7a537, type: 3}
+  - {fileID: -15728113, guid: 3874231f39c342a45a67d266f5a7a537, type: 3}
