@@ -44,7 +44,7 @@ public class MenuManager : MonoBehaviour
 
         if (timer > timeForStart)
         {
-            //  start game
+            GameManager.instance.StartGame();
         }
     }
 
