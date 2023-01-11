@@ -6,6 +6,8 @@ public class MenuManager : MonoBehaviour
 {
     List<PlayerInput> playersInStartZone = new();
 
+    List<GameObject> playersInOptionZone = new();
+
     [SerializeField]
     private float timeForStart;
 
@@ -14,9 +16,13 @@ public class MenuManager : MonoBehaviour
     [SerializeField]
     private StartZone startZone;
 
+    [SerializeField]
+    private GameObject options;
+
     void Start()
     {
         ResetProgressBar();
+        options.SetActive(false);
     }
 
     public void PlayerEnterStartZone(PlayerInput player)
@@ -32,6 +38,26 @@ public class MenuManager : MonoBehaviour
         }
 
         ResetProgressBar();
+    }
+
+    public void PlayerEnterOptionZone(GameObject player)
+    {
+        playersInOptionZone.Add(player);
+
+        options.SetActive(true);
+    }
+
+    public void PlayerLeaveOptionZone(GameObject player)
+    {
+        if (playersInOptionZone.Contains(player))
+        {
+            playersInOptionZone.Remove(player);
+        }
+
+        if(playersInOptionZone.Count == 0)
+        {
+            options.SetActive(false);
+        }
     }
 
     void Update()
