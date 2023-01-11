@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
 	[SerializeField]
 	private float moveSpeed = 5.0f;
 	[SerializeField]
+	private Player player;
+	[SerializeField]
 	private Animator animator;
 
 	private new Rigidbody2D rigidbody;
@@ -24,6 +26,13 @@ public class PlayerController : MonoBehaviour
 		Direction = ctx.action.ReadValue<Vector2>();
 	
 		animator.SetBool( "IsWalking", Direction != Vector2.zero );
+	}
+
+	public void OnDrop( InputAction.CallbackContext ctx )
+	{
+		if ( !ctx.action.triggered ) return;
+
+		player.Inventory.DropLastItem();
 	}
 
 	void Update()

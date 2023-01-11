@@ -4,6 +4,8 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
+    public Inventory Inventory => inventory;
+
     [SerializeField]
     private TextMeshPro nameText;
 
@@ -12,6 +14,9 @@ public class Player : MonoBehaviour
 
     private string controllerName;
     private Sprite sprite;
+
+    [SerializeField]
+    private Inventory inventory;
 
     public void InitializePlayer(string newControllerName, int playerIndex)
     {
