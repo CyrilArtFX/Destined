@@ -50,8 +50,7 @@ public class Player : MonoBehaviour
     {
         if (!menuMode) return;
 
-        PlayersManager.instance.PlayerLeft(this);
-        Destroy(gameObject);
+        Remove();
     }
 
     public void Deconnect()
@@ -64,7 +63,19 @@ public class Player : MonoBehaviour
             return;
         }
 
+        Remove();
+    }
+
+    public void Remove()
+    {
+        //  drop items
+        for ( int i = 0; i <= inventory.ItemsCount; i++ )
+            inventory.DropLastItem();
+
+        //  manage quit
         PlayersManager.instance.PlayerLeft(this);
+        
+        //  destroy
         Destroy(gameObject);
     }
 
