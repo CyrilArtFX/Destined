@@ -22,8 +22,13 @@ public class PlayerController : MonoBehaviour
 	[SerializeField]
 	private GameObject carrotProjectile;
 
+	[SerializeField]
+	private float stunImmuneTime;
+
 
 	private bool throwing = false;
+	private float stun = 0.0f;
+	private bool stunImmune;
 
 	void Awake()
 	{
@@ -34,7 +39,7 @@ public class PlayerController : MonoBehaviour
 	{
 		Direction = ctx.action.ReadValue<Vector2>();
 	
-		animator.SetBool( "IsWalking", Direction != Vector2.zero );
+		animator.SetBool( "IsWalking", Direction != Vector2.zero && stun <= 0.0f );
 	}
 
 	public void OnDrop( InputAction.CallbackContext ctx )
@@ -85,14 +90,35 @@ public class PlayerController : MonoBehaviour
     {
         GameObject projectile = GameObject.Instantiate(carrotProjectile);
 		projectile.transform.position = throwStart.position;
-		projectile.GetComponent<CarrotProjectile>().SetDirection(direction);
+		projectile.GetComponent<CarrotProjectile>().Initialize(direction, gameObject);
 
 		player.Inventory.RemoveItem(player.Inventory.Items[0]);
 		player.Inventory.UpdateItemsPositions();
     }
 
+	public void Stun(float stunTime)
+	{
+		if (stunImmune) return;
+
+		stun += stunTime;
+		StartCoroutine(StunImmunity());
+	}
+
 	void Update()
 	{
+		if(stun > 0.0f)
+		{
+			stun -= Time.deltaTime;
+			return;
+		}
+
 		rigidbody.MovePosition( rigidbody.position + Direction * moveSpeed );
+	}
+
+	private IEnumerator StunImmunity()
+	{
+		stunImmune = true;
+		yield return new WaitForSeconds(stunImmuneTime);
+		stunImmune = false;
 	}
 }

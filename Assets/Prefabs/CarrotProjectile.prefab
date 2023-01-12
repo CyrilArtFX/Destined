@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1237562026189896567}
   - component: {fileID: 1237562026189896565}
   - component: {fileID: 5068680372945867090}
+  - component: {fileID: 945541169175522475}
   m_Layer: 0
   m_Name: CarrotProjectile
   m_TagString: Untagged
@@ -99,7 +100,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.02
-  range: 5
+  range: 8
+  stunTime: 1
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!96 &5068680372945867090
 TrailRenderer:
   serializedVersion: 2
@@ -208,3 +213,19 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!58 &945541169175522475
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1237562026189896566}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.4

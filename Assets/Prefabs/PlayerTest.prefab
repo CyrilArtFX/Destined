@@ -292,7 +292,7 @@ GameObject:
   - component: {fileID: 236517255970550696}
   - component: {fileID: 7507196015134540527}
   - component: {fileID: -1462114050433421847}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PlayerTest
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -456,6 +456,7 @@ MonoBehaviour:
   animator: {fileID: 4388120074462765570}
   throwStart: {fileID: 2329970718111140914}
   carrotProjectile: {fileID: 1237562026189896566, guid: 6cfd28db1b5843d489dd6928c7ad5c15, type: 3}
+  stunImmuneTime: 5
 --- !u!50 &236517255970550696
 Rigidbody2D:
   serializedVersion: 4

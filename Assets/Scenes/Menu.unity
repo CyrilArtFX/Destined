@@ -320,6 +320,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &465992773
 GameObject:
   m_ObjectHideFlags: 0
@@ -456,6 +459,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menuManager: {fileID: 8387651}
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!61 &466886260
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -600,7 +606,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4120019830584834528, guid: 41d86e26d65bd804cb64891368bfdf2a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.6950026
+      value: -2.99
       objectReference: {fileID: 0}
     - target: {fileID: 4120019830584834528, guid: 41d86e26d65bd804cb64891368bfdf2a, type: 3}
       propertyPath: m_LocalPosition.z

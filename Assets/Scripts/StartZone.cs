@@ -12,13 +12,18 @@ public class StartZone : MonoBehaviour
     [SerializeField]
     AnimationCurve progressBarCurve;
 
+    [SerializeField]
+    LayerMask playerMask;
+
     void OnTriggerEnter2D(Collider2D collision)
     {
+        if (!LayerMaskUtils.HasLayer(playerMask, collision.gameObject.layer)) return;
         menuManager.PlayerEnterStartZone(collision.gameObject.GetComponent<PlayerInput>()); 
     }
 
     void OnTriggerExit2D(Collider2D collision)
     {
+        if (!LayerMaskUtils.HasLayer(playerMask, collision.gameObject.layer)) return;
         menuManager.PlayerLeaveStartZone(collision.gameObject.GetComponent<PlayerInput>());
     }
 
