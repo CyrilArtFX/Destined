@@ -644,7 +644,7 @@ MonoBehaviour:
   maxCount: 100
   itemOffset: 0.25
   dropRadius: 0.75
-  player: {fileID: -1462114050433421847}
+  owner: {fileID: 3429361060142620931}
 --- !u!1001 &5312569272347564280
 PrefabInstance:
   m_ObjectHideFlags: 0

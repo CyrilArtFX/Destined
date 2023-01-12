@@ -6,9 +6,10 @@ using static UnityEditor.Progress;
 [RequireComponent( typeof( CircleCollider2D ) )]
 public class Inventory : MonoBehaviour
 {
-	public Player Player => player;
+	public Transform Owner => owner;
 	public ReadOnlyCollection<Collectible> Items => items.AsReadOnly();
 	public int ItemsCount => items.Count;
+	public int MaxCount => maxCount;
 
 	[SerializeField]
 	private int maxCount = 5;
@@ -17,7 +18,7 @@ public class Inventory : MonoBehaviour
 	[SerializeField]
 	private float dropRadius = 0.25f;
 	[SerializeField]
-	private Player player;
+	private Transform owner;
 
 	private readonly List<Collectible> items = new();
 
@@ -65,6 +66,7 @@ public class Inventory : MonoBehaviour
 		float ang = Random.Range( 0.0f, 360.0f );
 		item.transform.position = transform.position + new Vector3( Mathf.Cos( ang ) * dropRadius, Mathf.Sin( ang ) * dropRadius );
 		item.transform.localEulerAngles = Vector3.zero;
+		item.transform.localScale = Vector3.one;
 	}
 
 	public void DropLastItem()

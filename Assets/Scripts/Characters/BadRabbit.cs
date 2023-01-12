@@ -1,6 +1,5 @@
+using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
-using static UnityEditor.Progress;
 
 public class BadRabbit : MonoBehaviour
 {
@@ -25,6 +24,10 @@ public class BadRabbit : MonoBehaviour
 	private Vector2 idleTimeRange = new( 0.8f, 1.2f );
 	[SerializeField]
 	private float stunTime = 1.0f;
+	[SerializeField]
+	private float searchRadius = 2.0f;
+	[SerializeField]
+	private float searchPercent = 0.4f;
 
 	[Header( "Charge Attack" )]
 	[SerializeField]
@@ -41,6 +44,8 @@ public class BadRabbit : MonoBehaviour
 	private Animator animator;
 	[SerializeField]
 	private Rabbit_AnimController animController;
+	[SerializeField]
+	private Inventory inventory;
 
 	private Player playerTarget;
 	private Vector3 moveTarget;
@@ -124,9 +129,17 @@ public class BadRabbit : MonoBehaviour
 	void SetPlayerTarget( Player player )
 	{
 		playerTarget = player;
-		state = player == null ? State.PATROL : State.ATTACK;
 
-		isIdling = false;
+		//  change state
+		if ( playerTarget != null )
+			state = State.ATTACK;
+		else
+		{
+			state = State.PATROL;
+			moveTarget = FindNextPatrolPosition();
+		}
+
+		//  reset idle
 		ResetIdle();
 	}
 
@@ -157,11 +170,17 @@ public class BadRabbit : MonoBehaviour
 	{
 		if ( playerTarget == null ) return;
 
+		//  stun target
 		playerTarget.Controller.Stun( stunTime );
+		
+		//  stop chasing player
 		SetPlayerTarget( null );
 		
+		//  idling
 		isIdling = false;
 		animator.ResetTrigger( "Attack" );
+
+		SearchCarrots();
 	}
 
 	void OnAnimChargeJumpEnd()
@@ -174,10 +193,37 @@ public class BadRabbit : MonoBehaviour
 			player.Controller.Stun( chargeStunTime );
 		}
 
+		//  stop chasing player
 		SetPlayerTarget( null );
 
+		//  idling
 		isIdling = false;
 		animator.SetBool( "IsChargeJumping", false );
+
+		SearchCarrots();
+	}
+
+	void SearchCarrots()
+	{
+		if ( inventory.ItemsCount > inventory.MaxCount ) return;
+
+		//  search for collectibles
+		List<Collectible> found_items = new();
+		foreach( Collider2D collider in Physics2D.OverlapCircleAll( transform.position, searchRadius ) )
+		{
+			if ( !collider.TryGetComponent( out Collectible item ) ) continue;
+
+			found_items.Add( item );
+		}
+
+		//  grab a percent of them
+		int grab_amount = (int) Mathf.Floor( found_items.Count * searchPercent );
+		for ( int i = 0; i < grab_amount; i++ )
+		{
+			if ( inventory.ItemsCount > inventory.MaxCount ) return;
+
+			inventory.AddItem( found_items[i] );
+		}
 	}
 
 	void OnMoveUpdateEnd()
@@ -200,6 +246,14 @@ public class BadRabbit : MonoBehaviour
 				{
 					moveTarget = FindNextPatrolPosition();
 					ResetIdle();
+
+					//  dropping items
+					if ( inventory.ItemsCount > 0 )
+					{
+						int drop_amount = Random.Range( 1, 2 );
+						for ( int i = 0; i <= drop_amount; i++ )
+							inventory.DropLastItem();
+					}
 				}
 				break;
 		}
@@ -227,8 +281,10 @@ public class BadRabbit : MonoBehaviour
 		return pos;
 	}
 
-	void GameEventOnCollect( Player player, Collectible item )
+	void GameEventOnCollect( Transform owner, Collectible item )
 	{
+		if ( !owner.TryGetComponent( out Player player ) ) return;
+
 		//  check is within territory
 		float dist_sqr = ( player.transform.position - territoryCenter.position ).sqrMagnitude;
 		if ( dist_sqr > territoryRadius * territoryRadius )
@@ -267,5 +323,9 @@ public class BadRabbit : MonoBehaviour
 		//  charge
 		Gizmos.color = Color.yellow;
 		Gizmos.DrawWireSphere( transform.position, chargeRadius );
+
+		//  search
+		Gizmos.color = Color.cyan;
+		Gizmos.DrawWireSphere( transform.position, searchRadius );
 	}
 }

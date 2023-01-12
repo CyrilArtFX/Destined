@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 [RequireComponent( typeof( Collider2D ) )]
 public class Collectible : MonoBehaviour
@@ -6,7 +7,7 @@ public class Collectible : MonoBehaviour
 	[SerializeField]
 	private float collectDelay = 0.5f;
 
-	private float lastCollectTime;
+	private Dictionary<Inventory, float> lastCollectTimes = new();
 
 	private new Collider2D collider;
 
@@ -22,12 +23,12 @@ public class Collectible : MonoBehaviour
 	{
 		if ( !CanCollect( inventory ) ) return false;
 
-		lastCollectTime = Time.time + collectDelay;
+		lastCollectTimes[inventory] = Time.time + collectDelay;
 		collider.enabled = false;
 		
 		OnCollect( inventory );
 
-		GameEvents.OnCollect.Invoke( inventory.Player, this );
+		GameEvents.OnCollect.Invoke( inventory.Owner, this );
 
 		sr.sortingOrder = 1;
 
@@ -36,7 +37,7 @@ public class Collectible : MonoBehaviour
 
 	public void Drop( Inventory inventory )
 	{
-		lastCollectTime = Time.time + collectDelay;
+		lastCollectTimes[inventory] = Time.time + collectDelay;
 		collider.enabled = true;
 
 		OnDrop( inventory );
@@ -46,7 +47,10 @@ public class Collectible : MonoBehaviour
 
 	public virtual bool CanCollect( Inventory inventory )
 	{
-		return lastCollectTime <= Time.time;
+		if ( lastCollectTimes.ContainsKey( inventory ) )
+			return lastCollectTimes[inventory] <= Time.time;
+
+		return true;
 	}
 	public virtual void OnCollect( Inventory inventory ) {}
 	public virtual void OnDrop( Inventory inventory ) {}
