@@ -124,12 +124,18 @@ public class PlayerController : MonoBehaviour
     {
         if (stunImmune) return;
 
+        //  set time
         stun = stunTime;
 
+        //  animation
+        animator.SetBool( "IsStunned", true );
+
+        //  play stun particles
         var particleMain = stunParticles.main;
         particleMain.startLifetime = stunTime;
         stunParticles.Play();
 
+        //  handle immunity
         StartCoroutine(StunImmunity());
 
         //  drop all items
@@ -153,7 +159,10 @@ public class PlayerController : MonoBehaviour
         //  stun
         if (stun > 0.0f)
         {
-            stun -= Time.deltaTime;
+            if ( ( stun -= Time.deltaTime ) <= 0.0f )
+            {
+                animator.SetBool( "IsStunned", false );
+            }
         }
         //  move
         else
