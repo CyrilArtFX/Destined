@@ -11,6 +11,8 @@ public class Inventory : MonoBehaviour
 	public int ItemsCount => items.Count;
 
 	[SerializeField]
+	private int maxCount = 5;
+	[SerializeField]
 	private float itemOffset = 0.25f;
 	[SerializeField]
 	private float dropRadius = 0.25f;
@@ -21,6 +23,7 @@ public class Inventory : MonoBehaviour
 
 	public bool AddItem( Collectible item )
 	{
+		if ( items.Count + 1 > maxCount ) return false;
 		if ( items.Contains( item ) ) return false;
 		if ( !item.Collect( this ) ) return false;
 
