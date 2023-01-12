@@ -35,7 +35,7 @@ public class Inventory : MonoBehaviour
 
 	public void UpdateItemPosition( Collectible item )
 	{
-		item.transform.localPosition = new Vector3( 0.0f, itemOffset * items.Count );
+		item.transform.localPosition = new Vector3( 0.0f, itemOffset * items.IndexOf( item ) );
 		item.transform.localEulerAngles = Vector3.zero;
 	}
 

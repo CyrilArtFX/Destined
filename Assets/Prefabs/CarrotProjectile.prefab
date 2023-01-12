@@ -13,7 +13,9 @@ GameObject:
   - component: {fileID: 1237562026189896565}
   - component: {fileID: 5068680372945867090}
   - component: {fileID: 945541169175522475}
-  m_Layer: 0
+  - component: {fileID: -2295763757762121961}
+  - component: {fileID: 1447295282654347504}
+  m_Layer: 6
   m_Name: CarrotProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,12 +101,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a07e7f9c7eb4574f8d11840295a4afb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.02
-  range: 8
-  stunTime: 1
+  speed: 0.3
+  range: 5
+  stunTime: 1.5
   playerMask:
     serializedVersion: 2
     m_Bits: 8
+  carrot: {fileID: 8504721398169505408, guid: 41d86e26d65bd804cb64891368bfdf2a, type: 3}
+  triggerCC: {fileID: 945541169175522475}
+  collisionCC: {fileID: -2295763757762121961}
 --- !u!96 &5068680372945867090
 TrailRenderer:
   serializedVersion: 2
@@ -228,4 +233,41 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.4
+  m_Radius: 0.45
+--- !u!58 &-2295763757762121961
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1237562026189896566}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.3
+--- !u!50 &1447295282654347504
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1237562026189896566}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4

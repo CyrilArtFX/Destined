@@ -15,14 +15,23 @@ public class CarrotProjectile : MonoBehaviour
     [SerializeField]
     private LayerMask playerMask;
 
+    [SerializeField]
+    private GameObject carrot;
+
 
     private Vector2 direction;
     private Vector3 startPosition;
     private GameObject owner;
 
+    [Header("Colliders")]
+    [SerializeField]
+    CircleCollider2D triggerCC;
+    [SerializeField]
+    CircleCollider2D collisionCC;
+
     private SpriteRenderer sr;
     private TrailRenderer trail;
-    private CircleCollider2D cc;
+    private Rigidbody2D rb;
 
     private bool destroyed = false;
 
@@ -30,7 +39,7 @@ public class CarrotProjectile : MonoBehaviour
     {
         sr = GetComponent<SpriteRenderer>();
         trail = GetComponent<TrailRenderer>();
-        cc = GetComponent<CircleCollider2D>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     public void Initialize(Vector2 newDirection, GameObject newOwner)
@@ -40,6 +49,8 @@ public class CarrotProjectile : MonoBehaviour
         owner = newOwner;
 
         transform.right = newDirection;
+
+        Physics2D.IgnoreCollision(collisionCC, newOwner.GetComponent<Collider2D>(), true);
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -50,7 +61,12 @@ public class CarrotProjectile : MonoBehaviour
 
         collision.gameObject.GetComponent<PlayerController>().Stun(stunTime);
 
-        StartCoroutine(DestroyProjectile());
+        StartCoroutine(DestroyProjectile(false));
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        StartCoroutine(DestroyProjectile(true));
     }
 
     private void Update()
@@ -59,21 +75,28 @@ public class CarrotProjectile : MonoBehaviour
 
         if(direction != Vector2.zero)
         {
-            transform.position += (Vector3)direction * speed;
+
+            rb.MovePosition(rb.position + direction * speed);
 
             if (Vector3.Distance(transform.position, startPosition) > range)
             {
-                StartCoroutine(DestroyProjectile());
+                StartCoroutine(DestroyProjectile(true));
             }
         }
     }
 
-    IEnumerator DestroyProjectile()
+    IEnumerator DestroyProjectile(bool mustSpawnCarrot)
     {
         destroyed = true;
 
         sr.enabled = false;
-        cc.enabled = false;
+        triggerCC.enabled = false;
+        collisionCC.enabled = false;
+
+        if(mustSpawnCarrot)
+        {
+            GameObject.Instantiate(carrot).transform.position = transform.position;
+        }
 
         trail.emitting = false;
         yield return new WaitForSeconds(trail.time);

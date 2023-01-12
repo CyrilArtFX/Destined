@@ -100,7 +100,7 @@ public class PlayerController : MonoBehaviour
 	{
 		if (stunImmune) return;
 
-		stun += stunTime;
+		stun = stunTime;
 		StartCoroutine(StunImmunity());
 	}
 
