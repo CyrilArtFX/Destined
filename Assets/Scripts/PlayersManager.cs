@@ -160,6 +160,11 @@ public class PlayersManager : MonoBehaviour
         players = playersReorganized;
     }
 
+    public List<Player> GetPlayers()
+    {
+        return players;
+    }
+
     public int GetNumberOfPlayers()
     {
         return players.Count;
