@@ -18,6 +18,9 @@ public class CarrotProjectile : MonoBehaviour
     [SerializeField]
     private GameObject carrot;
 
+    [SerializeField]
+    private ParticleSystem impactParticles;
+
 
     private Vector2 direction;
     private Vector3 startPosition;
@@ -59,8 +62,15 @@ public class CarrotProjectile : MonoBehaviour
 
         if (collision.gameObject == owner) return;
 
+        if (collision.gameObject.GetComponent<PlayerController>().IsStunImmune)
+        {
+            Physics2D.IgnoreCollision(collisionCC, collision, true);
+            return;
+        }
+
         collision.gameObject.GetComponent<PlayerController>().Stun(stunTime);
 
+        impactParticles.Play();
         StartCoroutine(DestroyProjectile(false));
     }
 
@@ -73,7 +83,7 @@ public class CarrotProjectile : MonoBehaviour
     {
         if (destroyed) return;
 
-        if(direction != Vector2.zero)
+        if (direction != Vector2.zero)
         {
 
             rb.MovePosition(rb.position + direction * speed);
@@ -93,7 +103,7 @@ public class CarrotProjectile : MonoBehaviour
         triggerCC.enabled = false;
         collisionCC.enabled = false;
 
-        if(mustSpawnCarrot)
+        if (mustSpawnCarrot)
         {
             GameObject.Instantiate(carrot).transform.position = transform.position;
         }
