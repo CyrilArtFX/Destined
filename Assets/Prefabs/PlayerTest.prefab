@@ -458,9 +458,34 @@ MonoBehaviour:
   player: {fileID: -1462114050433421847}
   animator: {fileID: 4388120074462765570}
   stunParticles: {fileID: 729170756997111267}
+  sr: {fileID: 7682793936419345379}
   throwStart: {fileID: 2329970718111140914}
   carrotProjectile: {fileID: 1237562026189896566, guid: 6cfd28db1b5843d489dd6928c7ad5c15, type: 3}
   stunImmuneTime: 5
+  stunImmuneAnimation:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.2
+      inSlope: -0.02151107
+      outSlope: -0.02151107
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.75078785
+    - serializedVersion: 3
+      time: 1
+      value: 0.1
+      inSlope: -0.22913499
+      outSlope: -0.22913499
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.24921215
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!50 &236517255970550696
 Rigidbody2D:
   serializedVersion: 4
