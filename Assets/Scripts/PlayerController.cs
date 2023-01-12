@@ -14,6 +14,9 @@ public class PlayerController : MonoBehaviour
 	[SerializeField]
 	private Animator animator;
 
+	[SerializeField]
+	private ParticleSystem stunParticles;
+
 	private new Rigidbody2D rigidbody;
 
 	[SerializeField]
@@ -25,6 +28,9 @@ public class PlayerController : MonoBehaviour
 	[SerializeField]
 	private float stunImmuneTime;
 
+
+	public bool IsStun => stun > 0.0f;
+	public bool IsStunImmune => stunImmune;
 
 	private bool throwing = false;
 	private float stun = 0.0f;
@@ -101,6 +107,7 @@ public class PlayerController : MonoBehaviour
 		if (stunImmune) return;
 
 		stun = stunTime;
+		stunParticles.Play();
 		StartCoroutine(StunImmunity());
 
 		//  drop all items
