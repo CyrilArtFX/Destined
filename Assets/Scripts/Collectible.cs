@@ -23,6 +23,9 @@ public class Collectible : MonoBehaviour
 		collider.enabled = false;
 		
 		OnCollect( inventory );
+
+		GameEvents.OnCollect.Invoke( inventory.Player, this );
+
 		return true;
 	}
 

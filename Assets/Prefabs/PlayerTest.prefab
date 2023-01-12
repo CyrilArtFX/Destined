@@ -519,6 +519,7 @@ MonoBehaviour:
   nameText: {fileID: 6903711896116869281}
   spriteRenderer: {fileID: 7682793936419345379}
   inventory: {fileID: 4836424595104404903}
+  controller: {fileID: 1833290444441284576}
 --- !u!1 &6824560319115427043
 GameObject:
   m_ObjectHideFlags: 0
