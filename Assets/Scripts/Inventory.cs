@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using UnityEngine;
 using static UnityEditor.Progress;
 
@@ -6,7 +7,7 @@ using static UnityEditor.Progress;
 public class Inventory : MonoBehaviour
 {
 	public Player Player => player;
-	public IReadOnlyCollection<Collectible> Items => items.AsReadOnly();
+	public ReadOnlyCollection<Collectible> Items => items.AsReadOnly();
 	public int ItemsCount => items.Count;
 
 	[SerializeField]
@@ -27,10 +28,21 @@ public class Inventory : MonoBehaviour
 
 		//  parent
 		item.transform.SetParent( transform );
-		item.transform.localPosition = new Vector3( 0.0f, itemOffset * items.Count );
-		item.transform.localEulerAngles = Vector3.zero;
+		UpdateItemPosition( item );
 
 		return true;
+	}
+
+	public void UpdateItemPosition( Collectible item )
+	{
+		item.transform.localPosition = new Vector3( 0.0f, itemOffset * items.Count );
+		item.transform.localEulerAngles = Vector3.zero;
+	}
+
+	public void UpdateItemsPositions()
+	{
+		foreach ( Collectible item in items )
+			UpdateItemPosition( item );
 	}
 
 	public void DropItem( Collectible item )
@@ -57,6 +69,17 @@ public class Inventory : MonoBehaviour
 		if ( items.Count <= 0 ) return;
 
 		DropItem( items[items.Count - 1] );
+	}
+
+	public void RemoveItem( Collectible item )
+	{
+		if ( !items.Contains( item ) ) return;
+
+		//  remove from container
+		items.Remove( item );
+
+		//  destroy item
+		Destroy( item );
 	}
 
 	private void OnTriggerEnter2D( Collider2D collision )
