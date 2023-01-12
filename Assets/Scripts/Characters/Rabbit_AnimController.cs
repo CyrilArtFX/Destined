@@ -5,11 +5,17 @@ using UnityEngine.Events;
 public class Rabbit_AnimController : MonoBehaviour
 {
     public bool CanMove = false;
+    public bool IsChargeJumping = false;
 
-    public Action OnAnimAttack;
+    public Action OnAttack;
+    public Action OnChargeJumpEnd;
 
     public void AllowMove() => CanMove = true;
     public void DisallowMove() => CanMove = false;
 
-    public void InvokeAttackEvent() => OnAnimAttack.Invoke();
+    public void EnableChargeJumping() => IsChargeJumping = true;
+    public void DisableChargeJumping() => IsChargeJumping = false;
+
+    public void InvokeOnAttack() => OnAttack.Invoke();
+    public void InvokeOnChargeJumpEnd() => OnChargeJumpEnd.Invoke();
 }

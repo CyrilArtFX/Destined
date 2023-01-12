@@ -119,6 +119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CanMove: 0
+  IsChargeJumping: 0
 --- !u!1 &3923206999493795325
 GameObject:
   m_ObjectHideFlags: 0
@@ -172,6 +173,10 @@ MonoBehaviour:
   moveAcceptanceRadius: 1
   idleTimeRange: {x: 0.8, y: 1.2}
   stunTime: 1
+  chargeMoveSpeed: 10
+  chargeStunTime: 1
+  chargeRadius: 3.5
+  chargeCooldown: 7
   animator: {fileID: 5499350637687264151}
   animController: {fileID: 5622785581863007980}
 --- !u!58 &6989836207612748582

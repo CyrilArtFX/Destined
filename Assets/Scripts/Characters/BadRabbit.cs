@@ -26,12 +26,15 @@ public class BadRabbit : MonoBehaviour
 	[SerializeField]
 	private float stunTime = 1.0f;
 
-	private Player playerTarget;
-	private Vector3 moveTarget;
-	private Vector3 moveDir;
-	private bool isIdling = true;
-	private float currentIdleTime = 0.0f;
-	private State state = State.PATROL;
+	[Header( "Charge Attack" )]
+	[SerializeField]
+	private float chargeMoveSpeed = .3f;
+	[SerializeField]
+	private float chargeStunTime = 1.0f;
+	[SerializeField]
+	private float chargeRadius = 3.5f;
+	[SerializeField]
+	private float chargeCooldown = 2.0f;
 
 	[Header( "References" )]
 	[SerializeField]
@@ -39,12 +42,22 @@ public class BadRabbit : MonoBehaviour
 	[SerializeField]
 	private Rabbit_AnimController animController;
 
+	private Player playerTarget;
+	private Vector3 moveTarget;
+	private Vector3 moveDir;
+	private bool isIdling = true;
+	private float currentIdleTime = 0.0f;
+	private float currentChargeCooldown = 0.0f;
+	private State state = State.PATROL;
+
 	void Start()
 	{
 		moveTarget = transform.position;
 		currentIdleTime = idleTimeRange.x;
 
-		animController.OnAnimAttack = OnAnimAttack;
+		animController.OnAttack = OnAnimAttack;
+		animController.OnChargeJumpEnd = OnAnimChargeJumpEnd;
+
 		GameEvents.OnCollect.AddListener( GameEventOnCollect );
 	}
 
@@ -60,6 +73,10 @@ public class BadRabbit : MonoBehaviour
 					state = State.PATROL;
 					ResetIdle();
 				}
+
+				//  decrease charge cooldown
+				if ( !animController.IsChargeJumping )
+					currentChargeCooldown -= Time.deltaTime;
 				break;
 		}
 		
@@ -67,7 +84,12 @@ public class BadRabbit : MonoBehaviour
 		Vector3 dir = moveTarget - transform.position;
 		if ( !isIdling && animController.CanMove )
 		{
-			float speed = Time.deltaTime * ( state == State.ATTACK ? chaseSpeed : moveSpeed );
+			float speed = Time.deltaTime;
+			if ( state == State.ATTACK )
+				speed *= animController.IsChargeJumping ? chargeMoveSpeed : chaseSpeed;
+			else
+				speed *= moveSpeed;
+
 			transform.position = transform.position + speed * moveDir;
 		}
 		//  destination reached
@@ -79,6 +101,20 @@ public class BadRabbit : MonoBehaviour
 		else
 		{
 			moveDir = dir.normalized;
+
+			switch ( state )
+			{
+				case State.ATTACK:
+					if ( ( playerTarget.transform.position - transform.position ).sqrMagnitude > chargeRadius * chargeRadius )
+					{
+						if ( currentChargeCooldown <= 0.0f )
+						{
+							animator.SetBool( "IsChargeJumping", true );
+							currentChargeCooldown = chargeCooldown;
+						}
+					}
+					break;
+			}
 		}
 
 		animator.SetBool( "IsWalking", !isIdling );
@@ -125,7 +161,23 @@ public class BadRabbit : MonoBehaviour
 		SetPlayerTarget( null );
 		
 		isIdling = false;
-		animator.SetBool( "Attack", false );
+		animator.ResetTrigger( "Attack" );
+	}
+
+	void OnAnimChargeJumpEnd()
+	{
+		//  stun in circle
+		foreach ( Collider2D collider in Physics2D.OverlapCircleAll( transform.position, chargeRadius ) )
+		{
+			if ( !collider.TryGetComponent( out Player player ) ) continue;
+
+			player.Controller.Stun( chargeStunTime );
+		}
+
+		SetPlayerTarget( null );
+
+		isIdling = false;
+		animator.SetBool( "IsChargeJumping", false );
 	}
 
 	void OnMoveUpdateEnd()
@@ -137,7 +189,7 @@ public class BadRabbit : MonoBehaviour
 				if ( playerTarget != null && !isIdling )
 				{
 					isIdling = true;
-					animator.SetBool( "Attack", true );
+					animator.SetTrigger( "Attack" );
 				}
 				break;
 			//  idling after movement
@@ -211,5 +263,9 @@ public class BadRabbit : MonoBehaviour
 			Gizmos.color = Color.green;
 			Gizmos.DrawWireSphere( playerTarget.transform.position, 1.0f );
 		}
+
+		//  charge
+		Gizmos.color = Color.yellow;
+		Gizmos.DrawWireSphere( transform.position, chargeRadius );
 	}
 }
