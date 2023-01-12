@@ -452,6 +452,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0.1
+  maxSpeedReduction: 0.75
+  speedReductionPerItem: 0.1
   player: {fileID: -1462114050433421847}
   animator: {fileID: 4388120074462765570}
   throwStart: {fileID: 2329970718111140914}
