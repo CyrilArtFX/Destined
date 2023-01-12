@@ -41,6 +41,7 @@ public class Inventory : MonoBehaviour
 	{
 		item.transform.localPosition = new Vector3( 0.0f, itemOffset * items.IndexOf( item ) );
 		item.transform.localEulerAngles = Vector3.zero;
+		item.transform.localScale = Vector3.one;
 	}
 
 	public void UpdateItemsPositions()
