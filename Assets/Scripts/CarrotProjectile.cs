@@ -18,6 +18,9 @@ public class CarrotProjectile : MonoBehaviour
     [SerializeField]
     private GameObject carrot;
 
+    [SerializeField]
+    private ParticleSystem impactParticles;
+
 
     private Vector2 direction;
     private Vector3 startPosition;
@@ -67,6 +70,7 @@ public class CarrotProjectile : MonoBehaviour
 
         collision.gameObject.GetComponent<PlayerController>().Stun(stunTime);
 
+        impactParticles.Play();
         StartCoroutine(DestroyProjectile(false));
     }
 

@@ -10,6 +10,9 @@ public class Collectible : MonoBehaviour
 
 	private new Collider2D collider;
 
+	[SerializeField]
+	private SpriteRenderer sr;
+
 	void Awake()
 	{
 		collider = GetComponent<Collider2D>();
@@ -26,6 +29,8 @@ public class Collectible : MonoBehaviour
 
 		GameEvents.OnCollect.Invoke( inventory.Player, this );
 
+		sr.sortingOrder = 1;
+
 		return true;
 	}
 
@@ -35,6 +40,8 @@ public class Collectible : MonoBehaviour
 		collider.enabled = true;
 
 		OnDrop( inventory );
+
+		sr.sortingOrder = -1;
 	}
 
 	public virtual bool CanCollect( Inventory inventory )
