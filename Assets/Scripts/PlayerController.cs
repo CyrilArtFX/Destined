@@ -10,6 +10,10 @@ public class PlayerController : MonoBehaviour
 	[SerializeField]
 	private float moveSpeed = 5.0f;
 	[SerializeField]
+	private float maxSpeedReduction = .9f;
+	[SerializeField]
+	private float speedReductionPerItem = 0.15f;
+	[SerializeField]
 	private Player player;
 	[SerializeField]
 	private Animator animator;
@@ -123,7 +127,8 @@ public class PlayerController : MonoBehaviour
 			return;
 		}
 
-		rigidbody.MovePosition( rigidbody.position + Direction * moveSpeed );
+		float speed = moveSpeed - moveSpeed * Mathf.Min( maxSpeedReduction, player.Inventory.ItemsCount * speedReductionPerItem );
+		rigidbody.MovePosition( rigidbody.position + Direction * speed );
 	}
 
 	private IEnumerator StunImmunity()

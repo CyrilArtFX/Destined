@@ -453,6 +453,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0.1
+  maxSpeedReduction: 0.75
+  speedReductionPerItem: 0.1
   player: {fileID: -1462114050433421847}
   animator: {fileID: 4388120074462765570}
   stunParticles: {fileID: 729170756997111267}
@@ -614,6 +616,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d59da66fd25278a49a86d5570d47998c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxCount: 100
   itemOffset: 0.25
   dropRadius: 0.75
   player: {fileID: -1462114050433421847}
