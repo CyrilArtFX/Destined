@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: db5198ecd55b2e14d8b7a9b9a1136e20
+guid: 435972e2b3a835143a7cf17c613f133f
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -104,7 +104,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Burrows_0
+      name: Grass_0
       rect:
         serializedVersion: 2
         x: 0
@@ -118,14 +118,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8d16225273190ff4995a63063a70844a
-      internalID: 1945172849
+      spriteID: 613355dcbc93cbb48993b75637cd501d
+      internalID: -1974185274
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Burrows_1
+      name: Grass_1
       rect:
         serializedVersion: 2
         x: 16
@@ -139,14 +139,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3a9c13e4889028d40a67d27a25c3af50
-      internalID: -1501186539
+      spriteID: f30cee67d6c554c48ad0f53760faaecf
+      internalID: -233319920
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Burrows_2
+      name: Grass_2
       rect:
         serializedVersion: 2
         x: 32
@@ -160,8 +160,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 08e7616401ccbef4397e078116f90ae5
-      internalID: 1490925830
+      spriteID: 56d4b396384c09e44b1ec544e5a5ab81
+      internalID: 1673310184
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grass_3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a46d9538d83f8d34a8a60e5c4e6dd68e
+      internalID: 633432593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grass_4
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80b66e5290a910841996d2529a12f4a2
+      internalID: -1796290203
       vertices: []
       indices: 
       edges: []
@@ -177,9 +219,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Burrows_1: -1501186539
-      Burrows_0: 1945172849
-      Burrows_2: 1490925830
+      Grass_0: -1974185274
+      Grass_2: 1673310184
+      Grass_1: -233319920
+      Grass_3: 633432593
+      Grass_4: -1796290203
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
