@@ -85,13 +85,17 @@ public class BadRabbit : MonoBehaviour
 		animator.SetFloat( "AnimSpeed", state == State.ATTACK ? chaseSpeed / moveSpeed : 1.0f );
 	}
 
-	void GameEventOnCollect( Player player, Collectible item )
+	void SetPlayerTarget( Player player )
 	{
-		//  check is within territory
-		float dist_sqr = ( player.transform.position - territoryCenter.position ).sqrMagnitude;
-		if ( dist_sqr > territoryRadius * territoryRadius )
-			return;
+		playerTarget = player;
+		state = player == null ? State.PATROL : State.ATTACK;
 
+		isIdling = false;
+		ResetIdle();
+	}
+
+	void TryChangePriorityPlayer( Player player )
+	{
 		//  check priority w/ current player 
 		if ( playerTarget != null && playerTarget != player )
 		{
@@ -103,15 +107,6 @@ public class BadRabbit : MonoBehaviour
 
 		//  set new target
 		SetPlayerTarget( player );
-	}
-
-	void SetPlayerTarget( Player player )
-	{
-		playerTarget = player;
-		state = player == null ? State.PATROL : State.ATTACK;
-
-		isIdling = false;
-		ResetIdle();
 	}
 
 	void ResetIdle()
@@ -176,6 +171,23 @@ public class BadRabbit : MonoBehaviour
 		}
 
 		return pos;
+	}
+
+	void GameEventOnCollect( Player player, Collectible item )
+	{
+		//  check is within territory
+		float dist_sqr = ( player.transform.position - territoryCenter.position ).sqrMagnitude;
+		if ( dist_sqr > territoryRadius * territoryRadius )
+			return;
+
+		TryChangePriorityPlayer( player );
+	}
+
+	void OnTriggerEnter2D( Collider2D collision )
+	{
+		if ( !collision.TryGetComponent( out Player player ) ) return;
+
+		TryChangePriorityPlayer( player );
 	}
 
 	void OnDrawGizmos()
