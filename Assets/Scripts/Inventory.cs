@@ -79,7 +79,7 @@ public class Inventory : MonoBehaviour
 		items.Remove( item );
 
 		//  destroy item
-		Destroy( item );
+		Destroy( item.gameObject );
 	}
 
 	private void OnTriggerEnter2D( Collider2D collision )

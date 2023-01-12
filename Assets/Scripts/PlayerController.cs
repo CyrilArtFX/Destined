@@ -16,6 +16,15 @@ public class PlayerController : MonoBehaviour
 
 	private new Rigidbody2D rigidbody;
 
+	[SerializeField]
+	private Transform throwStart;
+
+	[SerializeField]
+	private GameObject carrotProjectile;
+
+
+	private bool throwing = false;
+
 	void Awake()
 	{
 		rigidbody = GetComponent<Rigidbody2D>();
@@ -34,6 +43,53 @@ public class PlayerController : MonoBehaviour
 
 		player.Inventory.DropLastItem();
 	}
+
+	public void OnThrowController( InputAction.CallbackContext ctx )
+	{
+		if (player.Inventory.Items.Count == 0) return;
+
+		Vector2 throw_direction = ctx.action.ReadValue<Vector2>();
+
+        if (throw_direction.magnitude >= 1.0f)
+		{
+			if(!throwing)
+			{
+				throwing = true;
+				throw_direction.Normalize();
+
+				SpawnProjectile(throw_direction);
+			}
+		}
+		else if(throw_direction.magnitude <= 0.3f)
+		{
+			throwing = false;
+		}
+	}
+
+	public void OnThrowMouse( InputAction.CallbackContext ctx )
+    {
+        if (player.Inventory.Items.Count == 0) return;
+
+        if (!ctx.action.triggered) return;
+
+		Vector2 mouse_pos = Mouse.current.position.ReadValue();
+		mouse_pos = Camera.main.ScreenToWorldPoint(mouse_pos);
+
+		Vector2 throw_direction = mouse_pos - (Vector2)transform.position;
+		throw_direction.Normalize();
+
+		SpawnProjectile(throw_direction);
+    }
+
+	private void SpawnProjectile(Vector2 direction)
+    {
+        GameObject projectile = GameObject.Instantiate(carrotProjectile);
+		projectile.transform.position = throwStart.position;
+		projectile.GetComponent<CarrotProjectile>().SetDirection(direction);
+
+		player.Inventory.RemoveItem(player.Inventory.Items[0]);
+		player.Inventory.UpdateItemsPositions();
+    }
 
 	void Update()
 	{

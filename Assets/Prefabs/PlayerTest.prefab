@@ -313,6 +313,7 @@ Transform:
   m_Children:
   - {fileID: 9206186632740967191}
   - {fileID: 1257466874691507953}
+  - {fileID: 2329970718111140914}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -401,6 +402,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: c3fe7694-e8dc-49f5-becc-be2ecec8dd29
     m_ActionName: GameActions/Drop[/Keyboard/space,/XInputControllerWindows/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1833290444441284576}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnThrowController
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 7aa38ccf-e5c1-427b-9f2b-00677d582c53
+    m_ActionName: GameActions/ThrowController[/XInputControllerWindows/rightStick/up,/XInputControllerWindows1/rightStick/up,/XInputControllerWindows/rightStick/down,/XInputControllerWindows1/rightStick/down,/XInputControllerWindows/rightStick/left,/XInputControllerWindows1/rightStick/left,/XInputControllerWindows/rightStick/right,/XInputControllerWindows1/rightStick/right]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1833290444441284576}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnThrowMouse
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 49be1d11-28b9-4ec0-a8c9-2420f9257f49
+    m_ActionName: GameActions/ThrowKeyboard[/Mouse/leftButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: GameActions
@@ -421,6 +454,8 @@ MonoBehaviour:
   moveSpeed: 0.1
   player: {fileID: -1462114050433421847}
   animator: {fileID: 4388120074462765570}
+  throwStart: {fileID: 2329970718111140914}
+  carrotProjectile: {fileID: 1237562026189896566, guid: 6cfd28db1b5843d489dd6928c7ad5c15, type: 3}
 --- !u!50 &236517255970550696
 Rigidbody2D:
   serializedVersion: 4
@@ -483,6 +518,37 @@ MonoBehaviour:
   nameText: {fileID: 6903711896116869281}
   spriteRenderer: {fileID: 7682793936419345379}
   inventory: {fileID: 4836424595104404903}
+--- !u!1 &6824560319115427043
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2329970718111140914}
+  m_Layer: 0
+  m_Name: ThrowStart
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2329970718111140914
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6824560319115427043}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.036, y: -0.106, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3429361060142620931}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7943831981410499516
 GameObject:
   m_ObjectHideFlags: 0

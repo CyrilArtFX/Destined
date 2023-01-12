@@ -47,7 +47,6 @@ public class PlayersManager : MonoBehaviour
 
         int sameTypeIndex = 1;
         string deviceName = playerInput.devices[0].displayName;
-        print(playerInput.devices[0]);
         foreach (string controller in controllers.Keys)
         {
             if (deviceName + " " + sameTypeIndex == controller)
