@@ -96,6 +96,8 @@ public class BadRabbit : MonoBehaviour
 
 	void TryChangePriorityPlayer( Player player )
 	{
+		if ( player.Controller.IsStun || player.Controller.IsStunImmune ) return;
+
 		//  check priority w/ current player 
 		if ( playerTarget != null && playerTarget != player )
 		{
