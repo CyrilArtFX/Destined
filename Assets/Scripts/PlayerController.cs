@@ -61,8 +61,6 @@ public class PlayerController : MonoBehaviour
     public void OnMove(InputAction.CallbackContext ctx)
     {
         Direction = ctx.action.ReadValue<Vector2>();
-
-        animator.SetBool("IsWalking", Direction != Vector2.zero && stun <= 0.0f);
     }
 
     public void OnDrop(InputAction.CallbackContext ctx)
@@ -149,16 +147,23 @@ public class PlayerController : MonoBehaviour
             siaHideTime -= Time.deltaTime;
         }
 
+        //  get move speed
+        float speed = moveSpeed - moveSpeed * Mathf.Min(maxSpeedReduction, player.Inventory.ItemsCount * speedReductionPerItem);
+
+        //  stun
         if (stun > 0.0f)
         {
             stun -= Time.deltaTime;
-            return;
+        }
+        //  move
+        else
+        {
+            rigidbody.MovePosition(rigidbody.position + Direction * speed);
         }
 
-        //  everything below this will not happen if the player is stun
-
-        float speed = moveSpeed - moveSpeed * Mathf.Min(maxSpeedReduction, player.Inventory.ItemsCount * speedReductionPerItem);
-        rigidbody.MovePosition(rigidbody.position + Direction * speed);
+        //  animation
+        animator.SetBool("IsWalking", Direction != Vector2.zero && stun <= 0.0f);
+        animator.SetFloat("AnimSpeed", moveSpeed / speed);
     }
 
     private IEnumerator StunImmunity()
