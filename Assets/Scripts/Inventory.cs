@@ -87,6 +87,14 @@ public class Inventory : MonoBehaviour
 		Destroy( item.gameObject );
 	}
 
+	public void ClearInventory()
+	{
+		for(int i = items.Count - 1; i >= 0; i--)
+		{
+			RemoveItem(items[i]);
+		}
+	}
+
 	private void OnTriggerEnter2D( Collider2D collision )
 	{
 		if ( !collision.TryGetComponent( out Collectible item ) ) return;

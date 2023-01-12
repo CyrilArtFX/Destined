@@ -44,12 +44,14 @@ public class PlayerController : MonoBehaviour
 
     public bool IsStun => stun > 0.0f;
     public bool IsStunImmune => stunImmune;
+    public bool IsInsideSafeZone => insideSafeZone;
 
     private bool throwing = false;
     private float stun = 0.0f;
     private bool stunImmune;
     private bool siaHide;
     private float siaHideTime, siaMaxHideTime;
+    private bool insideSafeZone = false;
 
     void Awake()
     {
@@ -65,6 +67,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnDrop(InputAction.CallbackContext ctx)
     {
+        if (insideSafeZone) return;
         if (!ctx.action.triggered) return;
 
         player.Inventory.DropLastItem();
@@ -73,6 +76,7 @@ public class PlayerController : MonoBehaviour
     public void OnThrowController(InputAction.CallbackContext ctx)
     {
         if (player.Inventory.Items.Count == 0) return;
+        if (insideSafeZone) return;
 
         Vector2 throw_direction = ctx.action.ReadValue<Vector2>();
 
@@ -95,6 +99,7 @@ public class PlayerController : MonoBehaviour
     public void OnThrowMouse(InputAction.CallbackContext ctx)
     {
         if (player.Inventory.Items.Count == 0) return;
+        if (insideSafeZone) return;
 
         if (!ctx.action.triggered) return;
 
@@ -178,5 +183,11 @@ public class PlayerController : MonoBehaviour
         siaHide = false;
 
         stunImmune = false;
+    }
+
+
+    public void SetInsideSafeZone(bool value)
+    {
+        insideSafeZone = value;
     }
 }

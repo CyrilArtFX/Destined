@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,9 +14,9 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         int scenesOpened = SceneManager.sceneCount;
-        if(scenesOpened > 1)
+        if (scenesOpened > 1)
         {
-            for(int i = 1; i < scenesOpened; i++)
+            for (int i = 1; i < scenesOpened; i++)
             {
                 SceneManager.UnloadSceneAsync(SceneManager.GetSceneAt(i));
             }
@@ -28,5 +29,16 @@ public class GameManager : MonoBehaviour
         PlayersManager.instance.SwitchToPlayMode();
         SceneManager.UnloadSceneAsync(1);
         SceneManager.LoadSceneAsync("GameScene", LoadSceneMode.Additive);
+
+        List<Player> playerList = PlayersManager.instance.GetPlayers();
+        foreach (Player player in playerList)
+        {
+            player.Inventory.ClearInventory();
+        }
+    }
+
+    public List<Player> GetPlayers()
+    {
+        return PlayersManager.instance.GetPlayers();
     }
 }
