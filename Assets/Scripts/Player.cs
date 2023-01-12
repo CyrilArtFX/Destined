@@ -6,6 +6,7 @@ using UnityEngine.Rendering.UI;
 public class Player : MonoBehaviour
 {
     public Inventory Inventory => inventory;
+    public PlayerController Controller => controller;
 
     [SerializeField]
     private TextMeshPro nameText;
@@ -19,6 +20,8 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private Inventory inventory;
+    [SerializeField]
+    private PlayerController controller;
     
     private bool menuMode = true;
 

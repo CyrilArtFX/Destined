@@ -129,6 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6633629607489292126}
   - component: {fileID: 1710350580871099234}
+  - component: {fileID: 6989836207612748582}
   m_Layer: 0
   m_Name: BadRabbit
   m_TagString: Untagged
@@ -165,9 +166,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 3
+  chaseSpeed: 4.5
   territoryCenter: {fileID: 0}
   territoryRadius: 5
   moveAcceptanceRadius: 1
   idleTimeRange: {x: 0.8, y: 1.2}
+  stunTime: 1
   animator: {fileID: 5499350637687264151}
   animController: {fileID: 5622785581863007980}
+--- !u!58 &6989836207612748582
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3923206999493795325}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.25}
+  serializedVersion: 2
+  m_Radius: 2
