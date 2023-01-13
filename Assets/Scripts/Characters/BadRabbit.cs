@@ -77,7 +77,7 @@ public class BadRabbit : MonoBehaviour
 		switch ( state )
 		{
 			case State.ATTACK:
-				if ( playerTarget != null )
+				if ( playerTarget != null && !playerTarget.Controller.IsInsideSafeZone )
 					moveTarget = playerTarget.transform.position;
 				else
 				{
