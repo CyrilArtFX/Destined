@@ -61,7 +61,7 @@ public class Burrow : MonoBehaviour
 	void SpawnCarrot( Vector2 radius_range )
 	{
 		//  instantiate
-		GameObject obj = Instantiate( carrotPrefab );
+		GameObject obj = Instantiate( carrotPrefab, GameManager.instance.transform );
 
 		//  set pos
 		float ang = Random.Range( 0, 360 );

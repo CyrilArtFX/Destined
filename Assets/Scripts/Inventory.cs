@@ -61,7 +61,7 @@ public class Inventory : MonoBehaviour
 		items.Remove( item );
 
 		//  un-parent
-		item.transform.SetParent( null );
+		item.transform.SetParent( GameManager.instance.transform );
 
 		//  set pos
 		float ang = Random.Range( 0.0f, 360.0f );

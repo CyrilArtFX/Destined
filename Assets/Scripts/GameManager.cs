@@ -31,7 +31,13 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadSceneAsync("Menu", LoadSceneMode.Additive);
     }
 
-    public void StartGame()
+	void OnLevelWasLoaded( int level )
+	{
+		foreach ( Transform child in transform )
+            Destroy( child.gameObject );
+	}
+
+	public void StartGame()
     {
         firstTimeLobby = false;
 

@@ -127,7 +127,7 @@ public class PlayerController : MonoBehaviour
 
         if ( carrot == null ) return;
 
-        GameObject projectile = GameObject.Instantiate(carrotProjectile);
+        GameObject projectile = GameObject.Instantiate(carrotProjectile, GameManager.instance.transform);
         projectile.transform.position = throwStart.position;
         projectile.GetComponent<CarrotProjectile>().Initialize(direction, gameObject);
 
