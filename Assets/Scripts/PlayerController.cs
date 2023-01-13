@@ -224,4 +224,17 @@ public class PlayerController : MonoBehaviour
     {
         inCinematic = value;
     }
+
+    public void ClearEffects()
+    {
+        StopAllCoroutines();
+        stunParticles.Stop();
+        stunParticles.Clear();
+        stun = 0.0f;
+        stunImmune = false;
+        Color color = sr.color;
+        color.a = 1.0f;
+        sr.color = color; 
+        animator.SetBool("IsStunned", false);
+    }
 }
