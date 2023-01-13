@@ -112,11 +112,24 @@ public class PlayerController : MonoBehaviour
 
     private void SpawnProjectile(Vector2 direction)
     {
+        //  get item to consume
+        Collectible carrot = null;
+        foreach ( Collectible item in player.Inventory.Items )
+        {
+            if ( !item.CanBeThrown ) continue;
+
+            carrot = item;
+
+            break;
+        }
+
+        if ( carrot == null ) return;
+
         GameObject projectile = GameObject.Instantiate(carrotProjectile);
         projectile.transform.position = throwStart.position;
         projectile.GetComponent<CarrotProjectile>().Initialize(direction, gameObject);
 
-        player.Inventory.RemoveItem(player.Inventory.Items[0]);
+        player.Inventory.RemoveItem(carrot);
         player.Inventory.UpdateItemsPositions();
     }
 

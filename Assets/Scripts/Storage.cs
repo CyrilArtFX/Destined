@@ -23,7 +23,10 @@ public class Storage : MonoBehaviour
 
         assignedPlayer.Controller.SetInsideSafeZone(true);
 
-        carrotStored += assignedPlayer.Inventory.ItemsCount;
+        foreach ( Collectible item in assignedPlayer.Inventory.Items )
+        { 
+            carrotStored += item.Score;
+        }
         assignedPlayer.Inventory.ClearInventory();
 
         debugText.text = carrotStored.ToString();

@@ -39,6 +39,12 @@ public class BadRabbit : MonoBehaviour
 	[SerializeField]
 	private float chargeCooldown = 2.0f;
 
+	[Header( "Gold Carrot" )]
+	[SerializeField]
+	private GameObject goldCarrotPrefab;
+	[SerializeField]
+	private float chancePerCarrot = 0.1f;
+
 	[Header( "References" )]
 	[SerializeField]
 	private Animator animator;
@@ -250,9 +256,33 @@ public class BadRabbit : MonoBehaviour
 					//  dropping items
 					if ( inventory.ItemsCount > 0 )
 					{
-						int drop_amount = Random.Range( 1, 2 );
-						for ( int i = 0; i <= drop_amount; i++ )
-							inventory.DropLastItem();
+						//  list non-gold carrots
+						List<Collectible> non_gold_carrots = new();
+						foreach ( Collectible item in inventory.Items )
+						{
+							if ( item.Type == Collectible.ItemType.GOLD_CARROT ) continue;
+							non_gold_carrots.Add( item );
+						}
+
+						//  chance to craft a gold carrot instead
+						float chance = chancePerCarrot * non_gold_carrots.Count;
+						if ( Random.Range( 0.0f, 1.0f ) <= chance )
+						{
+							//  instance gold carrot
+							GameObject gold_carrot = Instantiate( goldCarrotPrefab );
+							gold_carrot.transform.position = transform.position;
+
+							//  clear inventory
+							foreach ( Collectible item in non_gold_carrots )
+								inventory.RemoveItem( item );
+						}
+						//  drop items
+						else
+						{
+							int drop_amount = Random.Range( 1, 2 );
+							for ( int i = 0; i <= drop_amount; i++ )
+								inventory.DropLastItem();
+						}
 					}
 				}
 				break;

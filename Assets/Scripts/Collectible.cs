@@ -4,15 +4,31 @@ using UnityEngine;
 [RequireComponent( typeof( Collider2D ) )]
 public class Collectible : MonoBehaviour
 {
+	public enum ItemType
+	{
+		CARROT,
+		GOLD_CARROT,
+	}
+
+	public ItemType Type => type;
+	public int Score => score;
+	public bool CanBeThrown => canBeThrown;
+
+	[SerializeField]
+	private ItemType type;
 	[SerializeField]
 	private float collectDelay = 0.5f;
+	[SerializeField]
+	private bool canBeThrown = true;
+	[SerializeField]
+	private int score = 1;
+
+	[SerializeField]
+	private new SpriteRenderer renderer;
 
 	private Dictionary<Inventory, float> lastCollectTimes = new();
 
 	private new Collider2D collider;
-
-	[SerializeField]
-	private SpriteRenderer sr;
 
 	void Awake()
 	{
@@ -30,7 +46,7 @@ public class Collectible : MonoBehaviour
 
 		GameEvents.OnCollect.Invoke( inventory.Owner, this );
 
-		sr.sortingOrder = 1;
+		renderer.sortingOrder = 1;
 
 		return true;
 	}
@@ -42,7 +58,7 @@ public class Collectible : MonoBehaviour
 
 		OnDrop( inventory );
 
-		sr.sortingOrder = -1;
+		renderer.sortingOrder = -1;
 	}
 
 	public virtual bool CanCollect( Inventory inventory )

@@ -135,10 +135,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1490925830, guid: db5198ecd55b2e14d8b7a9b9a1136e20, type: 3}
     - target: {fileID: 3469544441465698780, guid: 00342095c1d22fc4d8f9bb399b5a738e, type: 3}
-      propertyPath: maxAliveCarrots
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3469544441465698780, guid: 00342095c1d22fc4d8f9bb399b5a738e, type: 3}
       propertyPath: sprites.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -595,10 +591,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1710350580871099234, guid: f5f3880ffb5a916408eb36e9c5a02af1, type: 3}
-      propertyPath: searchRadius
-      value: 1.75
-      objectReference: {fileID: 0}
     - target: {fileID: 1710350580871099234, guid: f5f3880ffb5a916408eb36e9c5a02af1, type: 3}
       propertyPath: territoryCenter
       value: 

@@ -239,12 +239,14 @@ MonoBehaviour:
   moveAcceptanceRadius: 1
   idleTimeRange: {x: 0.8, y: 1.2}
   stunTime: 1
-  searchRadius: 1.25
+  searchRadius: 1.75
   searchPercent: 0.4
-  chargeMoveSpeed: 10
+  chargeMoveSpeed: 7
   chargeStunTime: 1
-  chargeRadius: 3.5
+  chargeRadius: 2.5
   chargeCooldown: 7
+  goldCarrotPrefab: {fileID: 5484264537431741950, guid: 6c3cc347257c46841bfeae7d2284fd9a, type: 3}
+  chancePerCarrot: 0.1
   animator: {fileID: 5499350637687264151}
   animController: {fileID: 5622785581863007980}
   inventory: {fileID: 4779868577597296916}
