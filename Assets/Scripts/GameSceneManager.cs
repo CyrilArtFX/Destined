@@ -1,10 +1,16 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GameSceneManager : MonoBehaviour
 {
     [SerializeField]
     private List<Storage> storages = new();
+
+    [SerializeField]
+    private float gameTimer;
+    [SerializeField]
+    private TextMeshProUGUI gameTimerText;
 
     private List<Player> playerList = new();
 
@@ -26,5 +32,11 @@ public class GameSceneManager : MonoBehaviour
                 storages[i].gameObject.SetActive(false);
             }
         }
+    }
+
+    void Update()
+    {
+        gameTimer -= Time.deltaTime;
+        gameTimerText.text = ((int)gameTimer).ToString();
     }
 }

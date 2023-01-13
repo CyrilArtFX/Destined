@@ -94,6 +94,7 @@ public class Inventory : MonoBehaviour
 		{
 			RemoveItem(items[i]);
 		}
+		items.Clear();
 	}
 
 	private void OnTriggerEnter2D( Collider2D collision )
