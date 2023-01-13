@@ -130,10 +130,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 292772678712312083, guid: 00342095c1d22fc4d8f9bb399b5a738e, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 1490925830, guid: db5198ecd55b2e14d8b7a9b9a1136e20, type: 3}
     - target: {fileID: 3469544441465698780, guid: 00342095c1d22fc4d8f9bb399b5a738e, type: 3}
       propertyPath: sprites.Array.size
       value: 1
