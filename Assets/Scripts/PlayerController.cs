@@ -232,6 +232,7 @@ public class PlayerController : MonoBehaviour
         stunParticles.Clear();
         stun = 0.0f;
         stunImmune = false;
+        insideSafeZone = false;
         Color color = sr.color;
         color.a = 1.0f;
         sr.color = color; 
