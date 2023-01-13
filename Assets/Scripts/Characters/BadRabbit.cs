@@ -269,7 +269,7 @@ public class BadRabbit : MonoBehaviour
 						if ( Random.Range( 0.0f, 1.0f ) <= chance )
 						{
 							//  instance gold carrot
-							GameObject gold_carrot = Instantiate( goldCarrotPrefab );
+							GameObject gold_carrot = Instantiate( goldCarrotPrefab, GameManager.instance.transform );
 							gold_carrot.transform.position = transform.position;
 
 							//  clear inventory

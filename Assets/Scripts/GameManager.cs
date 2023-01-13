@@ -20,6 +20,9 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        //  hook to scene loading
+        SceneManager.sceneLoaded += OnSceneLoaded;
+
         int scenesOpened = SceneManager.sceneCount;
         if (scenesOpened > 1)
         {
@@ -31,7 +34,7 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadSceneAsync("Menu", LoadSceneMode.Additive);
     }
 
-	void OnLevelWasLoaded( int level )
+	void OnSceneLoaded( Scene scene, LoadSceneMode mode )
 	{
 		foreach ( Transform child in transform )
             Destroy( child.gameObject );
