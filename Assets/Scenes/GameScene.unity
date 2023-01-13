@@ -159,11 +159,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1866919092188398853, guid: 8c909b5a2f318a34ba8e2ddb713c39d8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.4
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1866919092188398853, guid: 8c909b5a2f318a34ba8e2ddb713c39d8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 1866919092188398853, guid: 8c909b5a2f318a34ba8e2ddb713c39d8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -469,11 +469,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1866919092188398853, guid: 8c909b5a2f318a34ba8e2ddb713c39d8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.4
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1866919092188398853, guid: 8c909b5a2f318a34ba8e2ddb713c39d8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4
+      value: -3.5
       objectReference: {fileID: 0}
     - target: {fileID: 1866919092188398853, guid: 8c909b5a2f318a34ba8e2ddb713c39d8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -781,11 +781,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1866919092188398853, guid: 8c909b5a2f318a34ba8e2ddb713c39d8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.4
+      value: -7
       objectReference: {fileID: 0}
     - target: {fileID: 1866919092188398853, guid: 8c909b5a2f318a34ba8e2ddb713c39d8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4
+      value: -3.5
       objectReference: {fileID: 0}
     - target: {fileID: 1866919092188398853, guid: 8c909b5a2f318a34ba8e2ddb713c39d8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2992,15 +2992,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1866919092188398853, guid: 8c909b5a2f318a34ba8e2ddb713c39d8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.4
+      value: -7
       objectReference: {fileID: 0}
     - target: {fileID: 1866919092188398853, guid: 8c909b5a2f318a34ba8e2ddb713c39d8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1866919092188398853, guid: 8c909b5a2f318a34ba8e2ddb713c39d8, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 1866919092188398853, guid: 8c909b5a2f318a34ba8e2ddb713c39d8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
