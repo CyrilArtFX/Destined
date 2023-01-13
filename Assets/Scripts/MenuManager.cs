@@ -23,7 +23,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField]
     private List<Podium> podiums;
 
-    private Dictionary<int, List<Player>> playersOnPodium = new();
+    private Dictionary<int, List<PlayerScore>> playersOnPodium = new();
 
     void Start()
     {
@@ -50,7 +50,7 @@ public class MenuManager : MonoBehaviour
                     {
                         playersOnPodium.Add(place, new());
                     }
-                    playersOnPodium[place].Add(playersScores[i].player);
+                    playersOnPodium[place].Add(playersScores[i]);
                     playersScores.RemoveAt(i);
                 }
             }
@@ -65,11 +65,11 @@ public class MenuManager : MonoBehaviour
         int podiumUsed = 0;
         for (int i = 1; i < place; i++)
         {
-            foreach (Player player in playersOnPodium[i])
+            foreach (PlayerScore playerScore in playersOnPodium[i])
             {
                 podiums[podiumUsed].gameObject.SetActive(true);
-                Vector3 playerPosOnPodium = podiums[podiumUsed].SetPodium(i);
-                player.transform.position = playerPosOnPodium;
+                Vector3 playerPosOnPodium = podiums[podiumUsed].SetPodium(i, playerScore.score);
+                playerScore.player.transform.position = playerPosOnPodium;
                 podiumUsed++;
             }
         }
