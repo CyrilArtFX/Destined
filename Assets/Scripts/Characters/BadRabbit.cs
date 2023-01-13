@@ -151,7 +151,7 @@ public class BadRabbit : MonoBehaviour
 
 	void TryChangePriorityPlayer( Player player )
 	{
-		if ( player.Controller.IsStun || player.Controller.IsStunImmune ) return;
+		if ( player.Controller.IsStun || player.Controller.IsStunImmune || player.Controller.IsInsideSafeZone ) return;
 
 		//  check priority w/ current player 
 		if ( playerTarget != null && playerTarget != player )
