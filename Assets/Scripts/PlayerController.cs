@@ -210,6 +210,10 @@ public class PlayerController : MonoBehaviour
         }
         siaHide = false;
 
+        Color color = sr.color;
+        color.a = 1.0f;
+        sr.color = color;
+
         stunImmune = false;
     }
 
