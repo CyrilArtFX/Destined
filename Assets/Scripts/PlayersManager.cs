@@ -178,4 +178,13 @@ public class PlayersManager : MonoBehaviour
             player.SetToPlayMode();
         }
     }
+
+    public void SwitchToMenuMode()
+    {
+        menuMode = true;
+        foreach(Player player in players)
+        {
+            player.SetToMenuMode();
+        }
+    }
 }

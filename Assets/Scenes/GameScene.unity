@@ -631,7 +631,7 @@ MonoBehaviour:
   - {fileID: 970863975}
   - {fileID: 390105400}
   - {fileID: 1433488344}
-  gameTimer: 120
+  gameTimer: 20
   gameTimerText: {fileID: 1199792762}
 --- !u!1001 &557711731
 PrefabInstance:
@@ -730,7 +730,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.05, y: 0.15}
   m_AnchorMax: {x: 0.25, y: 0.85}
-  m_AnchoredPosition: {x: -0.000091553, y: -0.00005340576}
+  m_AnchoredPosition: {x: -0.000091552734, y: -0.00005340576}
   m_SizeDelta: {x: 0.00011826, y: -0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &738293028
@@ -1130,7 +1130,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.25, y: 0.15}
   m_AnchorMax: {x: 0.95, y: 0.85}
-  m_AnchoredPosition: {x: -0.000012398, y: 0}
+  m_AnchoredPosition: {x: -0.000011444092, y: 0}
   m_SizeDelta: {x: -0.000030518, y: 0.00006485}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1199792762

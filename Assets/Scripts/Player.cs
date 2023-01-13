@@ -18,6 +18,8 @@ public class Player : MonoBehaviour
     private Sprite sprite;
     private int playerIndex;
 
+    public int Index => playerIndex;
+
     [SerializeField]
     private Inventory inventory;
     [SerializeField]
@@ -47,6 +49,11 @@ public class Player : MonoBehaviour
     public void SetToPlayMode()
     {
         menuMode = false;
+    }
+
+    public void SetToMenuMode()
+    {
+        menuMode = true;
     }
 
     public void Deconnect(InputAction.CallbackContext ctx)
