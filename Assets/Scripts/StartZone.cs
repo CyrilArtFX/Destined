@@ -30,6 +30,6 @@ public class StartZone : MonoBehaviour
     public void ChangeProgressBar(float value)
     {
         value = progressBarCurve.Evaluate(value);
-        progressBar.transform.localScale = new Vector3(value * 7.0f, 0.4f, 1.0f);
+        progressBar.transform.localScale = new Vector3(value * 7.5f, 0.4f, 1.0f);
     }
 }
