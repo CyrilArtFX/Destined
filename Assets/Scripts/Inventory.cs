@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 [RequireComponent( typeof( CircleCollider2D ) )]
 public class Inventory : MonoBehaviour
