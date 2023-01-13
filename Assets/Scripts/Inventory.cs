@@ -19,14 +19,20 @@ public class Inventory : MonoBehaviour
 	[SerializeField]
 	private Transform owner;
 
-	private readonly List<Collectible> items = new();
+	public List<Collectible> items = new();
 
 	public bool AddItem( Collectible item )
 	{
-		if ( items.Count + 1 > maxCount ) return false;
-		if ( items.Contains( item ) ) return false;
-		if ( !item.Collect( this ) ) return false;
+		if ( items.Count + 1 > maxCount )
+			return false;
+		if ( items.Contains( item ) )
+			return false;
+		if ( !item.Collect( this ) )
+			return false;
 
+		ClearNulls();
+
+		//  add to container
 		items.Add( item );
 
 		//  parent
@@ -45,19 +51,24 @@ public class Inventory : MonoBehaviour
 
 	public void UpdateItemsPositions()
 	{
+		ClearNulls();
+
 		foreach ( Collectible item in items )
 			UpdateItemPosition( item );
 	}
 
 	public void DropItem( Collectible item )
 	{
-		if ( !items.Contains( item ) ) return;
-
-		//  drop event
-		item.Drop( this );
+		if ( !items.Contains( item ) )
+			return;
 
 		//  remove from container
 		items.Remove( item );
+		if ( item == null )
+			return;
+
+		//  drop event
+		item.Drop( this );
 
 		//  un-parent
 		item.transform.SetParent( GameManager.instance.transform );
@@ -71,14 +82,25 @@ public class Inventory : MonoBehaviour
 
 	public void DropLastItem()
 	{
-		if ( items.Count <= 0 ) return;
+		if ( items.Count <= 0 )
+			return;
 
 		DropItem( items[items.Count - 1] );
 	}
 
+	public void DropItems()
+	{
+		ClearNulls();
+
+		//  drop all
+		while ( ItemsCount > 0 )
+			DropLastItem();
+	}
+
 	public void RemoveItem( Collectible item )
 	{
-		if ( !items.Contains( item ) ) return;
+		if ( !items.Contains( item ) )
+			return;
 
 		//  remove from container
 		items.Remove( item );
@@ -89,17 +111,28 @@ public class Inventory : MonoBehaviour
 
 	public void ClearInventory()
 	{
-		for(int i = items.Count - 1; i >= 0; i--)
+		ClearNulls();
+
+		for ( int i = items.Count - 1; i >= 0; i-- )
 		{
-			RemoveItem(items[i]);
+			RemoveItem( items[i] );
 		}
 		items.Clear();
 	}
 
+	public void ClearNulls()
+	{
+		int count = items.RemoveAll( x => !x );
+		if ( count == 0 ) return;
+
+		UpdateItemsPositions();
+	}
+
 	private void OnTriggerEnter2D( Collider2D collision )
 	{
-		if ( !collision.TryGetComponent( out Collectible item ) ) return;
-		
+		if ( !collision.TryGetComponent( out Collectible item ) )
+			return;
+
 		AddItem( item );
 	}
 }

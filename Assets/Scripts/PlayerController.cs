@@ -154,8 +154,7 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(StunImmunity());
 
         //  drop all items
-        while (player.Inventory.ItemsCount > 0)
-            player.Inventory.DropLastItem();
+        player.Inventory.DropItems();
     }
 
     void Update()

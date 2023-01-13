@@ -62,13 +62,14 @@ public class CarrotProjectile : MonoBehaviour
 
         if (collision.gameObject == owner) return;
 
-        if (collision.gameObject.GetComponent<PlayerController>().IsStunImmune)
+        Player player = collision.gameObject.GetComponent<Player>();
+        if (player.Controller.IsStunImmune)
         {
             Physics2D.IgnoreCollision(collisionCC, collision, true);
             return;
         }
 
-        collision.gameObject.GetComponent<PlayerController>().Stun(stunTime);
+        player.Controller.Stun(stunTime);
 
         impactParticles.Play();
         StartCoroutine(DestroyProjectile(false));
