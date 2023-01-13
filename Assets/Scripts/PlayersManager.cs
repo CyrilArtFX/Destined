@@ -75,6 +75,8 @@ public class PlayersManager : MonoBehaviour
         int rdm = Random.Range(0, unusedSprites.Count);
         player.SetSprite(unusedSprites[rdm]);
         sprites[unusedSprites[rdm]] = true;
+
+        player.transform.position = transform.position;
     }
 
     public void PlayerLeft(Player player)
