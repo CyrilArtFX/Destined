@@ -137,7 +137,7 @@ public class PlayerController : MonoBehaviour
 
     public void Stun(float stunTime)
     {
-        if (stunImmune) return;
+        if (stunImmune || IsInsideSafeZone || inCinematic) return;
 
         //  set time
         stun = stunTime;
