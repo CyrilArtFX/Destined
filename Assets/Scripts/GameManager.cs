@@ -6,6 +6,13 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+
+    public bool IsFirstTimeLobby => firstTimeLobby;
+    private bool firstTimeLobby = true;
+
+
+    private List<PlayerScore> playersScores = new();
+
     void Awake()
     {
         instance = this;
@@ -26,9 +33,25 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+        firstTimeLobby = false;
+
         PlayersManager.instance.SwitchToPlayMode();
-        SceneManager.UnloadSceneAsync(1);
+        SceneManager.UnloadSceneAsync("Menu");
         SceneManager.LoadSceneAsync("GameScene", LoadSceneMode.Additive);
+
+        List<Player> playerList = PlayersManager.instance.GetPlayers();
+        foreach (Player player in playerList)
+        {
+            player.Inventory.ClearInventory();
+        }
+    }
+
+    public void ReturnToLobby(List<PlayerScore> scores)
+    {
+        playersScores = scores;
+
+        SceneManager.UnloadSceneAsync("GameScene");
+        SceneManager.LoadSceneAsync("Menu", LoadSceneMode.Additive);
 
         List<Player> playerList = PlayersManager.instance.GetPlayers();
         foreach (Player player in playerList)
@@ -40,5 +63,10 @@ public class GameManager : MonoBehaviour
     public List<Player> GetPlayers()
     {
         return PlayersManager.instance.GetPlayers();
+    }
+
+    public List<PlayerScore> GetPlayersScores()
+    {
+        return playersScores;
     }
 }

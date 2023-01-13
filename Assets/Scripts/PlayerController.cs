@@ -46,6 +46,8 @@ public class PlayerController : MonoBehaviour
     public bool IsStunImmune => stunImmune;
     public bool IsInsideSafeZone => insideSafeZone;
 
+    private bool inCinematic = false;
+
     private bool throwing = false;
     private float stun = 0.0f;
     private bool stunImmune;
@@ -178,13 +180,13 @@ public class PlayerController : MonoBehaviour
             }
         }
         //  move
-        else
+        else if(!inCinematic)
         {
             rigidbody.MovePosition(rigidbody.position + Direction * speed);
         }
 
         //  animation
-        animator.SetBool("IsWalking", Direction != Vector2.zero && stun <= 0.0f);
+        animator.SetBool("IsWalking", Direction != Vector2.zero && stun <= 0.0f && !inCinematic);
         animator.SetFloat("AnimSpeed", moveSpeed / speed);
     }
 
@@ -216,5 +218,10 @@ public class PlayerController : MonoBehaviour
     public void SetInsideSafeZone(bool value)
     {
         insideSafeZone = value;
+    }
+
+    public void SetInCinematic(bool value)
+    {
+        inCinematic = value;
     }
 }

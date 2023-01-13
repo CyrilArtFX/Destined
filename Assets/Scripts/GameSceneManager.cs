@@ -2,6 +2,17 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+public struct PlayerScore : IComparer<PlayerScore>
+{
+    public Player player;
+    public int score;
+
+    public int Compare(PlayerScore x, PlayerScore y)
+    {
+        return x.score.CompareTo(y.score);
+    }
+}
+
 public class GameSceneManager : MonoBehaviour
 {
     [SerializeField]
@@ -24,8 +35,8 @@ public class GameSceneManager : MonoBehaviour
             if(i < players)
             {
                 storages[i].AssignPlayer(playerList[i]);
-                Physics2D.IgnoreCollision(storages[i].getCollider(), playerList[i].gameObject.GetComponent<Collider2D>(), true);
-                playerList[i].transform.position = storages[i].getSpawnPosition();
+                Physics2D.IgnoreCollision(storages[i].GetCollider(), playerList[i].gameObject.GetComponent<Collider2D>(), true);
+                playerList[i].transform.position = storages[i].GetSpawnPosition();
             }
             else
             {
@@ -38,5 +49,16 @@ public class GameSceneManager : MonoBehaviour
     {
         gameTimer -= Time.deltaTime;
         gameTimerText.text = ((int)gameTimer).ToString();
+
+        if(gameTimer < 0.0f)
+        {
+            List<PlayerScore> scores = new();
+            for(int i = 0; i < playerList.Count; i++)
+            {
+                scores.Add(new PlayerScore{ player = playerList[i], score = storages[i].GetPlayerScore()});
+            }
+
+            GameManager.instance.ReturnToLobby(scores);
+        }
     }
 }

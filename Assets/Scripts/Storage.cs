@@ -44,13 +44,18 @@ public class Storage : MonoBehaviour
         assignedPlayer = playerToAssign;
     }
 
-    public BoxCollider2D getCollider()
+    public BoxCollider2D GetCollider()
     {
         return boxCollider;
     }
 
-    public Vector3 getSpawnPosition()
+    public Vector3 GetSpawnPosition()
     {
         return playerSpawnPoint.position;
+    }
+
+    public int GetPlayerScore()
+    {
+        return carrotStored;
     }
 }
