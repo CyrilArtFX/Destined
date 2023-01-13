@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
         foreach (Player player in playerList)
         {
             player.Inventory.ClearInventory();
+            player.Controller.ClearEffects();
         }
     }
 
@@ -57,6 +58,7 @@ public class GameManager : MonoBehaviour
         foreach (Player player in playerList)
         {
             player.Inventory.ClearInventory();
+            player.Controller.ClearEffects();
         }
     }
 
