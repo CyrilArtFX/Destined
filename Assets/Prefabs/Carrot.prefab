@@ -147,7 +147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  collectDelay: 0.5
+  collectDelay: 1.5
   canBeThrown: 1
   score: 1
   renderer: {fileID: 2651154432323528654}
