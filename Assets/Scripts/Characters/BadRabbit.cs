@@ -38,6 +38,8 @@ public class BadRabbit : MonoBehaviour
 	private float chargeRadius = 3.5f;
 	[SerializeField]
 	private float chargeCooldown = 2.0f;
+	[SerializeField]
+	private ParticleSystem chargeParticles;
 
 	[Header( "Gold Carrot" )]
 	[SerializeField]
@@ -70,6 +72,9 @@ public class BadRabbit : MonoBehaviour
 		animController.OnChargeJumpEnd = OnAnimChargeJumpEnd;
 
 		GameEvents.OnCollect.AddListener( GameEventOnCollect );
+
+		ParticleSystem.ShapeModule shape = chargeParticles.shape;
+		shape.radius = chargeRadius;
 	}
 
 	void Update()
@@ -198,6 +203,9 @@ public class BadRabbit : MonoBehaviour
 
 			player.Controller.Stun( chargeStunTime );
 		}
+
+		//  play particles
+		chargeParticles.Play();
 
 		//  stop chasing player
 		SetPlayerTarget( null );

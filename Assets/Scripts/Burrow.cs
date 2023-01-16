@@ -69,7 +69,6 @@ public class Burrow : MonoBehaviour
 
             float rdm = Random.Range(0.0f, currentSpawnRatio) * Data.carrotSpawnProbabilityMultiplier;
             int numberToSpawn = Mathf.Clamp(Mathf.FloorToInt(rdm), 1, Data.maxCarrotSpawnAtOnce);
-            print(rdm);
             for(int i = 0; i < numberToSpawn; i++)
             {
                 SpawnCarrot(GetZoneRange(id));

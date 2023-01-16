@@ -1076,6 +1076,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1710350580871099234, guid: f5f3880ffb5a916408eb36e9c5a02af1, type: 3}
+      propertyPath: chargeRadius
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1710350580871099234, guid: f5f3880ffb5a916408eb36e9c5a02af1, type: 3}
       propertyPath: territoryCenter
       value: 
       objectReference: {fileID: 620402152}
