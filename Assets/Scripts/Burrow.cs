@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Burrow : MonoBehaviour
 {
-	/*[SerializeField]
+    /*[SerializeField]
 	private Sprite[] sprites;
 
 	[SerializeField]
@@ -14,78 +14,105 @@ public class Burrow : MonoBehaviour
 	{
 		renderer.sprite = sprites[Random.Range( 0, sprites.Length )];
 	}*/
-	[SerializeField]
-	GameObject carrotPrefab;
-	[SerializeField]
-	int maxAliveCarrots = 20;
 
-	[SerializeField]
-	float[] zonesRadiuses;
-	[SerializeField]
-	float[] zonesCooldowns;
+    [SerializeField]
+    GameObject carrotPrefab;
+    [SerializeField]
+    int maxAliveCarrots = 20;
 
-	float[] currentZonesCooldowns;
-	List<Transform> aliveCarrots = new();
+    public BurrowData Data;
 
-	void Start()
-	{
-		//  init cooldowns
-		currentZonesCooldowns = new float[zonesCooldowns.Length];
-		for ( int id = 0; id < currentZonesCooldowns.Length; id++ )
-			currentZonesCooldowns[id] = zonesCooldowns[id];
-	}
+    float[] currentZonesCooldowns;
+    List<Transform> aliveCarrots = new();
 
-	void Update()
-	{
-		//  remove null references
-		for ( int i = 0; i < aliveCarrots.Count; i++ )
-		{
-			if ( aliveCarrots[i] == null )
-			{
-				aliveCarrots.RemoveAt( i );
-				break;
-			}
-		}
+    float currentSpawnRatio;
+    float gameTimer;
+    float maxGameTimer;
 
-		//  handle cooldowns
-		for ( int id = 0; id < currentZonesCooldowns.Length; id++ )
-		{
-			if ( aliveCarrots.Count + 1 > maxAliveCarrots ) continue;
-			if ( ( currentZonesCooldowns[id] -= Time.deltaTime ) > 0.0f ) continue;
 
-			SpawnCarrot( GetZoneRange( id ) );
-			currentZonesCooldowns[id] = zonesCooldowns[id];
-		}
-	}
+    void Start()
+    {
+        Initialize();
+    }
 
-	void SpawnCarrot( Vector2 radius_range )
-	{
-		//  instantiate
-		GameObject obj = Instantiate( carrotPrefab, GameManager.instance.transform );
+    public void Initialize()
+    {
+        //  init cooldowns
+        currentZonesCooldowns = new float[Data.ZonesCooldowns.Length];
+        for (int id = 0; id < currentZonesCooldowns.Length; id++)
+            currentZonesCooldowns[id] = Data.ZonesCooldowns[id];
 
-		//  set pos
-		float ang = Random.Range( 0, 360 );
-		float radius = Random.Range( radius_range.x, radius_range.y );
-		obj.transform.position = transform.position + new Vector3( Mathf.Cos( ang ) * radius, Mathf.Sin( ang ) * radius );
+        if(Data.GameTimer && GameSceneManager.instance)
+        {
+            gameTimer = maxGameTimer = GameSceneManager.instance.GameTimer;
+        }
+        currentSpawnRatio = Data.SpawnProgressionCurve.Evaluate(0.0f);
+    }
 
-		//  register
-		aliveCarrots.Add( obj.transform );	
-	}
+    void Update()
+    {
+        //  remove null references
+        for (int i = 0; i < aliveCarrots.Count; i++)
+        {
+            if (aliveCarrots[i] == null)
+            {
+                aliveCarrots.RemoveAt(i);
+                break;
+            }
+        }
 
-	Vector2 GetZoneRange( int id )
-	{
-		Vector2 range = new( 0, zonesRadiuses[id] );
+        //  handle cooldowns
+        for (int id = 0; id < currentZonesCooldowns.Length; id++)
+        {
+            if (aliveCarrots.Count + 1 > maxAliveCarrots + (int)(maxAliveCarrots * currentSpawnRatio)) continue;
+            if ((currentZonesCooldowns[id] -= Time.deltaTime) > 0.0f) continue;
 
-		if ( id - 1 >= 0 )
-			range.x = zonesRadiuses[id - 1];
+            float rdm = Random.Range(0.0f, currentSpawnRatio) * Data.carrotSpawnProbabilityMultiplier;
+            int numberToSpawn = Mathf.Clamp(Mathf.FloorToInt(rdm), 1, Data.maxCarrotSpawnAtOnce);
+            print(rdm);
+            for(int i = 0; i < numberToSpawn; i++)
+            {
+                SpawnCarrot(GetZoneRange(id));
+            }
 
-		return range;
-	}
+            currentZonesCooldowns[id] = Data.ZonesCooldowns[id];
+        }
 
-	void OnDrawGizmosSelected()
-	{
-		Gizmos.color = Color.magenta;
-		for ( int id = 0; id < zonesRadiuses.Length; id++ )
-			Gizmos.DrawWireSphere( transform.position, zonesRadiuses[id] );
-	}
+        if (gameTimer > 0)
+        {
+            gameTimer-= Time.deltaTime;
+            currentSpawnRatio = Data.SpawnProgressionCurve.Evaluate((maxGameTimer - gameTimer) / maxGameTimer);
+        }
+    }
+
+    void SpawnCarrot(Vector2 radius_range)
+    {
+        //  instantiate
+        GameObject obj = Instantiate(carrotPrefab, GameManager.instance.transform);
+
+        //  set pos
+        float ang = Random.Range(0, 360);
+        float radius = Random.Range(radius_range.x, radius_range.y);
+        obj.transform.position = transform.position + new Vector3(Mathf.Cos(ang) * radius, Mathf.Sin(ang) * radius);
+
+        //  register
+        aliveCarrots.Add(obj.transform);
+    }
+
+    Vector2 GetZoneRange(int id)
+    {
+        Vector2 range = new(0, Data.ZonesRadiuses[id]);
+
+        if (id - 1 >= 0)
+            range.x = Data.ZonesRadiuses[id - 1];
+
+        return range;
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.magenta;
+        for (int id = 0; id < Data.ZonesRadiuses.Length; id++)
+            Gizmos.DrawWireSphere(transform.position, Data.ZonesRadiuses[id]);
+    }
 }
