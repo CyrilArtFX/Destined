@@ -46,8 +46,6 @@ public class Collectible : MonoBehaviour
 
 		GameEvents.OnCollect.Invoke( inventory.Owner, this );
 
-		renderer.sortingOrder = 1;
-
 		return true;
 	}
 
@@ -57,8 +55,6 @@ public class Collectible : MonoBehaviour
 		collider.enabled = true;
 
 		OnDrop( inventory );
-
-		renderer.sortingOrder = -1;
 	}
 
 	public virtual bool CanCollect( Inventory inventory )
