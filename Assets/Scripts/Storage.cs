@@ -44,6 +44,11 @@ public class Storage : MonoBehaviour
         assignedPlayer.Inventory.ClearInventory();
     }
 
+    void OnTriggerStay2D(Collider2D collision)
+    {
+        OnTriggerEnter2D(collision);
+    }
+
     void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject != assignedPlayer.gameObject) return;
