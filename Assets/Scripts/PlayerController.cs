@@ -65,13 +65,15 @@ public class PlayerController : MonoBehaviour
         Direction = ctx.action.ReadValue<Vector2>();
     }
 
+    //  drop action (removed because useless)
+    /*
     public void OnDrop(InputAction.CallbackContext ctx)
     {
         if (insideSafeZone) return;
         if (!ctx.action.triggered) return;
 
         player.Inventory.DropLastItem();
-    }
+    }*/
 
     public void OnThrowController(InputAction.CallbackContext ctx)
     {
