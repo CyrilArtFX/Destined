@@ -1077,7 +1077,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1710350580871099234, guid: f5f3880ffb5a916408eb36e9c5a02af1, type: 3}
       propertyPath: chargeRadius
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1710350580871099234, guid: f5f3880ffb5a916408eb36e9c5a02af1, type: 3}
       propertyPath: territoryCenter
@@ -1093,11 +1093,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6633629607489292126, guid: f5f3880ffb5a916408eb36e9c5a02af1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.467
+      value: 0.37
       objectReference: {fileID: 0}
     - target: {fileID: 6633629607489292126, guid: f5f3880ffb5a916408eb36e9c5a02af1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.319
+      value: -0.35
       objectReference: {fileID: 0}
     - target: {fileID: 6633629607489292126, guid: f5f3880ffb5a916408eb36e9c5a02af1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1130,6 +1130,10 @@ PrefabInstance:
     - target: {fileID: 6633629607489292126, guid: f5f3880ffb5a916408eb36e9c5a02af1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6989836207612748582, guid: f5f3880ffb5a916408eb36e9c5a02af1, type: 3}
+      propertyPath: m_Radius
+      value: 1.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5f3880ffb5a916408eb36e9c5a02af1, type: 3}
