@@ -106,7 +106,7 @@ public class CarrotProjectile : MonoBehaviour
 
         if (mustSpawnCarrot)
         {
-            GameObject.Instantiate(carrot).transform.position = transform.position;
+            GameObject.Instantiate(carrot, GameManager.instance.transform).transform.position = transform.position;
         }
 
         trail.emitting = false;
