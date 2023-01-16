@@ -302,6 +302,10 @@ MonoBehaviour:
   - {fileID: 1433488344}
   gameTimer: 120
   gameTimerText: {fileID: 1199792762}
+  burrow: {fileID: 620402153}
+  twoPlayersBurrowData: {fileID: 11400000, guid: 8ceae10ee21029a42900c08f86a9dd10, type: 2}
+  threePlayersBurrowData: {fileID: 11400000, guid: 8db460d8a1cd0384b98fcb54973a30fb, type: 2}
+  fourPlayersBurrowData: {fileID: 11400000, guid: 33e21cb3f23f5a442b954adc5c1e15e6, type: 2}
 --- !u!82 &555249835
 AudioSource:
   m_ObjectHideFlags: 0
@@ -505,6 +509,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5309093337940854885, guid: 00342095c1d22fc4d8f9bb399b5a738e, type: 3}
   m_PrefabInstance: {fileID: 620402151}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &620402153 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3469544441465698780, guid: 00342095c1d22fc4d8f9bb399b5a738e, type: 3}
+  m_PrefabInstance: {fileID: 620402151}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66364c8f119806c458dd76c338965467, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &738293026
 GameObject:
   m_ObjectHideFlags: 0

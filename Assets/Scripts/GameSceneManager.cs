@@ -23,7 +23,25 @@ public class GameSceneManager : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI gameTimerText;
 
+    public float GameTimer => gameTimer;
+
     private List<Player> playerList = new();
+
+    [SerializeField]
+    private Burrow burrow;
+    [SerializeField]
+    private BurrowData twoPlayersBurrowData;
+    [SerializeField]
+    private BurrowData threePlayersBurrowData;
+    [SerializeField]
+    private BurrowData fourPlayersBurrowData;
+
+    public static GameSceneManager instance;
+
+    void Awake()
+    {
+        instance = this;
+    }
 
     void Start()
     {
@@ -43,6 +61,20 @@ public class GameSceneManager : MonoBehaviour
                 storages[i].gameObject.SetActive(false);
             }
         }
+
+        switch(players)
+        {
+            case 2:
+                burrow.Data = twoPlayersBurrowData;
+                break;
+            case 3:
+                burrow.Data = threePlayersBurrowData;
+                break;
+            case 4:
+                burrow.Data = fourPlayersBurrowData;
+                break;
+        }
+        burrow.Initialize();
     }
 
     void Update()
