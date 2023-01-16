@@ -25,12 +25,20 @@ public class MenuManager : MonoBehaviour
 
     private Dictionary<int, List<PlayerScore>> playersOnPodium = new();
 
+
+    [SerializeField]
+    private AudioSource menuMusic;
+    [SerializeField]
+    private AudioSource endGameMusic;
+
     void Start()
     {
         ResetProgressBar();
         options.SetActive(false);
 
         if (GameManager.instance.IsFirstTimeLobby) return;
+
+        menuMusic.Stop();
 
         //  draw podium, put the players on it and play the 'cinematic'
 
@@ -141,14 +149,22 @@ public class MenuManager : MonoBehaviour
     {
         List<Player> players = PlayersManager.instance.GetPlayers();
 
-        foreach(Player player in players)
+        foreach (Player player in players)
         {
             player.Controller.SetInCinematic(true);
         }
 
-        yield return new WaitForSeconds(5.0f);
+        if (endGameMusic.clip)
+        {
+            endGameMusic.Play();
+            yield return new WaitForSeconds(endGameMusic.clip.length);
+        }
+        else
+        {
+            yield return new WaitForSeconds(5.0f);
+        }
 
-        foreach(Podium podium in podiums)
+        foreach (Podium podium in podiums)
         {
             podium.gameObject.SetActive(false);
         }
@@ -158,5 +174,8 @@ public class MenuManager : MonoBehaviour
             player.Controller.SetInCinematic(false);
         }
         PlayersManager.instance.SwitchToMenuMode();
+
+        menuMusic.Play();
+        menuMusic.loop = true;
     }
 }

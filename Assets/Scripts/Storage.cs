@@ -89,8 +89,6 @@ public class Storage : MonoBehaviour
         float rdmX = Random.Range(vsMinX, vsMaxX);
         float rdmY = Random.Range(vsMinY, vsMaxY);
 
-        print(rdmX + "   " + vsMinX + "   " + vsMaxX);
-
         GameObject carrot = GameObject.Instantiate(spawnGolden ? visualStoredGoldenCarrot : visualStoredCarrot, visualStorageZone.transform, true);
         carrot.transform.position = new Vector2(rdmX, rdmY);
     }
