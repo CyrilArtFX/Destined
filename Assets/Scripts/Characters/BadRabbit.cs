@@ -61,6 +61,7 @@ public class BadRabbit : MonoBehaviour
 	private Vector3 moveTarget;
 	private Vector3 moveDir;
 	private bool isIdling = true;
+	private bool isAttacking = false;
 	private float currentIdleTime = 0.0f;
 	private float currentChargeCooldown = 0.0f;
 	private State state = State.PATROL;
@@ -127,6 +128,7 @@ public class BadRabbit : MonoBehaviour
 						{
 							animator.SetBool( "IsChargeJumping", true );
 							currentChargeCooldown = chargeCooldown;
+							isAttacking = true;
 						}
 					}
 					break;
@@ -156,6 +158,7 @@ public class BadRabbit : MonoBehaviour
 
 	void TryChangePriorityPlayer( Player player )
 	{
+		if ( isAttacking ) return;
 		if ( player.Controller.IsStun || player.Controller.IsStunImmune || player.Controller.IsInsideSafeZone ) return;
 
 		//  check priority w/ current player 
@@ -193,6 +196,7 @@ public class BadRabbit : MonoBehaviour
 
 		//  idling
 		isIdling = false;
+		isAttacking = false;
 		animator.ResetTrigger( "Attack" );
 	}
 
@@ -216,6 +220,7 @@ public class BadRabbit : MonoBehaviour
 
 		//  idling
 		isIdling = false;
+		isAttacking = false;
 		animator.SetBool( "IsChargeJumping", false );
 	}
 
@@ -253,6 +258,7 @@ public class BadRabbit : MonoBehaviour
 					if ( ( transform.position - playerTarget.transform.position ).sqrMagnitude <= attackRadius * attackRadius )
 					{
 						isIdling = true;
+						isAttacking = true;
 						animator.SetTrigger( "Attack" );
 					}
 				}
