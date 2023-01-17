@@ -1,14 +1,17 @@
 using UnityEngine;
 
-public static class LayerMaskUtils
+namespace Utility
 {
-    public static bool HasLayer(LayerMask mask, int layer)
+    public static class LayerMaskUtils
     {
-        return (mask.value & (1 << layer)) > 0;
-    }
+        public static bool HasLayer(LayerMask mask, int layer)
+        {
+            return (mask.value & (1 << layer)) > 0;
+        }
 
-    public static bool HasFlag(int flag, int layer)
-    {
-        return (flag & layer) == layer;
+        public static bool HasFlag(int flag, int layer)
+        {
+            return (flag & layer) == layer;
+        }
     }
 }
