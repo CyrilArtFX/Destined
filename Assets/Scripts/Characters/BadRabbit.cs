@@ -235,6 +235,7 @@ public class BadRabbit : MonoBehaviour
 		foreach( Collider2D collider in Physics2D.OverlapCircleAll( transform.position, searchRadius ) )
 		{
 			if ( !collider.TryGetComponent( out Collectible item ) ) continue;
+			if ( item.Type == Collectible.ItemType.GOLD_CARROT ) continue;
 
 			found_items.Add( item );
 		}
