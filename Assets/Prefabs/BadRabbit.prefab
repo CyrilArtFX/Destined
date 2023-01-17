@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7751324465733448937}
   - component: {fileID: 5499350637687264151}
   - component: {fileID: 5622785581863007980}
+  - component: {fileID: 1366473276642006299}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -121,6 +122,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CanMove: 0
   IsChargeJumping: 0
+--- !u!210 &1366473276642006299
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2021304811076994095}
+  m_Enabled: 1
+  m_SortingLayerID: -2009574621
+  m_SortingLayer: 1
+  m_SortingOrder: 0
 --- !u!1 &3676332709822086602
 GameObject:
   m_ObjectHideFlags: 0
@@ -132,6 +144,7 @@ GameObject:
   - component: {fileID: 5644242778026870455}
   - component: {fileID: 1145441819628528048}
   - component: {fileID: 4779868577597296916}
+  - component: {fileID: 1754784167905729028}
   m_Layer: 0
   m_Name: Inventory
   m_TagString: Untagged
@@ -187,6 +200,17 @@ MonoBehaviour:
   dropRadius: 0.25
   owner: {fileID: 6633629607489292126}
   items: []
+--- !u!210 &1754784167905729028
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3676332709822086602}
+  m_Enabled: 1
+  m_SortingLayerID: -2009574621
+  m_SortingLayer: 1
+  m_SortingOrder: 0
 --- !u!1 &3923206999493795325
 GameObject:
   m_ObjectHideFlags: 0
