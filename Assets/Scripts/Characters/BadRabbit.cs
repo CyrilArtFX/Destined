@@ -61,10 +61,11 @@ public class BadRabbit : MonoBehaviour
 	private Vector3 moveTarget;
 	private Vector3 moveDir;
 	private bool isIdling = true;
-	private bool isAttacking = false;
+	private bool isTargetLocked = false;
 	private float currentIdleTime = 0.0f;
 	private float currentChargeCooldown = 0.0f;
 	private State state = State.PATROL;
+	private bool isNextDropGoldCarrot = false;
 
 	void Start()
 	{
@@ -88,7 +89,10 @@ public class BadRabbit : MonoBehaviour
 				if ( playerTarget != null && !playerTarget.Controller.IsInsideSafeZone )
 					moveTarget = playerTarget.transform.position;
 				else
+				{
 					SetPlayerTarget( null );
+					isTargetLocked = false;
+				}
 
 				//  decrease charge cooldown
 				if ( !animController.IsChargeJumping )
@@ -128,7 +132,6 @@ public class BadRabbit : MonoBehaviour
 						{
 							animator.SetBool( "IsChargeJumping", true );
 							currentChargeCooldown = chargeCooldown;
-							isAttacking = true;
 						}
 					}
 					break;
@@ -158,7 +161,7 @@ public class BadRabbit : MonoBehaviour
 
 	void TryChangePriorityPlayer( Player player )
 	{
-		if ( isAttacking ) return;
+		if ( isTargetLocked || isNextDropGoldCarrot ) return;
 		if ( player.Controller.IsStun || player.Controller.IsStunImmune || player.Controller.IsInsideSafeZone ) return;
 
 		//  check priority w/ current player 
@@ -196,7 +199,7 @@ public class BadRabbit : MonoBehaviour
 
 		//  idling
 		isIdling = false;
-		isAttacking = false;
+		isTargetLocked = false;
 		animator.ResetTrigger( "Attack" );
 	}
 
@@ -220,7 +223,6 @@ public class BadRabbit : MonoBehaviour
 
 		//  idling
 		isIdling = false;
-		isAttacking = false;
 		animator.SetBool( "IsChargeJumping", false );
 	}
 
@@ -245,6 +247,16 @@ public class BadRabbit : MonoBehaviour
 
 			inventory.AddItem( found_items[i] );
 		}
+
+		//  check for full inventory
+		if ( inventory.ItemsCount == inventory.MaxCount )
+		{
+			//  move away
+			SetPlayerTarget( null );
+
+			//  ensure a gold carrot drop
+			isNextDropGoldCarrot = true;
+		}
 	}
 
 	void OnMoveUpdateEnd()
@@ -258,7 +270,7 @@ public class BadRabbit : MonoBehaviour
 					if ( ( transform.position - playerTarget.transform.position ).sqrMagnitude <= attackRadius * attackRadius )
 					{
 						isIdling = true;
-						isAttacking = true;
+						isTargetLocked = true;
 						animator.SetTrigger( "Attack" );
 					}
 				}
@@ -285,7 +297,7 @@ public class BadRabbit : MonoBehaviour
 
 						//  chance to craft a gold carrot instead
 						float chance = chancePerCarrot * non_gold_carrots.Count;
-						if ( Random.Range( 0.0f, 1.0f ) <= chance )
+						if ( isNextDropGoldCarrot || Random.Range( 0.0f, 1.0f ) <= chance )
 						{
 							//  instance gold carrot
 							GameObject gold_carrot = Instantiate( goldCarrotPrefab, GameManager.instance.transform );
@@ -294,6 +306,9 @@ public class BadRabbit : MonoBehaviour
 							//  clear inventory
 							foreach ( Collectible item in non_gold_carrots )
 								inventory.RemoveItem( item );
+							inventory.UpdateItemsPositions();
+
+							isNextDropGoldCarrot = false;
 						}
 						//  drop items
 						else
