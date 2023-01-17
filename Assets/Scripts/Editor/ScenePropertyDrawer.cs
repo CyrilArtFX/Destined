@@ -13,7 +13,7 @@ namespace Core.Editor
         {
             if (property.propertyType == SerializedPropertyType.String)
             {
-                SceneAsset sceneObject = GetSceneObject(property.stringValue);
+                SceneAsset sceneObject = GetSceneObject(property.stringValue, out string path);
                 Object scene = EditorGUI.ObjectField(position, label, sceneObject, typeof(SceneAsset), true);
                 if (scene == null)
                 {
@@ -21,14 +21,14 @@ namespace Core.Editor
                 }
                 else if (scene.name != property.stringValue)
                 {
-                    SceneAsset sceneObj = GetSceneObject(scene.name);
+                    SceneAsset sceneObj = GetSceneObject(scene.name, out path);
                     if (sceneObj == null)
                     {
                         UnityEngine.Debug.LogWarning("The scene " + scene.name + " cannot be used. To use this scene add it to the build settings for the project");
                     }
                     else
                     {
-                        property.stringValue = scene.name;
+                        property.stringValue = path;
                     }
                 }
             }
@@ -37,14 +37,17 @@ namespace Core.Editor
                 EditorGUI.LabelField(position, label.text, "Use [Scene] with strings.");
             }
         }
-        protected SceneAsset GetSceneObject(string sceneObjectName)
+        protected SceneAsset GetSceneObject(string sceneObjectName, out string path)
         {
+            path = "";
+
             if (string.IsNullOrEmpty(sceneObjectName)) return null;
 
             foreach (var editorScene in EditorBuildSettings.scenes)
             {
                 if (editorScene.path.IndexOf(sceneObjectName) != -1)
                 {
+                    path = editorScene.path.Replace("Assets/", "").Replace(".unity", "");
                     return AssetDatabase.LoadAssetAtPath(editorScene.path, typeof(SceneAsset)) as SceneAsset;
                 }
             }

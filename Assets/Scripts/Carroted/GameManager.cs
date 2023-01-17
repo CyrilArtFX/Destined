@@ -41,11 +41,6 @@ namespace Carroted
             }
         }
 
-        public List<Player> GetPlayers()
-        {
-            return PlayersManager.instance.GetPlayers();
-        }
-
         public List<PlayerScore> GetPlayersScores()
         {
             return playersScores;

@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace Carroted
 {
+    [AddComponentMenu("Scripts/Carroted Menu Manager")]
     public class MenuManager : MonoBehaviour
     {
         [SerializeField]

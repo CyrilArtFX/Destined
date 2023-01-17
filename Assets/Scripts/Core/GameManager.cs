@@ -1,3 +1,5 @@
+using Core.Players;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Utility;
@@ -43,6 +45,11 @@ namespace Core
 
         public virtual void StartGame()
         {
+        }
+
+        public List<Player> GetPlayers()
+        {
+            return PlayersManager.instance.GetPlayers();
         }
     }
 }

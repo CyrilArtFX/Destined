@@ -6,13 +6,19 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Carotted/Players.unity
+    path: Assets/Scenes/HoldUp/Players.unity
+    guid: 7fa09ff02620232449407280b6b3bd35
+  - enabled: 1
+    path: Assets/Scenes/HoldUp/Menu.unity
+    guid: 0f40ff3154ef3514c80f711556b4299d
+  - enabled: 1
+    path: Assets/Scenes/Carroted/Players.unity
     guid: 6d2cfbc98eba2ad4ea8f8193b9fd3c08
   - enabled: 1
-    path: Assets/Scenes/Carotted/Menu.unity
+    path: Assets/Scenes/Carroted/Menu.unity
     guid: e9500008a6de7d94496c8a13a9211da2
   - enabled: 1
-    path: Assets/Scenes/Carotted/GameScene.unity
+    path: Assets/Scenes/Carroted/GameScene.unity
     guid: 1378f17b91d7de34b9e48eed16b2e3e8
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 4a378a7eaa7b2214f85e31b5593d541e, type: 2}
