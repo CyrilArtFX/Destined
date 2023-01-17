@@ -241,6 +241,7 @@ MonoBehaviour:
   moveAcceptanceRadius: 1
   idleTimeRange: {x: 0.8, y: 1.2}
   stunTime: 1
+  attackRadius: 0.8
   searchRadius: 1.75
   searchPercent: 0.4
   chargeMoveSpeed: 7

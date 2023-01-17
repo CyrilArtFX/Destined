@@ -25,6 +25,8 @@ public class BadRabbit : MonoBehaviour
 	[SerializeField]
 	private float stunTime = 1.0f;
 	[SerializeField]
+	private float attackRadius = 0.075f;
+	[SerializeField]
 	private float searchRadius = 2.0f;
 	[SerializeField]
 	private float searchPercent = 0.4f;
@@ -85,14 +87,12 @@ public class BadRabbit : MonoBehaviour
 				if ( playerTarget != null && !playerTarget.Controller.IsInsideSafeZone )
 					moveTarget = playerTarget.transform.position;
 				else
-				{
-					state = State.PATROL;
-					ResetIdle();
-				}
+					SetPlayerTarget( null );
 
 				//  decrease charge cooldown
 				if ( !animController.IsChargeJumping )
 					currentChargeCooldown -= Time.deltaTime;
+
 				break;
 		}
 		
@@ -179,19 +179,21 @@ public class BadRabbit : MonoBehaviour
 
 	void OnAnimAttack()
 	{
-		if ( playerTarget == null ) return;
+		//  damage player
+		if ( playerTarget != null )
+		{
+			//  stun target
+			playerTarget.Controller.Stun( stunTime );
+		
+			//  stop chasing player
+			SetPlayerTarget( null );
 
-		//  stun target
-		playerTarget.Controller.Stun( stunTime );
-		
-		//  stop chasing player
-		SetPlayerTarget( null );
-		
+			SearchCarrots();
+		}
+
 		//  idling
 		isIdling = false;
 		animator.ResetTrigger( "Attack" );
-
-		SearchCarrots();
 	}
 
 	void OnAnimChargeJumpEnd()
@@ -210,11 +212,11 @@ public class BadRabbit : MonoBehaviour
 		//  stop chasing player
 		SetPlayerTarget( null );
 
+		SearchCarrots();
+
 		//  idling
 		isIdling = false;
 		animator.SetBool( "IsChargeJumping", false );
-
-		SearchCarrots();
 	}
 
 	void SearchCarrots()
@@ -248,8 +250,11 @@ public class BadRabbit : MonoBehaviour
 			case State.ATTACK:
 				if ( playerTarget != null && !isIdling )
 				{
-					isIdling = true;
-					animator.SetTrigger( "Attack" );
+					if ( ( transform.position - playerTarget.transform.position ).sqrMagnitude <= attackRadius * attackRadius )
+					{
+						isIdling = true;
+						animator.SetTrigger( "Attack" );
+					}
 				}
 				break;
 			//  idling after movement
@@ -343,6 +348,9 @@ public class BadRabbit : MonoBehaviour
 		//  move target
 		Gizmos.color = Color.red;
 		Gizmos.DrawWireSphere( moveTarget, moveAcceptanceRadius );
+
+		//  attack radius
+		Gizmos.DrawWireSphere( transform.position, attackRadius );
 
 		//  territory
 		if ( territoryCenter != null )
