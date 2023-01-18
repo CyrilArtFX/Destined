@@ -18,7 +18,7 @@ namespace Core.Players
         private SpriteRenderer spriteRenderer;
 
         private string controllerName;
-        private Sprite sprite;
+        private PlayerSprite sprites;
         private int playerIndex;
 
         public int Index => playerIndex;
@@ -43,10 +43,10 @@ namespace Core.Players
             nameText.text = "Player " + playerIndex;
         }
 
-        public void SetSprite(Sprite newSprite)
+        public void SetSprite(PlayerSprite newSprites)
         {
-            sprite = newSprite;
-            spriteRenderer.sprite = sprite;
+            sprites = newSprites;
+            spriteRenderer.sprite = sprites.BodySprite;
         }
 
         public void SetToPlayMode()
@@ -106,9 +106,9 @@ namespace Core.Players
             return controllerName;
         }
 
-        public Sprite GetSprite()
+        public PlayerSprite GetSprites()
         {
-            return sprite;
+            return sprites;
         }
     }
 }
