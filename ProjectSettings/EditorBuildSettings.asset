@@ -21,7 +21,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Carroted/GameScene.unity
     guid: 1378f17b91d7de34b9e48eed16b2e3e8
   - enabled: 1
-    path: Assets/Scenes/HoldUp/Tests/BankTestCyril.unity
+    path: Assets/Scenes/HoldUp/Testsu/BankTestCyril.unity
     guid: e06faadff451fd44ebd51624e96b555c
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 4a378a7eaa7b2214f85e31b5593d541e, type: 2}
