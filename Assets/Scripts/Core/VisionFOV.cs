@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Utility;
 
 namespace Core
 {
@@ -8,20 +9,24 @@ namespace Core
     [RequireComponent( typeof( MeshFilter ), typeof( MeshRenderer ) )]
     public class VisionFOV : MonoBehaviour
     {
+        public MeshFilter Filter { get; private set; }
+        public MeshRenderer Renderer { get; private set; }
+
+        public LayerMask ObstaclesMask;
         public float FOV = 90.0f;
         public float ViewDistance = 1.0f;
         public int RayCount = 10;
 
         private Mesh mesh;
 
-        private MeshFilter filter;
-
         void Awake()
         {
             mesh = new Mesh();
 
-            filter = GetComponent<MeshFilter>();
-            filter.mesh = mesh;
+            Filter = GetComponent<MeshFilter>();
+            Filter.mesh = mesh;
+
+            Renderer = GetComponent<MeshRenderer>();
         }
 
         void Update()
@@ -50,7 +55,7 @@ namespace Core
                 
                 //  get vertex position
                 Vector3 vertex;
-                RaycastHit2D hit = Physics2D.Raycast( transform.position, transform.TransformDirection( dir ), ViewDistance );
+                RaycastHit2D hit = Physics2DUtils.RaycastWithoutTrigger( transform.position, transform.TransformDirection( dir ), ViewDistance, ObstaclesMask );
                 if ( hit )
                     vertex = transform.InverseTransformPoint( hit.point );
                 else
