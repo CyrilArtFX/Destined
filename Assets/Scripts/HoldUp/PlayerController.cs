@@ -33,7 +33,7 @@ namespace HoldUp
 
             //  animation
             animator.SetBool("IsWalking", Direction != Vector2.zero && !InCinematic);
-            animator.SetFloat("AnimSpeed", moveSpeed);
+            //animator.SetFloat("AnimSpeed", 1.0f);
         }
     }
 }
