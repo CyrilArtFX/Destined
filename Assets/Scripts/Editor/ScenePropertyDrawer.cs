@@ -14,22 +14,26 @@ namespace Core.Editor
             if (property.propertyType == SerializedPropertyType.String)
             {
                 SceneAsset sceneObject = GetSceneObject(property.stringValue, out string path);
-                Object scene = EditorGUI.ObjectField(position, label, sceneObject, typeof(SceneAsset), true);
-                if (scene == null)
+                Object new_scene = EditorGUI.ObjectField(position, label, sceneObject, typeof(SceneAsset), true);
+                if (new_scene == null)
                 {
                     property.stringValue = "";
+                    return;
                 }
-                else if (scene.name != property.stringValue)
+
+                //  get new scene path
+                string new_path = ClearPath(AssetDatabase.GetAssetPath( new_scene ));
+                if (new_path == path) return;
+
+                //  check scene is in build settings
+                new_scene = GetSceneObject(new_path, out path);
+                if (new_scene == null)
                 {
-                    SceneAsset sceneObj = GetSceneObject(scene.name, out path);
-                    if (sceneObj == null)
-                    {
-                        UnityEngine.Debug.LogWarning("The scene " + scene.name + " cannot be used. To use this scene add it to the build settings for the project");
-                    }
-                    else
-                    {
-                        property.stringValue = path;
-                    }
+                    Debug.LogWarning("The scene '" + new_path + "' cannot be used. To use this scene add it to the build settings for the project");
+                }
+                else
+                {
+                    property.stringValue = path;
                 }
             }
             else
@@ -47,7 +51,7 @@ namespace Core.Editor
             {
                 if (editorScene.path.IndexOf(sceneObjectName) != -1)
                 {
-                    path = editorScene.path.Replace("Assets/", "").Replace(".unity", "");
+                    path = ClearPath(editorScene.path);
                     return AssetDatabase.LoadAssetAtPath(editorScene.path, typeof(SceneAsset)) as SceneAsset;
                 }
             }
@@ -55,5 +59,7 @@ namespace Core.Editor
             UnityEngine.Debug.LogWarning("Scene [" + sceneObjectName + "] cannot be used. Add this scene to the 'Scenes in the Build' in build settings.");
             return null;
         }
+
+        string ClearPath( string path ) => path.Replace("Assets/", "").Replace(".unity", "");
     }
 }
