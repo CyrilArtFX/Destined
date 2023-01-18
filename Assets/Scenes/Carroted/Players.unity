@@ -613,10 +613,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSprites:
-  - {fileID: 594728411, guid: 3874231f39c342a45a67d266f5a7a537, type: 3}
-  - {fileID: 1042768307, guid: 3874231f39c342a45a67d266f5a7a537, type: 3}
-  - {fileID: 1336306107, guid: 3874231f39c342a45a67d266f5a7a537, type: 3}
-  - {fileID: -15728113, guid: 3874231f39c342a45a67d266f5a7a537, type: 3}
+  - BodySprite: {fileID: 594728411, guid: 3874231f39c342a45a67d266f5a7a537, type: 3}
+    HeadSprite: {fileID: 0}
+  - BodySprite: {fileID: 1042768307, guid: 3874231f39c342a45a67d266f5a7a537, type: 3}
+    HeadSprite: {fileID: 0}
+  - BodySprite: {fileID: 1336306107, guid: 3874231f39c342a45a67d266f5a7a537, type: 3}
+    HeadSprite: {fileID: 0}
+  - BodySprite: {fileID: -15728113, guid: 3874231f39c342a45a67d266f5a7a537, type: 3}
+    HeadSprite: {fileID: 0}
+  playerOOBParent: {fileID: 0}
   disconnectedControllersText: {fileID: 1382256981}
 --- !u!1 &1907886713
 GameObject:
