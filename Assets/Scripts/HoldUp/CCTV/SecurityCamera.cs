@@ -11,10 +11,6 @@ namespace HoldUp.CCTV
 
 		[SerializeField]
 		private VisionFOV vision;
-		[SerializeField]
-		private string inControlLayerName;
-		[SerializeField]
-		private string unControlLayerName;
 
 		void Awake()
 		{
@@ -36,7 +32,7 @@ namespace HoldUp.CCTV
 			Player = player;
 
 			//vision.enabled = true;
-			gameObject.layer = LayerMask.NameToLayer( inControlLayerName );
+			gameObject.layer = LayerMask.NameToLayer( VisionFOV.VISION_MASK_LAYER_NAME );
 			vision.gameObject.layer = gameObject.layer;
 		}
 
@@ -45,7 +41,7 @@ namespace HoldUp.CCTV
 			Player = null;
 
 			//vision.enabled = false;
-			gameObject.layer = LayerMask.NameToLayer( unControlLayerName );
+			gameObject.layer = LayerMask.NameToLayer( VisionFOV.BEHIND_VISION_MASK_LAYER_NAME );
 			vision.gameObject.layer = gameObject.layer;
 		}
 

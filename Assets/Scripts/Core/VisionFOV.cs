@@ -9,6 +9,9 @@ namespace Core
     [RequireComponent( typeof( MeshFilter ), typeof( MeshRenderer ) )]
     public class VisionFOV : MonoBehaviour
     {
+        public const string VISION_MASK_LAYER_NAME = "VisionMask";
+        public const string BEHIND_VISION_MASK_LAYER_NAME = "BehindVisionMask";
+
         public MeshFilter Filter { get; private set; }
         public MeshRenderer Renderer { get; private set; }
 
