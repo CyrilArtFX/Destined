@@ -24,6 +24,8 @@ namespace Core.Menu
 
         List<Player> playersInStartZone = new();
 
+        private bool gameStarted = false;
+
 
         void Start()
         {
@@ -81,9 +83,10 @@ namespace Core.Menu
                 ResetProgressBar();
             }
 
-            if (timer > timeForStart)
+            if (timer > timeForStart && !gameStarted)
             {
                 GameManager.instance.StartGame();
+                gameStarted = true;
             }
         }
     }

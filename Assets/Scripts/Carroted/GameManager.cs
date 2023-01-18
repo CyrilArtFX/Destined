@@ -2,6 +2,7 @@ using Core.Players;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Utility;
 
 namespace Carroted
 {
@@ -10,13 +11,16 @@ namespace Carroted
     {
         private List<PlayerScore> playersScores = new();
 
+        [SerializeField, Scene]
+        protected string gameScene;
+
         public override void StartGame()
         {
             IsFirstTimeLobby = false;
 
             PlayersManager.instance.SwitchToPlayMode();
-            SceneManager.UnloadSceneAsync("Menu");
-            SceneManager.LoadSceneAsync("GameScene", LoadSceneMode.Additive);
+            SceneManager.UnloadSceneAsync(menuScene);
+            SceneManager.LoadSceneAsync(gameScene, LoadSceneMode.Additive);
 
             List<Player> playerList = PlayersManager.instance.GetPlayers();
             foreach (Player player in playerList)
@@ -30,8 +34,8 @@ namespace Carroted
         {
             playersScores = scores;
 
-            SceneManager.UnloadSceneAsync("GameScene");
-            SceneManager.LoadSceneAsync("Menu", LoadSceneMode.Additive);
+            SceneManager.UnloadSceneAsync(gameScene);
+            SceneManager.LoadSceneAsync(menuScene, LoadSceneMode.Additive);
 
             List<Player> playerList = PlayersManager.instance.GetPlayers();
             foreach (Player player in playerList)

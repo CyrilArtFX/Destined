@@ -5,6 +5,13 @@ using TMPro;
 
 namespace Core.Players
 {
+    [System.Serializable]
+    public struct PlayerSprite
+    {
+        public Sprite BodySprite;
+        public Sprite HeadSprite;
+    }
+
     public class PlayersManager : MonoBehaviour
     {
         private Dictionary<string, PlayerInput> controllers = new();
@@ -14,9 +21,12 @@ namespace Core.Players
 
 
         [SerializeField]
-        private List<Sprite> playerSprites = new();
+        private List<PlayerSprite> playerSprites = new();
 
-        private Dictionary<Sprite, bool> sprites = new();
+        [SerializeField, Tooltip("Leave this at none if you don't need the OOB system in your game")]
+        private Transform playerOOBParent;
+
+        private Dictionary<PlayerSprite, bool> sprites = new();
 
         public static PlayersManager instance;
 
@@ -33,7 +43,7 @@ namespace Core.Players
 
         private void Start()
         {
-            foreach (Sprite playerSprite in playerSprites)
+            foreach (PlayerSprite playerSprite in playerSprites)
             {
                 sprites.Add(playerSprite, false);
             }
@@ -64,8 +74,8 @@ namespace Core.Players
             players.Add(player);
             player.InitializePlayer(deviceName, players.Count);
 
-            List<Sprite> unusedSprites = new();
-            foreach (Sprite sprite in sprites.Keys)
+            List<PlayerSprite> unusedSprites = new();
+            foreach (PlayerSprite sprite in sprites.Keys)
             {
                 if (!sprites[sprite])
                 {
@@ -78,6 +88,11 @@ namespace Core.Players
             sprites[unusedSprites[rdm]] = true;
 
             player.transform.position = transform.position;
+
+            if(playerOOBParent)
+            {
+                player.GetComponent<PlayerOutOfBound>().Initialize(playerOOBParent);
+            }
         }
 
         public void PlayerLeft(Player player)
@@ -85,7 +100,7 @@ namespace Core.Players
             players.Remove(player);
             ReorganizePlayers();
             controllers.Remove(player.GetControllerName());
-            sprites[player.GetSprite()] = false;
+            sprites[player.GetSprites()] = false;
         }
 
         public void PlayerDeconnexion(string controllerName)

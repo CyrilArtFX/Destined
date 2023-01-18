@@ -270,6 +270,7 @@ GameObject:
   - component: {fileID: 1589364889}
   - component: {fileID: 1589364888}
   - component: {fileID: 1589364891}
+  - component: {fileID: 1589364892}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -376,6 +377,18 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!114 &1589364892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1589364887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baf6402b581caa0448c1b2e0701559d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1688445674
 GameObject:
   m_ObjectHideFlags: 0
@@ -452,7 +465,7 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: 0}
-  m_PlayerPrefab: {fileID: 3429361060142620941, guid: e74200ca59cb0694b9f72bc54e32dbe3, type: 3}
+  m_PlayerPrefab: {fileID: 3429361060142620941, guid: 195c8ae0592a2aa4d9430c5d748f8bb0, type: 3}
   m_SplitScreen: 0
   m_MaintainAspectRatioInSplitScreen: 0
   m_FixedNumberOfSplitScreens: -1
@@ -490,10 +503,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSprites:
-  - {fileID: 594728411, guid: 3874231f39c342a45a67d266f5a7a537, type: 3}
-  - {fileID: 1042768307, guid: 3874231f39c342a45a67d266f5a7a537, type: 3}
-  - {fileID: 1336306107, guid: 3874231f39c342a45a67d266f5a7a537, type: 3}
-  - {fileID: -15728113, guid: 3874231f39c342a45a67d266f5a7a537, type: 3}
+  - BodySprite: {fileID: 594728411, guid: 3874231f39c342a45a67d266f5a7a537, type: 3}
+    HeadSprite: {fileID: -1759521771, guid: 3874231f39c342a45a67d266f5a7a537, type: 3}
+  - BodySprite: {fileID: 1042768307, guid: 3874231f39c342a45a67d266f5a7a537, type: 3}
+    HeadSprite: {fileID: 461339661, guid: 3874231f39c342a45a67d266f5a7a537, type: 3}
+  - BodySprite: {fileID: 1336306107, guid: 3874231f39c342a45a67d266f5a7a537, type: 3}
+    HeadSprite: {fileID: 1470383137, guid: 3874231f39c342a45a67d266f5a7a537, type: 3}
+  - BodySprite: {fileID: -15728113, guid: 3874231f39c342a45a67d266f5a7a537, type: 3}
+    HeadSprite: {fileID: -1604582017, guid: 3874231f39c342a45a67d266f5a7a537, type: 3}
+  playerOOBParent: {fileID: 1914294220}
   disconnectedControllersText: {fileID: 1382256981}
 --- !u!1 &1907886713
 GameObject:
@@ -542,6 +560,42 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1914294219
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1914294220}
+  m_Layer: 5
+  m_Name: OOBPlayersIcons
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1914294220
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1914294219}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2103505631}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2097851923
 GameObject:
   m_ObjectHideFlags: 0
@@ -587,6 +641,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menuScene: Scenes/HoldUp/Menu
+  gameScene: Scenes/HoldUp/Tests/BankTestCyril
+  gameCamera: {fileID: 1589364892}
 --- !u!1 &2103505627
 GameObject:
   m_ObjectHideFlags: 0
@@ -635,10 +691,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -664,8 +720,8 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -2009574621
+  m_SortingOrder: 9000
   m_TargetDisplay: 0
 --- !u!224 &2103505631
 RectTransform:
@@ -680,6 +736,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1382256980}
+  - {fileID: 1914294220}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

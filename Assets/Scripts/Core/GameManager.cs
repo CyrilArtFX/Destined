@@ -13,7 +13,7 @@ namespace Core
         public bool IsFirstTimeLobby { get; protected set; }
 
         [SerializeField, Scene]
-        private string menuScene;
+        protected string menuScene;
 
         private void Awake()
         {
