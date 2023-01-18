@@ -641,7 +641,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menuScene: Scenes/HoldUp/Menu
-  gameScene: Scenes/HoldUp/Tests/BankTestCyril
+  gameScene: 
   gameCamera: {fileID: 1589364892}
 --- !u!1 &2103505627
 GameObject:

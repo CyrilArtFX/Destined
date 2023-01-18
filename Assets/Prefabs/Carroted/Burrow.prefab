@@ -72,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2009574621
   m_SortingLayer: 1
-  m_SortingOrder: -2
+  m_SortingOrder: -999
   m_Sprite: {fileID: 1490925830, guid: db5198ecd55b2e14d8b7a9b9a1136e20, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -130,6 +130,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   carrotPrefab: {fileID: 8504721398169505408, guid: 41d86e26d65bd804cb64891368bfdf2a, type: 3}
-  goldenCarrotPrefab: {fileID: 5484264537431741950, guid: 6c3cc347257c46841bfeae7d2284fd9a, type: 3}
   maxAliveCarrots: 15
   Data: {fileID: 11400000, guid: d614098f8890a654781b4ef26b635e48, type: 2}
