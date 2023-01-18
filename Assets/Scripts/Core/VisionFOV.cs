@@ -51,6 +51,8 @@ namespace Core
             int[] triangles = new int[RayCount * 3];
             Vector2[] uv = new Vector2[vertices.Length];
 
+            Physics2D.queriesHitTriggers = false;
+
             int vertex_id = 1;
             int triangle_id = 0;
             float angle = FOV / 2.0f;
@@ -62,7 +64,7 @@ namespace Core
                 
                 //  get vertex position
                 Vector3 vertex;
-                RaycastHit2D hit = Physics2DUtils.RaycastWithoutTrigger( transform.position, transform.TransformDirection( dir ), ViewDistance, ObstaclesMask );
+                RaycastHit2D hit = Physics2D.Raycast( transform.position, transform.TransformDirection( dir ), ViewDistance, ObstaclesMask );
                 if ( hit )
                 {
                     vertex = transform.InverseTransformPoint( hit.point );
@@ -86,8 +88,10 @@ namespace Core
                 angle -= angle_step;
             }
 
+            Physics2D.queriesHitTriggers = true;
+
             //  avoid errors while changing vertices count
-            if ( vertices.Length != mesh?.vertices.Length )
+            if ( vertices.Length != mesh.vertices.Length )
                 mesh.Clear();
 
             mesh.vertices = vertices;
