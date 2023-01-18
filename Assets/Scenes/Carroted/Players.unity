@@ -714,7 +714,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 328fe7c44b12abe4f8dd9318ddc760b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menuScene: Scenes/HoldUp/Menu
+  menuScene: Scenes/Carroted/Menu
+  gameScene: Scenes/Carroted/GameScene
 --- !u!1 &2103505627
 GameObject:
   m_ObjectHideFlags: 0
