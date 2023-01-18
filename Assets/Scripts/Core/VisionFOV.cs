@@ -41,6 +41,10 @@ namespace Core
         {
             if ( RayCount <= 1 ) return;
 
+            //  check setup
+            if ( mesh == null ) 
+                Awake();
+
             Vector3[] vertices = new Vector3[RayCount + 2];
             vertices[0] = Vector3.zero;
 
@@ -60,7 +64,10 @@ namespace Core
                 Vector3 vertex;
                 RaycastHit2D hit = Physics2DUtils.RaycastWithoutTrigger( transform.position, transform.TransformDirection( dir ), ViewDistance, ObstaclesMask );
                 if ( hit )
+                {
                     vertex = transform.InverseTransformPoint( hit.point );
+                    vertex.z = 0;
+                }
                 else
                     vertex = dir * ViewDistance;
 
@@ -79,7 +86,8 @@ namespace Core
                 angle -= angle_step;
             }
 
-            if ( vertices.Length != mesh.vertices.Length )
+            //  avoid errors while changing vertices count
+            if ( vertices.Length != mesh?.vertices.Length )
                 mesh.Clear();
 
             mesh.vertices = vertices;
