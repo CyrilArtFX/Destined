@@ -599,7 +599,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 119
   FOV: 360
-  ViewDistance: 2.5
+  ViewDistance: 4
   RayCount: 50
 --- !u!33 &3187041226443907244
 MeshFilter:
