@@ -34,10 +34,22 @@ namespace Core.Players
             {
                 oobIcon.gameObject.SetActive(true);
                 Vector3 screenPos = Camera.main.WorldToScreenPoint(playerRenderer.transform.position);
-                Vector2 oobIconPos = new Vector2(Mathf.Clamp(screenPos.x - 960, -910, 910), Mathf.Clamp(screenPos.y - 540, -490, 490));
+                Rect screenRect = Camera.main.pixelRect;
+                Vector2 oobIconPos = new Vector2(
+                    Mathf.Clamp((screenPos.x / screenRect.width * 1920) - 960, -910, 910), 
+                    Mathf.Clamp((screenPos.y / screenRect.height * 1080) - 540, -490, 490)
+                    );
                 oobIcon.SetPosition(oobIconPos);
 
                 oobIcon.CalculateArrowPosition(playerRenderer.transform.position);
+            }
+        }
+
+        void OnDestroy()
+        {
+            if(oobIcon)
+            {
+                Destroy(oobIcon.gameObject);
             }
         }
     }
