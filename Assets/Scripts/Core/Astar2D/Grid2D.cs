@@ -41,8 +41,7 @@ namespace Core.Astar2D
 				for ( int y = 0; y < gridSize.y; y++ )
 				{
 					Vector3 world_pos = ToWorldPos( x, y );
-					Grid[x, y] = new( ObstacleMap.HasTile( ObstacleMap.WorldToCell( world_pos ) ), world_pos, x, y );
-					//Grid[x, y] = new( Physics2D.Raycast( world_pos, Vector2.up ), world_pos, x, y );
+					Grid[x, y] = new( Physics2D.OverlapPoint( world_pos ), world_pos, x, y );
 				}
 			}
 
