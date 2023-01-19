@@ -43,27 +43,19 @@ namespace HoldUp
             currentItem.Initialize(playerController);
         }
 
-        public void UseItem(InputAction.CallbackContext ctx)
+        public void UseItemPressed()
         {
-            if (currentItem)
+            if(currentItem)
             {
-                currentItem.OnUse(ctx);
+                currentItem.OnUsePressed();
             }
         }
 
-        public void AimItemJoystick(InputAction.CallbackContext ctx)
+        public void UseItemReleased()
         {
-            if (currentItem)
+            if(currentItem)
             {
-                currentItem.OnAimJoystick(ctx);
-            }
-        }
-
-        public void AimItemMouse(InputAction.CallbackContext ctx)
-        {
-            if (currentItem)
-            {
-                currentItem.OnAimMouse(ctx);
+                currentItem.OnUseReleased();
             }
         }
     }

@@ -12,15 +12,11 @@ namespace HoldUp
             playerController = controller;
         }
 
-        public virtual void OnUse(InputAction.CallbackContext ctx)
+        public virtual void OnUsePressed()
         {
         }
 
-        public virtual void OnAimJoystick(InputAction.CallbackContext ctx)
-        {
-        }
-
-        public virtual void OnAimMouse(InputAction.CallbackContext ctx)
+        public virtual void OnUseReleased()
         {
         }
 

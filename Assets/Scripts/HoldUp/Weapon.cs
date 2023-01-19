@@ -5,17 +5,23 @@ namespace HoldUp
 {
     public class Weapon : Item
     {
+        public Vector2 Direction => playerController.AimDirection != Vector2.zero? playerController.AimDirection : playerController.LastPerformedDirection;
+
         [SerializeField, Tooltip("The number of shot per seconds of this weapon (can be a decimal number)")]
         private float fireRate;
+        [SerializeField]
+        private bool automaticWeapon;
+
+        [SerializeField]
+        private Bullet bullet;
+        [SerializeField]
+        private float bulletSpeed, bulletRange;
+        [SerializeField]
+        private Transform bulletSpawnPos;
 
 
         private bool useActionTriggered;
         private float timeBetweenShoots, shootTimer;
-
-        private Vector2 aimDirection;
-
-
-        private float onWaitForMouseReset;
 
 
         public override void Initialize(PlayerController controller)
@@ -24,32 +30,14 @@ namespace HoldUp
             timeBetweenShoots = 1.0f / fireRate;
         }
 
-        public override void OnUse(InputAction.CallbackContext ctx)
+        public override void OnUsePressed()
         {
-            if (ctx.action.WasPressedThisFrame())
-            {
-                useActionTriggered = true;
-            }
-            if (ctx.action.WasReleasedThisFrame())
-            {
-                useActionTriggered = false;
-            }
+            useActionTriggered = true;
         }
 
-        public override void OnAimJoystick(InputAction.CallbackContext ctx)
+        public override void OnUseReleased()
         {
-            aimDirection = ctx.ReadValue<Vector2>().normalized;
-        }
-
-        public override void OnAimMouse(InputAction.CallbackContext ctx)
-        {
-            Vector2 mouse_pos = Mouse.current.position.ReadValue();
-            mouse_pos = Camera.main.ScreenToWorldPoint(mouse_pos);
-
-            aimDirection = mouse_pos - (Vector2)transform.position;
-            aimDirection.Normalize();
-
-            onWaitForMouseReset = 0.5f;
+            useActionTriggered = false;
         }
 
         void Update()
@@ -58,10 +46,12 @@ namespace HoldUp
             {
                 if(shootTimer <= 0.0f)
                 {
-                    print("shoot");
+                    Bullet bulletObject = GameObject.Instantiate(bullet.gameObject, GameManager.instance.transform).GetComponent<Bullet>();
+                    bulletObject.Initialize(bulletSpeed, Direction, bulletRange, playerController.GetComponent<Collider2D>());
+                    bulletObject.transform.position = bulletSpawnPos.position;
+
                     shootTimer = timeBetweenShoots;
                 }
-
             }
 
             if(shootTimer > 0.0f)
@@ -70,17 +60,7 @@ namespace HoldUp
             }
 
 
-            if(onWaitForMouseReset > 0.0f)
-            {
-                onWaitForMouseReset -= Time.deltaTime;
-                if(onWaitForMouseReset <= 0.0f)
-                {
-                    aimDirection = Vector2.zero;
-                }
-            }
-
-
-            Rotate(aimDirection != Vector2.zero ? aimDirection : playerController.LastPerformedDirection);
+            Rotate(Direction);
         }
     }
 }
