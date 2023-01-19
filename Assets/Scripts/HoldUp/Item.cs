@@ -1,10 +1,18 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace HoldUp
 {
     public abstract class Item : MonoBehaviour
     {
-        public virtual void OnUse()
+        protected PlayerController playerController;
+
+        public virtual void Initialize(PlayerController controller)
+        {
+            playerController = controller;
+        }
+
+        public virtual void OnUse(InputAction.CallbackContext ctx)
         {
 
         }

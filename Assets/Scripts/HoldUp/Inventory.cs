@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace HoldUp
 {
@@ -10,10 +11,14 @@ namespace HoldUp
 
         private Item currentItem;
 
+        private PlayerController playerController;
 
-        public void EnableInventory()
+
+        public void EnableInventory(PlayerController controller)
         {
+            playerController = controller;
             currentItem = GameObject.Instantiate(defaultItem.gameObject, transform).GetComponent<Item>();
+            currentItem.Initialize(playerController);
         }
 
         public void DisableInventory()
@@ -28,19 +33,21 @@ namespace HoldUp
         {
             Destroy(currentItem.gameObject);
             currentItem = GameObject.Instantiate(itemToEquip.gameObject, transform).GetComponent<Item>();
+            currentItem.Initialize(playerController);
         }
 
         public void DropItem()
         {
             Destroy(currentItem.gameObject);
             currentItem = GameObject.Instantiate(defaultItem.gameObject, transform).GetComponent<Item>();
+            currentItem.Initialize(playerController);
         }
 
-        public void UseItem()
+        public void UseItem(InputAction.CallbackContext ctx)
         {
             if(currentItem)
             {
-                currentItem.OnUse();
+                currentItem.OnUse(ctx);
             }
         }
     }
