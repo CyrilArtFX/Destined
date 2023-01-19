@@ -74,6 +74,7 @@ namespace HoldUp
 
         public void EquipAndDrop()
         {
+            Physics2D.queriesHitTriggers = true;
             Collider2D itemOnGround = Physics2D.OverlapCircle(transform.position, radius, itemOnGroundMask);
             if(itemOnGround)
             {
@@ -95,6 +96,7 @@ namespace HoldUp
                     DropItem();
                 }
             }
+            Physics2D.queriesHitTriggers = false;
         }
 
 

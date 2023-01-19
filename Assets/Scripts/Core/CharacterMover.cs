@@ -29,6 +29,8 @@ namespace Core
         {
             float speed = MoveSpeed * speed_multiplier;
 
+            dir.Normalize();
+
             rigidbody.MovePosition(rigidbody.position + dir * speed);
 
             Direction = dir;
