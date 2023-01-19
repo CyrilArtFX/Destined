@@ -145,9 +145,6 @@ namespace Carroted
                 siaHideTime -= Time.deltaTime;
             }
 
-            //  get move speed
-            float speed = moveSpeed - moveSpeed * Mathf.Min(maxSpeedReduction, player.Inventory.ItemsCount * speedReductionPerItem);
-
             //  stun
             if (stun > 0.0f)
             {
@@ -159,12 +156,9 @@ namespace Carroted
             //  move
             else if (!InCinematic)
             {
-                rigidbody.MovePosition(rigidbody.position + Direction * speed);
+                float speed = moveSpeed - moveSpeed * Mathf.Min(maxSpeedReduction, player.Inventory.ItemsCount * speedReductionPerItem);
+                mover.Move(Direction, speed / moveSpeed, moveSpeed / speed);
             }
-
-            //  animation
-            animator.SetBool("IsWalking", Direction != Vector2.zero && !InCinematic);
-            animator.SetFloat("AnimSpeed", moveSpeed / speed);
         }
 
         private IEnumerator StunImmunity()

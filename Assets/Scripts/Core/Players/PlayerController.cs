@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 
 namespace Core.Players
 {
+    [RequireComponent(typeof(CharacterMover))]
     public abstract class PlayerController : MonoBehaviour
     {
         public Vector2 Direction { get; private set; }
@@ -19,12 +20,11 @@ namespace Core.Players
 
         [SerializeField]
         protected new SpriteRenderer renderer;
-        protected new Rigidbody2D rigidbody;
-
+        protected CharacterMover mover;
 
         void Awake()
         {
-            rigidbody = GetComponent<Rigidbody2D>();
+            mover = GetComponent<CharacterMover>();
         }
 
         public void OnMove(InputAction.CallbackContext ctx)

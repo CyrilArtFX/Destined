@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Core;
 
 namespace HoldUp
 {
@@ -28,12 +27,8 @@ namespace HoldUp
             //  move
             if (!InCinematic)
             {
-                rigidbody.MovePosition(rigidbody.position + Direction * moveSpeed);
+                mover.Move(Direction);
             }
-
-            //  animation
-            animator.SetBool("IsWalking", Direction != Vector2.zero && !InCinematic);
-            //animator.SetFloat("AnimSpeed", 1.0f);
         }
     }
 }
