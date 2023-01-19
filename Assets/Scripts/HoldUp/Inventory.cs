@@ -23,7 +23,7 @@ namespace HoldUp
 
         public void DisableInventory()
         {
-            if(currentItem)
+            if (currentItem)
             {
                 Destroy(currentItem.gameObject);
             }
@@ -45,9 +45,25 @@ namespace HoldUp
 
         public void UseItem(InputAction.CallbackContext ctx)
         {
-            if(currentItem)
+            if (currentItem)
             {
                 currentItem.OnUse(ctx);
+            }
+        }
+
+        public void AimItemJoystick(InputAction.CallbackContext ctx)
+        {
+            if (currentItem)
+            {
+                currentItem.OnAimJoystick(ctx);
+            }
+        }
+
+        public void AimItemMouse(InputAction.CallbackContext ctx)
+        {
+            if (currentItem)
+            {
+                currentItem.OnAimMouse(ctx);
             }
         }
     }

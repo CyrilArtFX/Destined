@@ -450,6 +450,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 9a45061b-d455-4203-b524-afc9b646f972
     m_ActionName: GameActions/UseItem[/Mouse/leftButton,/XInputControllerWindows/rightTrigger]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2874819252109220458}
+        m_TargetAssemblyTypeName: HoldUp.PlayerController, Assembly-CSharp
+        m_MethodName: OnMoveRightJoystick
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: d2c1dc37-41c6-49ca-a420-42ccd18ce1fd
+    m_ActionName: GameActions/AimController[/XInputControllerWindows/rightStick]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2874819252109220458}
+        m_TargetAssemblyTypeName: HoldUp.PlayerController, Assembly-CSharp
+        m_MethodName: OnMoveMouse
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: fd58b832-8f29-4ffa-8b96-eae6ee53884e
+    m_ActionName: GameActions/AimKeyboard[/Mouse/position]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: GameActions

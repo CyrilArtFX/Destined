@@ -12,6 +12,12 @@ namespace HoldUp
         private bool useActionTriggered;
         private float timeBetweenShoots, shootTimer;
 
+        private Vector2 aimDirection;
+
+
+        private float onWaitForMouseReset;
+
+
         public override void Initialize(PlayerController controller)
         {
             base.Initialize(controller);
@@ -30,13 +36,29 @@ namespace HoldUp
             }
         }
 
+        public override void OnAimJoystick(InputAction.CallbackContext ctx)
+        {
+            aimDirection = ctx.ReadValue<Vector2>().normalized;
+        }
+
+        public override void OnAimMouse(InputAction.CallbackContext ctx)
+        {
+            Vector2 mouse_pos = Mouse.current.position.ReadValue();
+            mouse_pos = Camera.main.ScreenToWorldPoint(mouse_pos);
+
+            aimDirection = mouse_pos - (Vector2)transform.position;
+            aimDirection.Normalize();
+
+            onWaitForMouseReset = 0.5f;
+        }
+
         void Update()
         {
             if(useActionTriggered)
             {
                 if(shootTimer <= 0.0f)
                 {
-                    print("shoot in this direction : " + playerController.LastPerformedDirection);
+                    print("shoot");
                     shootTimer = timeBetweenShoots;
                 }
 
@@ -46,6 +68,19 @@ namespace HoldUp
             {
                 shootTimer -= Time.deltaTime;
             }
+
+
+            if(onWaitForMouseReset > 0.0f)
+            {
+                onWaitForMouseReset -= Time.deltaTime;
+                if(onWaitForMouseReset <= 0.0f)
+                {
+                    aimDirection = Vector2.zero;
+                }
+            }
+
+
+            Rotate(aimDirection != Vector2.zero ? aimDirection : playerController.LastPerformedDirection);
         }
     }
 }

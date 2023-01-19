@@ -38,6 +38,16 @@ namespace HoldUp
             inventory.UseItem(ctx);
         }
 
+        public void OnMoveRightJoystick(InputAction.CallbackContext ctx)
+        {
+            inventory.AimItemJoystick(ctx);
+        }
+
+        public void OnMoveMouse(InputAction.CallbackContext ctx)
+        {
+            inventory.AimItemMouse(ctx);
+        }
+
         void Update()
         {
             //  move
