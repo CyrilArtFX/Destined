@@ -9,10 +9,11 @@ namespace Core.Astar2D
 	{
 		public static Grid2D Instance { get; private set; }
 
-		public Vector2Int GridWorldSize;
-		public float NodeRadius;
-		public Node2D[,] Grid;
-		public Tilemap ObstacleMap;
+		public Node2D[,] Grid { get; set; }
+
+		public Vector2Int GridWorldSize = new( 16, 16 );
+		public float NodeRadius = 0.5f;
+		public LayerMask ObstacleLayerMask;
 		public bool CanUseDiagonals = false;
 
 		Vector2Int gridSize;
@@ -41,7 +42,7 @@ namespace Core.Astar2D
 				for ( int y = 0; y < gridSize.y; y++ )
 				{
 					Vector3 world_pos = ToWorldPos( x, y );
-					Grid[x, y] = new( Physics2D.OverlapPoint( world_pos ), world_pos, x, y );
+					Grid[x, y] = new( Physics2D.OverlapPoint( world_pos, ObstacleLayerMask ), world_pos, x, y );
 				}
 			}
 
