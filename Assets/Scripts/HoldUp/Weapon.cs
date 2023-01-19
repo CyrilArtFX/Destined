@@ -32,22 +32,39 @@ namespace HoldUp
 
         public override void OnUsePressed()
         {
-            useActionTriggered = true;
+            if(automaticWeapon)
+            {
+                useActionTriggered = true;
+            }
+            else
+            {
+                if (shootTimer <= 0.0f)
+                {
+                    Bullet bulletObject = GameObject.Instantiate(bullet.gameObject, GameManager.instance.transform).GetComponent<Bullet>();
+                    bulletObject.Initialize(bulletSpeed, Direction.normalized, bulletRange, playerController.GetComponent<Collider2D>());
+                    bulletObject.transform.position = bulletSpawnPos.position;
+
+                    shootTimer = timeBetweenShoots;
+                }
+            }
         }
 
         public override void OnUseReleased()
         {
-            useActionTriggered = false;
+            if(automaticWeapon)
+            {
+                useActionTriggered = false;
+            }
         }
 
         void Update()
         {
-            if(useActionTriggered)
+            if(automaticWeapon && useActionTriggered)
             {
                 if(shootTimer <= 0.0f)
                 {
                     Bullet bulletObject = GameObject.Instantiate(bullet.gameObject, GameManager.instance.transform).GetComponent<Bullet>();
-                    bulletObject.Initialize(bulletSpeed, Direction, bulletRange, playerController.GetComponent<Collider2D>());
+                    bulletObject.Initialize(bulletSpeed, Direction.normalized, bulletRange, playerController.GetComponent<Collider2D>());
                     bulletObject.transform.position = bulletSpawnPos.position;
 
                     shootTimer = timeBetweenShoots;
