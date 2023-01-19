@@ -467,7 +467,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameText: {fileID: 6903711896116869281}
   spriteRenderer: {fileID: 7682793936419345379}
-  inventory: {fileID: 4836424595104404903}
   controller: {fileID: 7741838355061711870}
 --- !u!114 &7741838355061711870
 MonoBehaviour:
@@ -485,6 +484,7 @@ MonoBehaviour:
   player: {fileID: -1462114050433421847}
   animator: {fileID: 4388120074462765570}
   renderer: {fileID: 7682793936419345379}
+  inventory: {fileID: 4836424595104404903}
   maxSpeedReduction: 0.75
   speedReductionPerItem: 0.1
   stunParticles: {fileID: 729170756997111267}

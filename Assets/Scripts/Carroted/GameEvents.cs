@@ -1,4 +1,3 @@
-using Core.Items;
 using UnityEngine;
 using UnityEngine.Events;
 

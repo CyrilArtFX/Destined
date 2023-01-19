@@ -2,13 +2,11 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.UI;
-using Core.Items;
 
 namespace Core.Players
 {
     public class Player : MonoBehaviour
     {
-        public Inventory Inventory => inventory;
         public PlayerController Controller => controller;
 
         [SerializeField]
@@ -23,8 +21,6 @@ namespace Core.Players
 
         public int Index => playerIndex;
 
-        [SerializeField]
-        private Inventory inventory;
         [SerializeField]
         private PlayerController controller;
 
@@ -81,10 +77,6 @@ namespace Core.Players
 
         public void Remove()
         {
-            //  drop items
-            for (int i = 0; i <= inventory.ItemsCount; i++)
-                inventory.DropLastItem();
-
             //  manage quit
             PlayersManager.instance.PlayerLeft(this);
 

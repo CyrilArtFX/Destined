@@ -1,5 +1,4 @@
 using UnityEngine;
-using Core.Items;
 using Core.Players;
 
 namespace Carroted
@@ -39,12 +38,14 @@ namespace Carroted
 
             assignedPlayer.Controller.SetInsideSafeZone(true);
 
-            foreach (Carrot item in assignedPlayer.Inventory.Items)
+            Inventory playerInventory = (assignedPlayer.Controller as PlayerController).Inventory;
+
+            foreach (Carrot item in playerInventory.Items)
             {
                 carrotStored += item.Score;
                 SpawnVisualStoredCarrot(item.Type == Carrot.ItemType.GOLD_CARROT);
             }
-            assignedPlayer.Inventory.ClearInventory();
+            playerInventory.ClearInventory();
         }
 
         void OnTriggerStay2D(Collider2D collision)
