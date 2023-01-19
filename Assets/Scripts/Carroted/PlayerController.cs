@@ -160,7 +160,7 @@ namespace Carroted
             //  move
             else if (!InCinematic)
             {
-                float speed = moveSpeed - moveSpeed * Mathf.Min(maxSpeedReduction, player.Inventory.ItemsCount * speedReductionPerItem);
+                float speed = moveSpeed - moveSpeed * Mathf.Min(maxSpeedReduction, inventory.ItemsCount * speedReductionPerItem);
                 mover.Move(Direction, speed / moveSpeed, moveSpeed / speed);
             }
         }
