@@ -15,11 +15,15 @@ namespace HoldUp
 
         public Inventory Inventory => inventory;
 
+        public Vector2 LastPerformedDirection { get; private set; }
+
         void Start()
         {
             lifebar.Initialize(15.0f);
 
-            inventory.EnableInventory();
+            LastPerformedDirection = Vector2.right;
+
+            inventory.EnableInventory(this);
         }
 
         public void OnDebugAction(InputAction.CallbackContext ctx)
@@ -31,9 +35,7 @@ namespace HoldUp
 
         public void OnUseItemAction(InputAction.CallbackContext ctx)
         {
-            if (!ctx.action.triggered) return;
-
-            inventory.UseItem();
+            inventory.UseItem(ctx);
         }
 
         void Update()
@@ -43,11 +45,16 @@ namespace HoldUp
             {
                 mover.Move(Direction);
             }
+
+            if(Direction != Vector2.zero)
+            {
+                LastPerformedDirection = Direction.normalized;
+            }
         }
 
         void OnDestroy()
         {
-            if(inventory)
+            if (inventory)
             {
                 inventory.DisableInventory();
             }
