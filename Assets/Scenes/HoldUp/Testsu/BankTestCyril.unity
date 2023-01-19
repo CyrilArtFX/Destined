@@ -672,3 +672,60 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1447770776
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4930200477163738563, guid: fade6ca367321f24fb32235fcff35067, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4930200477163738563, guid: fade6ca367321f24fb32235fcff35067, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.3228002
+      objectReference: {fileID: 0}
+    - target: {fileID: 4930200477163738563, guid: fade6ca367321f24fb32235fcff35067, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.28468382
+      objectReference: {fileID: 0}
+    - target: {fileID: 4930200477163738563, guid: fade6ca367321f24fb32235fcff35067, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4930200477163738563, guid: fade6ca367321f24fb32235fcff35067, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4930200477163738563, guid: fade6ca367321f24fb32235fcff35067, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4930200477163738563, guid: fade6ca367321f24fb32235fcff35067, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4930200477163738563, guid: fade6ca367321f24fb32235fcff35067, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4930200477163738563, guid: fade6ca367321f24fb32235fcff35067, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4930200477163738563, guid: fade6ca367321f24fb32235fcff35067, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4930200477163738563, guid: fade6ca367321f24fb32235fcff35067, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4930200477163738565, guid: fade6ca367321f24fb32235fcff35067, type: 3}
+      propertyPath: m_Name
+      value: ItemOnGround_Weapon_AK47
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fade6ca367321f24fb32235fcff35067, type: 3}

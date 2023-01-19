@@ -40,15 +40,23 @@ namespace HoldUp
 
         public void OnUseItemAction(InputAction.CallbackContext ctx)
         {
-            if(ctx.action.WasPressedThisFrame())
+            if (ctx.action.WasPressedThisFrame())
             {
                 inventory.UseItemPressed();
                 mousePressed = true;
             }
-            if(ctx.action.WasReleasedThisFrame())
+            if (ctx.action.WasReleasedThisFrame())
             {
                 inventory.UseItemReleased();
                 mousePressed = false;
+            }
+        }
+
+        public void OnEquipAndDropAction(InputAction.CallbackContext ctx)
+        {
+            if (ctx.action.triggered)
+            {
+                inventory.EquipAndDrop();
             }
         }
 
@@ -76,7 +84,7 @@ namespace HoldUp
                 mover.Move(Direction);
             }
 
-            if(Direction != Vector2.zero)
+            if (Direction != Vector2.zero)
             {
                 LastPerformedDirection = Direction.normalized;
             }

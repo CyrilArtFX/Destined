@@ -482,6 +482,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: fd58b832-8f29-4ffa-8b96-eae6ee53884e
     m_ActionName: GameActions/AimKeyboard[/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2874819252109220458}
+        m_TargetAssemblyTypeName: HoldUp.PlayerController, Assembly-CSharp
+        m_MethodName: OnEquipAndDropAction
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 4a71d4ed-7b17-44ee-bd28-e882c0b6cbdb
+    m_ActionName: GameActions/EquipAndDrop[/Mouse/rightButton,/XInputControllerWindows/leftTrigger]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: GameActions
@@ -770,7 +786,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7943831981410499516}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -803,6 +819,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultItem: {fileID: 4930200477163738560, guid: a3a5c845f461ca943ba09d14baa7d442, type: 3}
+  itemOnGroundMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  radius: 0.56
 --- !u!1001 &1539360573148465135
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -129,6 +129,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6deca84422923c441b24e723983d332a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsDefaultItem: 0
+  ItemOnGround: {fileID: 7107347836230690416, guid: fade6ca367321f24fb32235fcff35067, type: 3}
   fireRate: 10
   automaticWeapon: 1
   bullet: {fileID: -1455292350417118654, guid: f591eef7c0e06c7408b4fd4fced0e052, type: 3}

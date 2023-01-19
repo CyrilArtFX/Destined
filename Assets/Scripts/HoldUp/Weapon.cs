@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace HoldUp
 {
@@ -41,8 +40,8 @@ namespace HoldUp
                 if (shootTimer <= 0.0f)
                 {
                     Bullet bulletObject = GameObject.Instantiate(bullet.gameObject, GameManager.instance.transform).GetComponent<Bullet>();
-                    bulletObject.Initialize(bulletSpeed, Direction.normalized, bulletRange, playerController.GetComponent<Collider2D>());
                     bulletObject.transform.position = bulletSpawnPos.position;
+                    bulletObject.Initialize(bulletSpeed, Direction.normalized, bulletRange, playerController.GetComponent<Collider2D>());
 
                     shootTimer = timeBetweenShoots;
                 }

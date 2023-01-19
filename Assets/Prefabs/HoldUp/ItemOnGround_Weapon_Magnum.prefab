@@ -1,36 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4496058418514930714
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2613662984291765994}
-  m_Layer: 0
-  m_Name: BulletSpawn
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2613662984291765994
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4496058418514930714}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.399, y: 0.117, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4930200477163738563}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4930200477163738565
 GameObject:
   m_ObjectHideFlags: 0
@@ -41,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4930200477163738563}
   - component: {fileID: 4930200477163738562}
-  - component: {fileID: 4930200477163738560}
-  m_Layer: 0
-  m_Name: Weapon_Magnum
+  - component: {fileID: 7107347836230690416}
+  - component: {fileID: 3964737564935521109}
+  m_Layer: 10
+  m_Name: ItemOnGround_Weapon_Magnum
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60,8 +30,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2613662984291765994}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -117,7 +86,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4930200477163738560
+--- !u!114 &7107347836230690416
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -126,14 +95,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 4930200477163738565}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6deca84422923c441b24e723983d332a, type: 3}
+  m_Script: {fileID: 11500000, guid: 4d0ecb14f377b3c46bc8fbc8a8060804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsDefaultItem: 1
-  ItemOnGround: {fileID: 7107347836230690416, guid: fbc9801c8af6ea546b09f92564c9172f, type: 3}
-  fireRate: 5
-  automaticWeapon: 0
-  bullet: {fileID: -1455292350417118654, guid: f591eef7c0e06c7408b4fd4fced0e052, type: 3}
-  bulletSpeed: 0.35
-  bulletRange: 10
-  bulletSpawnPos: {fileID: 2613662984291765994}
+  Item: {fileID: 4930200477163738560, guid: a3a5c845f461ca943ba09d14baa7d442, type: 3}
+--- !u!58 &3964737564935521109
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4930200477163738565}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.15625, y: 0.0625}
+  serializedVersion: 2
+  m_Radius: 0.28125

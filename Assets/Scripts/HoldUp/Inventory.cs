@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace HoldUp
 {
@@ -9,9 +8,17 @@ namespace HoldUp
         [SerializeField]
         private Item defaultItem;
 
+        [SerializeField]
+        private LayerMask itemOnGroundMask;
+
+        [SerializeField]
+        private float radius;
+
         private Item currentItem;
 
         private PlayerController playerController;
+
+        private ItemOnGround itemInRange;
 
 
         public void EnableInventory(PlayerController controller)
@@ -29,15 +36,21 @@ namespace HoldUp
             }
         }
 
-        public void EquipItem(Item itemToEquip)
+        private void EquipItem(ItemOnGround itemToEquip)
         {
+            if(!currentItem.IsDefaultItem)
+            {
+                currentItem.Drop();
+            }
             Destroy(currentItem.gameObject);
-            currentItem = GameObject.Instantiate(itemToEquip.gameObject, transform).GetComponent<Item>();
+            currentItem = GameObject.Instantiate(itemToEquip.Item.gameObject, transform).GetComponent<Item>();
             currentItem.Initialize(playerController);
+            Destroy(itemToEquip.gameObject);
         }
 
-        public void DropItem()
+        private void DropItem()
         {
+            currentItem.Drop();
             Destroy(currentItem.gameObject);
             currentItem = GameObject.Instantiate(defaultItem.gameObject, transform).GetComponent<Item>();
             currentItem.Initialize(playerController);
@@ -57,6 +70,38 @@ namespace HoldUp
             {
                 currentItem.OnUseReleased();
             }
+        }
+
+        public void EquipAndDrop()
+        {
+            Collider2D itemOnGround = Physics2D.OverlapCircle(transform.position, radius, itemOnGroundMask);
+            if(itemOnGround)
+            {
+                itemInRange = itemOnGround.GetComponent<ItemOnGround>();
+            }
+            else
+            {
+                itemInRange = null;
+            }
+
+            if(itemInRange)
+            {
+                EquipItem(itemInRange);
+            }
+            else
+            {
+                if(!currentItem.IsDefaultItem)
+                {
+                    DropItem();
+                }
+            }
+        }
+
+
+        void OnDrawGizmos()
+        {
+            Gizmos.color = Color.white;
+            Gizmos.DrawWireSphere(transform.position, radius);
         }
     }
 }
