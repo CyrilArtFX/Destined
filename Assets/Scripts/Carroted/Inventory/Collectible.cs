@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Core.Items
+namespace Carroted
 {
     [RequireComponent(typeof(Collider2D))]
     public class Collectible : MonoBehaviour

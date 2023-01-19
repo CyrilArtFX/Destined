@@ -25,7 +25,7 @@ namespace Carroted
             List<Player> playerList = PlayersManager.instance.GetPlayers();
             foreach (Player player in playerList)
             {
-                player.Inventory.ClearInventory();
+                (player.Controller as PlayerController).Inventory.ClearInventory();
                 player.Controller.ClearEffects();
             }
         }
@@ -40,7 +40,7 @@ namespace Carroted
             List<Player> playerList = PlayersManager.instance.GetPlayers();
             foreach (Player player in playerList)
             {
-                player.Inventory.ClearInventory();
+                (player.Controller as PlayerController).Inventory.ClearInventory();
                 player.Controller.ClearEffects();
             }
         }

@@ -2,9 +2,9 @@
 using System.Collections.ObjectModel;
 using UnityEngine;
 
-namespace Core.Items
+namespace Carroted
 {
-    [RequireComponent(typeof(CircleCollider2D))]
+    [RequireComponent(typeof(CircleCollider2D)), AddComponentMenu("Scripts/Carroted Inventory")]
     public class Inventory : MonoBehaviour
     {
         public Transform Owner => owner;

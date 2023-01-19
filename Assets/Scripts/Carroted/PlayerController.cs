@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using Core.Items;
 using UnityEngine.InputSystem;
 using System.ComponentModel;
 
@@ -9,6 +8,11 @@ namespace Carroted
     [AddComponentMenu( "Scripts/Carroted Player Controller" )]
     public class PlayerController : Core.Players.PlayerController
     {
+        public Inventory Inventory => inventory;
+
+        [SerializeField]
+        private Inventory inventory;
+
         [SerializeField]
         private float maxSpeedReduction = .9f;
         [SerializeField]
@@ -53,7 +57,7 @@ namespace Carroted
 
         public void OnThrowController(InputAction.CallbackContext ctx)
         {
-            if (player.Inventory.Items.Count == 0) return;
+            if (inventory.Items.Count == 0) return;
             if (InsideSafeZone) return;
 
             Vector2 throw_direction = ctx.action.ReadValue<Vector2>();
@@ -76,7 +80,7 @@ namespace Carroted
 
         public void OnThrowMouse(InputAction.CallbackContext ctx)
         {
-            if (player.Inventory.Items.Count == 0) return;
+            if (inventory.Items.Count == 0) return;
             if (InsideSafeZone) return;
 
             if (!ctx.action.triggered) return;
@@ -94,7 +98,7 @@ namespace Carroted
         {
             //  get item to consume
             Carrot carrot = null;
-            foreach (Carrot item in player.Inventory.Items)
+            foreach (Carrot item in inventory.Items)
             {
                 if (!item.CanBeThrown) continue;
 
@@ -109,8 +113,8 @@ namespace Carroted
             projectile.transform.position = throwStart.position;
             projectile.GetComponent<CarrotProjectile>().Initialize(direction, gameObject);
 
-            player.Inventory.RemoveItem(carrot);
-            player.Inventory.UpdateItemsPositions();
+            inventory.RemoveItem(carrot);
+            inventory.UpdateItemsPositions();
         }
 
         public void Stun(float stunTime)
@@ -132,7 +136,7 @@ namespace Carroted
             StartCoroutine(StunImmunity());
 
             //  drop all items
-            player.Inventory.DropItems();
+            inventory.DropItems();
         }
 
         void Update()
@@ -146,7 +150,7 @@ namespace Carroted
             }
 
             //  get move speed
-            float speed = moveSpeed - moveSpeed * Mathf.Min(maxSpeedReduction, player.Inventory.ItemsCount * speedReductionPerItem);
+            float speed = moveSpeed - moveSpeed * Mathf.Min(maxSpeedReduction, inventory.ItemsCount * speedReductionPerItem);
 
             //  stun
             if (stun > 0.0f)
@@ -208,6 +212,16 @@ namespace Carroted
             color.a = 1.0f;
             renderer.color = color;
             animator.SetBool("IsStunned", false);
+        }
+
+        void OnDestroy()
+        {
+            //  drop items
+            if(inventory)
+            {
+                for (int i = 0; i <= inventory.ItemsCount; i++)
+                    inventory.DropLastItem();
+            }
         }
     }
 }

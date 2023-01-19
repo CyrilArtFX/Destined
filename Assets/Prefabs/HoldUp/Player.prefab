@@ -249,7 +249,7 @@ SpriteRenderer:
   m_SortingLayerID: -2009574621
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1042768307, guid: 3874231f39c342a45a67d266f5a7a537, type: 3}
+  m_Sprite: {fileID: -2060139490, guid: 3874231f39c342a45a67d266f5a7a537, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -484,7 +484,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameText: {fileID: 6903711896116869281}
   spriteRenderer: {fileID: 7682793936419345379}
-  inventory: {fileID: 4836424595104404903}
   controller: {fileID: 2874819252109220458}
 --- !u!114 &2874819252109220458
 MonoBehaviour:
@@ -503,6 +502,7 @@ MonoBehaviour:
   animator: {fileID: 4388120074462765570}
   renderer: {fileID: 7682793936419345379}
   lifebar: {fileID: 260329455207840553}
+  inventory: {fileID: 504461108543955375}
 --- !u!114 &7094717382971621063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -708,8 +708,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7821048610620051893}
   - component: {fileID: 7046574755392835697}
-  - component: {fileID: 4836424595104404903}
   - component: {fileID: 8510418341315095683}
+  - component: {fileID: 504461108543955375}
   m_Layer: 8
   m_Name: Inventory
   m_TagString: Untagged
@@ -748,23 +748,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &4836424595104404903
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7943831981410499516}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d59da66fd25278a49a86d5570d47998c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxCount: 100
-  itemOffset: 0.25
-  dropRadius: 0.75
-  owner: {fileID: 3429361060142620931}
-  items: []
 --- !u!210 &8510418341315095683
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -776,6 +759,19 @@ SortingGroup:
   m_SortingLayerID: -2009574621
   m_SortingLayer: 1
   m_SortingOrder: 0
+--- !u!114 &504461108543955375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7943831981410499516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c26b00d9efe88964abde03adcf66cb11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultItem: {fileID: 4930200477163738560, guid: a3a5c845f461ca943ba09d14baa7d442, type: 3}
 --- !u!1001 &1539360573148465135
 PrefabInstance:
   m_ObjectHideFlags: 0
