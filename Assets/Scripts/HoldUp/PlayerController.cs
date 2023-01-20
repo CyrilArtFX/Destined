@@ -42,8 +42,11 @@ namespace HoldUp
         {
             if (ctx.action.WasPressedThisFrame())
             {
-                inventory.UseItemPressed();
-                mousePressed = true;
+                if (ctx.action.triggered)
+                {
+                    inventory.UseItemPressed();
+                    mousePressed = true;
+                }
             }
             if (ctx.action.WasReleasedThisFrame())
             {

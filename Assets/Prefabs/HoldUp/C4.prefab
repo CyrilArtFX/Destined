@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4930200477163738565
+--- !u!1 &1878148789841033433
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,24 +8,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4930200477163738563}
-  - component: {fileID: 4930200477163738562}
-  - component: {fileID: 7107347836230690416}
-  - component: {fileID: 3964737564935521109}
-  m_Layer: 10
-  m_Name: ItemOnGround_Weapon_AK47
+  - component: {fileID: 8737598864175974909}
+  - component: {fileID: 6323889985182354004}
+  - component: {fileID: 4973889870838916982}
+  m_Layer: 0
+  m_Name: C4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4930200477163738563
+--- !u!4 &8737598864175974909
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4930200477163738565}
+  m_GameObject: {fileID: 1878148789841033433}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -34,13 +33,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &4930200477163738562
+--- !u!212 &6323889985182354004
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4930200477163738565}
+  m_GameObject: {fileID: 1878148789841033433}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -72,46 +71,59 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -2009574621
-  m_SortingLayer: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1898835600, guid: c41ce54c43ac59641980f3c3e7d7d134, type: 3}
+  m_Sprite: {fileID: 765803222, guid: 0a7dfaa8e5c665e4491fe31d8ab0c5c6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.5625, y: 0.375}
+  m_Size: {x: 0.5, y: 0.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7107347836230690416
+--- !u!114 &4973889870838916982
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4930200477163738565}
+  m_GameObject: {fileID: 1878148789841033433}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d0ecb14f377b3c46bc8fbc8a8060804, type: 3}
+  m_Script: {fileID: 11500000, guid: eaab7468bedda6d4fb24f1710d4de296, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Item: {fileID: 4930200477163738560, guid: fe35299bcb6354347b7ce6d652012c7d, type: 3}
---- !u!58 &3964737564935521109
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4930200477163738565}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.2, y: 0.1}
-  serializedVersion: 2
-  m_Radius: 0.3
+  IsDefaultItem: 0
+  ItemOnGround: {fileID: 8414630596500377582, guid: d0f69a65d1714b64c8dabeb69678de1e, type: 3}
+  associatedObject: {fileID: 325030540862295101, guid: e1bbead7f74393d41a581e0e8b2132a6, type: 3}
+  throwingPower: 250
+  throwingPowerCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -0.024914892
+      outSlope: -0.024914892
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.33333334
+      outWeight: 0.66263235
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -0.73617697
+      outSlope: -0.73617697
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.05446291
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  throwingTimeForMinimalPower: 5
+  remoteSprite: {fileID: -874998806, guid: 0a7dfaa8e5c665e4491fe31d8ab0c5c6, type: 3}

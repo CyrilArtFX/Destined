@@ -99,6 +99,13 @@ namespace HoldUp
             Physics2D.queriesHitTriggers = false;
         }
 
+        public void DestroyItemInHand()
+        {
+            Destroy(currentItem.gameObject);
+            currentItem = GameObject.Instantiate(defaultItem.gameObject, transform).GetComponent<Item>();
+            currentItem.Initialize(playerController);
+        }
+
 
         void OnDrawGizmos()
         {

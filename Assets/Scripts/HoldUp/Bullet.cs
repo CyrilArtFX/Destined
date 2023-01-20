@@ -10,6 +10,7 @@ namespace HoldUp
         private float speed;
         private Vector2 direction;
         private float range;
+        private float damages;
 
         private Vector2 spawnPosition;
 
@@ -19,11 +20,12 @@ namespace HoldUp
             cc = GetComponent<CircleCollider2D>();
         }
 
-        public void Initialize(float bulletSpeed, Vector2 bulletDirection, float bulletRange, Collider2D ownerCollider)
+        public void Initialize(float bulletSpeed, Vector2 bulletDirection, float bulletRange, float bulletDamages, Collider2D ownerCollider)
         {
             speed = bulletSpeed;
             direction = bulletDirection;
             range = bulletRange;
+            damages = bulletDamages;
 
             spawnPosition = transform.position;
             Physics2D.IgnoreCollision(cc, ownerCollider);

@@ -4,8 +4,6 @@ namespace HoldUp
 {
     public class Weapon : Item
     {
-        public Vector2 Direction => playerController.AimDirection != Vector2.zero ? playerController.AimDirection : playerController.LastPerformedDirection;
-
         [SerializeField, Tooltip("The number of shot per seconds of this weapon (can be a decimal number)")]
         private float fireRate;
         [SerializeField]
@@ -20,7 +18,7 @@ namespace HoldUp
         [SerializeField]
         private Bullet bullet;
         [SerializeField]
-        private float bulletSpeed, bulletRange;
+        private float bulletSpeed, bulletRange, bulletDamages;
         [SerializeField]
         private Transform bulletSpawnPos;
 
@@ -55,7 +53,7 @@ namespace HoldUp
                 {
                     Bullet bulletObject = GameObject.Instantiate(bullet.gameObject, GameManager.instance.transform).GetComponent<Bullet>();
                     bulletObject.transform.position = bulletSpawnPos.position;
-                    bulletObject.Initialize(bulletSpeed, Direction.normalized, bulletRange, playerController.GetComponent<Collider2D>());
+                    bulletObject.Initialize(bulletSpeed, Direction.normalized, bulletRange, bulletDamages, playerController.GetComponent<Collider2D>());
 
                     shootTimer = timeBetweenShoots;
                 }
@@ -89,7 +87,7 @@ namespace HoldUp
 
                     Bullet bulletObject = GameObject.Instantiate(bullet.gameObject, GameManager.instance.transform).GetComponent<Bullet>();
                     bulletObject.transform.position = bulletSpawnPos.position;
-                    bulletObject.Initialize(bulletSpeed, recoiledDirection, bulletRange, playerController.GetComponent<Collider2D>());
+                    bulletObject.Initialize(bulletSpeed, recoiledDirection, bulletRange, bulletDamages, playerController.GetComponent<Collider2D>());
 
                     shootTimer = timeBetweenShoots;
                 }
