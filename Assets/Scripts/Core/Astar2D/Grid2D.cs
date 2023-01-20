@@ -37,16 +37,28 @@ namespace Core.Astar2D
 			Grid = new Node2D[gridSize.x, gridSize.y];
 			worldBottomLeft = transform.position - Vector3.right * GridWorldSize.x / 2 - Vector3.up * GridWorldSize.y / 2;
 
-			for ( int x = 0; x < gridSize.x; x++ )
+			for (int x = 0; x < gridSize.x; x++)
 			{
-				for ( int y = 0; y < gridSize.y; y++ )
+				for (int y = 0; y < gridSize.y; y++)
 				{
-					Vector3 world_pos = ToWorldPos( x, y );
-					Grid[x, y] = new( Physics2D.OverlapPoint( world_pos, ObstacleLayerMask ), world_pos, x, y );
+					Vector3 world_pos = ToWorldPos(x, y);
+					Grid[x, y] = new(Physics2D.OverlapPoint(world_pos, ObstacleLayerMask), world_pos, x, y);
 				}
 			}
 
 			print( $"Grid2D: created {Grid.Length} nodes!" );
+		}
+
+		public void Refresh()
+		{
+			for (int x = 0; x < gridSize.x; x++)
+			{
+				for (int y = 0; y < gridSize.y; y++)
+				{
+					Vector3 world_pos = ToWorldPos(x, y);
+					Grid[x, y].IsObstacle = Physics2D.OverlapPoint(world_pos, ObstacleLayerMask);
+				}
+			}
 		}
 
 		public List<Node2D> GetNeighbors( Node2D node )
