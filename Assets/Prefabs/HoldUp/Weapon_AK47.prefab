@@ -233,6 +233,32 @@ MonoBehaviour:
   ItemOnGround: {fileID: 7107347836230690416, guid: fade6ca367321f24fb32235fcff35067, type: 3}
   fireRate: 10
   automaticWeapon: 1
+  recoilCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.14847259
+      outSlope: 0.14847259
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.09531014
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1.3510998
+      outSlope: 1.3510998
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.0680787
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  timeForMaxRecoil: 8
+  recoilPower: 45
   bullet: {fileID: -1455292350417118654, guid: f591eef7c0e06c7408b4fd4fced0e052, type: 3}
   bulletSpeed: 0.3
   bulletRange: 7
