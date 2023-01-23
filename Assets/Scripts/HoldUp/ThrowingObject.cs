@@ -1,5 +1,4 @@
 using UnityEngine;
-using Utility;
 using Core.Tilemaps;
 using System.Collections;
 
@@ -7,9 +6,6 @@ namespace HoldUp
 {
     public class ThrowingObject : MonoBehaviour
     {
-        [SerializeField]
-        private LayerMask destructibleTilemapLayer;
-
         [SerializeField]
         private ParticleSystem particles;
 
@@ -64,9 +60,9 @@ namespace HoldUp
             {
                 if (col.gameObject == gameObject) continue;
 
-                if (LayerMaskUtils.HasLayer(destructibleTilemapLayer, col.gameObject.layer))
+                if (col.gameObject.TryGetComponent<DestructibleTilemap>(out DestructibleTilemap tilemap))
                 {
-                    col.GetComponent<DestructibleTilemap>().DestroyTilesInRadius(transform.position, radius);
+                    tilemap.DestroyTilesInRadius(transform.position, radius);
                     continue;
                 }
 
