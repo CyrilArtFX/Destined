@@ -59,14 +59,20 @@ namespace HoldUp.Characters.AI
 			);
 		}
 
+		public void SetTarget(PlayerController target)
+		{
+			Target = target;
+			StateMachine.SetProperty(TARGET_KEY, target != null ? target.transform : null);
+		}
+
 		void OnTriggerStay2D(Collider2D collision)
 		{
-			if (Target != null) return;
+			if (Target != null && Target.gameObject != collision.gameObject) return;
 			if (!collision.TryGetComponent(out PlayerController controller)) return;
 
 			//  can it see him?
 			Vector2 dir = controller.transform.position - transform.position;
-			RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, dir, seeCollider.radius, seeLayerMask);
+			RaycastHit2D[] hits = Physics2D.RaycastAll(seeCollider.transform.position, dir, seeCollider.radius, seeLayerMask);
 
 			bool has_found = false;
 			foreach (RaycastHit2D hit in hits)
@@ -74,17 +80,32 @@ namespace HoldUp.Characters.AI
 				if (hit.collider.gameObject == gameObject) 
 					continue;
 				if (hit.collider != collision)
-					return;
+					break;
 
 				has_found = true;
 				break;
 			}
-			if (!has_found) return;
+
+			if (!has_found) 
+			{
+				if (Target != null)
+					SetTarget(null);
+
+				return;
+			}
 
 			//  attack!
-			Target = controller;
-			StateMachine.SetProperty(TARGET_KEY, controller.transform);
-			print("attacking " + controller);
+			if (Target == null)
+			{
+				Target = controller;
+				StateMachine.SetProperty(TARGET_KEY, controller.transform);
+			}
+		}
+
+		void OnTriggerExit2D(Collider2D collision)
+		{
+			if (Target != null && Target.gameObject == collision.gameObject)
+				SetTarget(null);
 		}
 	}
 }
