@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 3542135706957353476, guid: 2aea605e01127dd439445651d0d67005, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 7359105, guid: 93d49d5fcb486754a8f92dcc7464ee25, type: 3}
+      objectReference: {fileID: 1124465693, guid: fe32c62c86c8e2346a802fb9294abed7, type: 3}
     - target: {fileID: 3717755345141351176, guid: 2aea605e01127dd439445651d0d67005, type: 3}
       propertyPath: m_Size.y
       value: 0.3778137
@@ -69,7 +69,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8368106468573765866, guid: 2aea605e01127dd439445651d0d67005, type: 3}
       propertyPath: m_Name
-      value: AICharacter_Guard
+      value: AICharacter_SWAT
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2aea605e01127dd439445651d0d67005, type: 3}
@@ -138,7 +138,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0.25}
   serializedVersion: 2
   m_Radius: 4
---- !u!114 &5560436488450418259
+--- !u!114 &2578510709620552508
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -151,8 +151,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprites:
-  - {fileID: 7359105, guid: 93d49d5fcb486754a8f92dcc7464ee25, type: 3}
-  - {fileID: -71099043, guid: 93d49d5fcb486754a8f92dcc7464ee25, type: 3}
+  - {fileID: 1124465693, guid: fe32c62c86c8e2346a802fb9294abed7, type: 3}
+  - {fileID: -1855661371, guid: fe32c62c86c8e2346a802fb9294abed7, type: 3}
+  - {fileID: -1949532663, guid: fe32c62c86c8e2346a802fb9294abed7, type: 3}
 --- !u!1001 &5293700143667122107
 PrefabInstance:
   m_ObjectHideFlags: 0
