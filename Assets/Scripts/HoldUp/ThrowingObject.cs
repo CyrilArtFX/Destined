@@ -15,7 +15,7 @@ namespace HoldUp
 
         private AnimationCurve powerCurve;
         private float timeForMinimalPower;
-        private float radius;
+        private float radius, damages;
 
         private CircleCollider2D cc;
         private Rigidbody2D rb;
@@ -34,11 +34,12 @@ namespace HoldUp
 
         public void Initialize(float throwingPower, Vector2 throwingDirection, AnimationCurve throwingPowerCurve,
             float throwingTimeForMinimalPower, Collider2D ownerCollider,
-            float explosionRadius)
+            float explosionRadius, float explosionDamages)
         {
             powerCurve = throwingPowerCurve;
             timeForMinimalPower = throwingTimeForMinimalPower;
             radius = explosionRadius;
+            damages = explosionDamages;
 
             Physics2D.IgnoreCollision(cc, ownerCollider);
 
@@ -62,12 +63,17 @@ namespace HoldUp
             foreach (Collider2D col in objectsToExplode)
             {
                 if (col.gameObject == gameObject) continue;
+
                 if (LayerMaskUtils.HasLayer(destructibleTilemapLayer, col.gameObject.layer))
                 {
                     col.GetComponent<DestructibleTilemap>().DestroyTilesInRadius(transform.position, radius);
                     continue;
                 }
-                print("explode " + col.gameObject);
+
+                if (col.gameObject.TryGetComponent<Damageable>(out Damageable damageableObject))
+                {
+                    damageableObject.DealDamages(damages);
+                }
             }
 
             StartCoroutine(DestroyObject());

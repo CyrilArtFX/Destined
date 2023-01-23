@@ -127,5 +127,5 @@ MonoBehaviour:
     m_RotationOrder: 4
   throwingTimeForMinimalPower: 2
   explosionRadius: 2
-  explosionDamages: 0
+  explosionDamages: 5
   remoteSprite: {fileID: -874998806, guid: 0a7dfaa8e5c665e4491fe31d8ab0c5c6, type: 3}

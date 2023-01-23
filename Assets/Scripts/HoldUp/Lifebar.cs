@@ -41,6 +41,12 @@ namespace HoldUp
             UpdateBar();
         }
 
+        public void ChangeLife(float newLifeValue)
+        {
+            life = newLifeValue;
+            UpdateBar();
+        }
+
         private void UpdateBar()
         {
             float lifeFraction = life / maxLife;

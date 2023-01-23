@@ -262,6 +262,7 @@ MonoBehaviour:
   bullet: {fileID: -1455292350417118654, guid: f591eef7c0e06c7408b4fd4fced0e052, type: 3}
   bulletSpeed: 0.3
   bulletRange: 7
+  bulletDamages: 1
   bulletSpawnPos: {fileID: 2613662984291765994}
   redLine: {fileID: 1606540253603035603}
   redLineMaxDistance: 2

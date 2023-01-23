@@ -322,6 +322,7 @@ GameObject:
   - component: {fileID: 236517255970550696}
   - component: {fileID: 7507196015134540527}
   - component: {fileID: 5434798867916449201}
+  - component: {fileID: 4783828992452276070}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -534,7 +535,6 @@ MonoBehaviour:
   player: {fileID: -1462114050433421847}
   animator: {fileID: 4388120074462765570}
   renderer: {fileID: 7682793936419345379}
-  lifebar: {fileID: 260329455207840553}
   inventory: {fileID: 504461108543955375}
 --- !u!114 &7094717382971621063
 MonoBehaviour:
@@ -612,6 +612,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveSpeed: 0.1
   animator: {fileID: 4388120074462765570}
+--- !u!114 &4783828992452276070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3429361060142620941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22096b45ba9a6da408dd46aa3d129f2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifebar: {fileID: 260329455207840553}
+  maxLife: 20
+  deathMode: 1
 --- !u!1 &5739892556035798250
 GameObject:
   m_ObjectHideFlags: 0
