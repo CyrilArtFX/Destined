@@ -60,15 +60,15 @@ namespace HoldUp
             {
                 if (col.gameObject == gameObject) continue;
 
-                if (col.gameObject.TryGetComponent<DestructibleTilemap>(out DestructibleTilemap tilemap))
+                if (col.gameObject.TryGetComponent(out DestructibleTilemap tilemap))
                 {
                     tilemap.DestroyTilesInRadius(transform.position, radius);
                     continue;
                 }
 
-                if (col.gameObject.TryGetComponent<Damageable>(out Damageable damageableObject))
+                if (col.gameObject.TryGetComponent(out Damageable damageable))
                 {
-                    damageableObject.DealDamages(damages);
+                    damageable.DealDamages(damages, transform.position);
                 }
             }
 

@@ -45,9 +45,9 @@ namespace HoldUp
 
         void OnCollisionEnter2D(Collision2D collision)
         {
-            if(collision.gameObject.TryGetComponent<Damageable>(out Damageable damageableObject))
+            if(collision.gameObject.TryGetComponent(out Damageable damageable))
             {
-                damageableObject.DealDamages(damages);
+                damageable.DealDamages(damages, transform.position);
             }
 
 

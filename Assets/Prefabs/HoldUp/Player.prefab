@@ -626,6 +626,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifebar: {fileID: 260329455207840553}
   maxLife: 20
+  damageParticlesPrefab: {fileID: 4498614656690819735, guid: 80f9b8aea9d62a643a2d36b59d06a642, type: 3}
   deathMode: 1
 --- !u!1 &6824560319115427043
 GameObject:

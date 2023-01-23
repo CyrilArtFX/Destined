@@ -1,4 +1,5 @@
 using UnityEngine;
+using Utility;
 
 namespace HoldUp
 {
@@ -17,6 +18,9 @@ namespace HoldUp
         private float maxLife;
 
         [SerializeField]
+        private GameObject damageParticlesPrefab;
+
+        [SerializeField]
         private DeathMode deathMode;
 
         private float life;
@@ -27,7 +31,7 @@ namespace HoldUp
             lifebar.Initialize(maxLife);
         }
 
-        public void DealDamages(float damages)
+        public void DealDamages(float damages, Vector3 origin)
         {
             life = Mathf.Max(life - damages, 0.0f);
             lifebar.ChangeLife(life);
@@ -35,6 +39,15 @@ namespace HoldUp
             if(life == 0)
             {
                 Death();
+            }
+
+            //  play damage particles
+            if (damageParticlesPrefab != null)
+            {
+                ParticleSystem particles = Instantiate(damageParticlesPrefab).GetComponent<ParticleSystem>();
+                particles.transform.position = transform.position;
+                particles.transform.eulerAngles = Vector2Utils.GetDirectionAngles(transform.position - origin);
+                particles.Emit( (int) (damages * 3.0f) );
             }
         }
 
