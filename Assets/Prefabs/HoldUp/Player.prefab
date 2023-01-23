@@ -536,6 +536,7 @@ MonoBehaviour:
   animator: {fileID: 4388120074462765570}
   renderer: {fileID: 7682793936419345379}
   inventory: {fileID: 504461108543955375}
+  damageable: {fileID: 4783828992452276070}
 --- !u!114 &7094717382971621063
 MonoBehaviour:
   m_ObjectHideFlags: 0

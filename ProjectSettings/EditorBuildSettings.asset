@@ -26,5 +26,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/HoldUp/Tests/Test_Arkaht.unity
     guid: 22cd4bf683010924a824b9a59a2f62ba
+  - enabled: 1
+    path: Assets/Scenes/HoldUp/Tests/Test_Marius.unity
+    guid: 4fbb8171afaf06248bb09e9973a14bb8
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 4a378a7eaa7b2214f85e31b5593d541e, type: 2}

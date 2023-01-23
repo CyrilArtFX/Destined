@@ -38,6 +38,12 @@ namespace HoldUp
             }
         }
 
+        public void ResetLife()
+        {
+            life = maxLife;
+            lifebar.ChangeLife(life);
+        }
+
         private void Death()
         {
             if(deathMode == DeathMode.Destroy)
