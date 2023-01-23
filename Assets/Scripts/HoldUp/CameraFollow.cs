@@ -7,6 +7,13 @@ namespace HoldUp
     [AddComponentMenu("Scripts/HoldUp Camera Follow")]
     public class CameraFollow : MonoBehaviour
     {
+        [Header("Lag")]
+        [SerializeField]
+        private bool isLagEnabled = false;
+        [SerializeField]
+        private float lagSpeed = 2.0f;
+
+        [Header("Extras")]
         [SerializeField]
         private bool autoUpdatePlayers = false;
         [SerializeField]
@@ -16,6 +23,7 @@ namespace HoldUp
 
         void Update()
         {
+            //  auto update transforms on player count changes
             if (autoUpdatePlayers && playersTransforms.Count != PlayersManager.instance.GetNumberOfPlayers())
             {
                 SetTargets(PlayersManager.instance.GetPlayers());
@@ -30,7 +38,16 @@ namespace HoldUp
                 }
                 centered_position /= playersTransforms.Count;
                 centered_position.z = -10.0f;
-                transform.position = centered_position;
+
+                //  apply position
+                if (isLagEnabled)
+                {
+                    transform.position = Vector3.Lerp(transform.position, centered_position, Time.deltaTime * lagSpeed);
+                }
+                else
+                { 
+                    transform.position = centered_position;
+                }
             }
             else
             {
