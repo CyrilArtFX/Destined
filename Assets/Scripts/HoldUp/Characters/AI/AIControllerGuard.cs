@@ -4,44 +4,48 @@ using Core.Characters.AI;
 
 namespace HoldUp.Characters.AI
 {
-	public enum AIControllerState
-	{
-		None,
-		Patrol,
-		Search,
-		Attack,
-	}
-
 	public class AIControllerGuard : AIController
 	{
 		public const string TARGET_KEY = "Target";
 		public const string MOVE_POS_KEY = "MovePos";
-		public const string PATROL_WAIT_TIME_KEY = "PatrolWaitTime";
 		
-		public AIControllerState State { get; private set; }
+		public PlayerController Target { get; private set; }
 
 		[SerializeField]
 		private Transform[] patrolWaypoints;
+		[SerializeField]
+		private LayerMask seeLayerMask;
+		[SerializeField]
+		private CircleCollider2D seeCollider;
+		[SerializeField]
+		private float patrolWaitTime = 3.0f;
 
 		void Start()
 		{
-			State = AIControllerState.Patrol;
-
 			//  setup properties
 			StateMachine.SetProperty(TARGET_KEY, null);
 			StateMachine.SetProperty(MOVE_POS_KEY, Vector2.one);
-			StateMachine.SetProperty(PATROL_WAIT_TIME_KEY, 3.0f);
 
 			AIState state;
 
+			//  create attack state
+			state = StateMachine.AddState("Attack");
+			state.CanRun = (state) => Target != null;
+			state.AddTasks(
+				new AITaskWait()
+				{
+					Time = new(0.4f),
+				}
+			);
+
 			//  create patrol state
 			state = StateMachine.AddState("Patrol");
-			state.CanRun = (state) => State == AIControllerState.Patrol;
+			state.CanRun = (state) => Target == null;
 			state.AddTasks(
 				new AITaskSetNextWaypoint()
 				{
 					Waypoints = patrolWaypoints,
-					PosKey = MOVE_POS_KEY,
+					Position = new(MOVE_POS_KEY),
 				},
 				new AITaskMoveTo()
 				{
@@ -50,19 +54,37 @@ namespace HoldUp.Characters.AI
 				},
 				new AITaskWait()
 				{
-					Time = new(PATROL_WAIT_TIME_KEY),
+					Time = new(patrolWaitTime),
 				}
 			);
+		}
 
-			//  create attack state
-			state = StateMachine.AddState("Attack");
-			state.CanRun = (state) => State == AIControllerState.Attack;
-			state.AddTask(
-				new AITaskWait()
-				{
-					Time = new(1.0f),
-				}
-			);
+		void OnTriggerStay2D(Collider2D collision)
+		{
+			if (Target != null) return;
+			if (!collision.TryGetComponent(out PlayerController controller)) return;
+
+			//  can it see him?
+			Vector2 dir = controller.transform.position - transform.position;
+			RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, dir, seeCollider.radius, seeLayerMask);
+
+			bool has_found = false;
+			foreach (RaycastHit2D hit in hits)
+			{
+				if (hit.collider.gameObject == gameObject) 
+					continue;
+				if (hit.collider != collision)
+					return;
+
+				has_found = true;
+				break;
+			}
+			if (!has_found) return;
+
+			//  attack!
+			Target = controller;
+			StateMachine.SetProperty(TARGET_KEY, controller.transform);
+			print("attacking " + controller);
 		}
 	}
 }
