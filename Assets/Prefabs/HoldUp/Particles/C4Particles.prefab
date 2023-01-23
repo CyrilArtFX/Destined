@@ -116,7 +116,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.75
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -443,7 +443,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationX:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -496,7 +496,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 0
       minScalar: 0
       maxCurve:
@@ -549,8 +549,8 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotation:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 0
+      minMaxState: 3
+      scalar: 6.283185
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -1436,20 +1436,20 @@ ParticleSystem:
         - serializedVersion: 3
           time: 0
           value: 0
-          inSlope: 1.6271188
-          outSlope: 1.6271188
+          inSlope: 2.1334457
+          outSlope: 2.1334457
           tangentMode: 0
           weightedMode: 0
           inWeight: 0.33333334
-          outWeight: 0.11458332
+          outWeight: 0.11401425
         - serializedVersion: 3
           time: 1
           value: 1
-          inSlope: 0.47162813
-          outSlope: 0.47162813
+          inSlope: 0.20318608
+          outSlope: 0.20318608
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.119791746
+          inWeight: 0.13301665
           outWeight: 0.33333334
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -1542,6 +1542,8 @@ ParticleSystem:
     sprites:
     - sprite: {fileID: -1537363013, guid: 8897d996b6e76db49a1f780442620c25, type: 3}
     - sprite: {fileID: 528339410, guid: 8897d996b6e76db49a1f780442620c25, type: 3}
+    - sprite: {fileID: -398762857, guid: 8897d996b6e76db49a1f780442620c25, type: 3}
+    - sprite: {fileID: -398762857, guid: 8897d996b6e76db49a1f780442620c25, type: 3}
     - sprite: {fileID: -398762857, guid: 8897d996b6e76db49a1f780442620c25, type: 3}
     - sprite: {fileID: 507338168, guid: 8897d996b6e76db49a1f780442620c25, type: 3}
     - sprite: {fileID: 49778209, guid: 8897d996b6e76db49a1f780442620c25, type: 3}
