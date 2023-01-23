@@ -45,7 +45,11 @@ namespace HoldUp
 
         void OnCollisionEnter2D(Collision2D collision)
         {
-            //  do action with the collision (maybe have a field of the 'target' of the bullet so that it does an action only if the collision is a target ?)
+            if(collision.gameObject.TryGetComponent<Damageable>(out Damageable damageableObject))
+            {
+                damageableObject.DealDamages(damages);
+            }
+
 
             DestroyBullet();
         }

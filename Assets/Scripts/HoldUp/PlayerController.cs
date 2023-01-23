@@ -8,9 +8,6 @@ namespace HoldUp
     public class PlayerController : Core.Players.PlayerController
     {
         [SerializeField]
-        private Lifebar lifebar;
-
-        [SerializeField]
         private Inventory inventory;
 
         public Inventory Inventory => inventory;
@@ -24,8 +21,6 @@ namespace HoldUp
 
         void Start()
         {
-            lifebar.Initialize(15.0f);
-
             LastPerformedDirection = Vector2.right;
 
             inventory.EnableInventory(this);
@@ -34,8 +29,6 @@ namespace HoldUp
         public void OnDebugAction(InputAction.CallbackContext ctx)
         {
             if (!ctx.action.triggered) return;
-
-            lifebar.LoseLife(1.0f);
         }
 
         public void OnUseItemAction(InputAction.CallbackContext ctx)
