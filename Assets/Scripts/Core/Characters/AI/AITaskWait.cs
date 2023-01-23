@@ -5,13 +5,13 @@ namespace Core.Characters.AI
 {
 	public class AITaskWait : AITask
 	{
-		public string TimeKey;
+		public AIProperty<float> Time;
 
 		private float currentWaitTime = 0.0f;
 
 		public override void OnStart()
 		{
-			currentWaitTime = StateMachine.GetProperty<float>(TimeKey);
+			currentWaitTime = Time.GetValue(StateMachine);
 		}
 
 		public override void OnTick(float dt)

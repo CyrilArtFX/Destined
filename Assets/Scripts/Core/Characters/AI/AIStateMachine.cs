@@ -6,25 +6,35 @@ using UnityEngine;
 
 namespace Core.Characters.AI
 {
-	/*public struct AIProperty
+	//  Abstract struct for getting a typed value from either StateMachine properties or const value
+	public struct AIProperty<T>
 	{
-		public bool IsVariable;
+		public bool IsProperty;
 		public string Key;
-		public object Value;
+		public T Value;
 
-		public object GetValue( AIStateMachine machine )
+		public AIProperty(string key)
 		{
-			if ( IsVariable )
-			{
-				if ( machine.Properties.TryGetValue( Key, out object value ) )
-					return value;
-				else
-					return null;
-			}
+			Key = key;
+			Value = default;
+			IsProperty = true;
+		}
+
+		public AIProperty(T value)
+		{
+			Key = null;
+			Value = value;
+			IsProperty = false;
+		}
+
+		public T GetValue(AIStateMachine machine)
+		{
+			if (IsProperty)
+				return machine.GetProperty<T>(Key);
 
 			return Value;
 		}
-	}*/
+	}
 
 	public sealed class AIStateMachine : MonoBehaviour
 	{

@@ -6,16 +6,16 @@ namespace Core.Characters.AI
 {
 	public class AITaskMoveTo : AITask
 	{
-		public float AcceptanceRadius = 0.05f;
-		public float SpeedMultiplier = 1.0f;
-		public string PosKey;
+		public AIProperty<float> AcceptanceRadius = new(0.05f);
+		public AIProperty<float> SpeedMultiplier = new(1.0f);
+		public AIProperty<Vector2> Position;
 
 		private Vector2 target;
 		private List<Node2D> path;
 
 		public override void OnStart()
 		{
-			target = StateMachine.GetProperty<Vector2>(PosKey);
+			target = Position.GetValue(StateMachine);
 
 			StateMachine.AIController.Pathfinder.FindPath(target);
 			path = StateMachine.AIController.Pathfinder.Path;
@@ -33,13 +33,15 @@ namespace Core.Characters.AI
 			Vector3 next_pos = path[0].Position;
 
 			//  check is in acceptance radius
-			if ((next_pos - StateMachine.AIController.transform.position).sqrMagnitude <= AcceptanceRadius * AcceptanceRadius)
+			float acceptance_radius = AcceptanceRadius.GetValue(StateMachine);
+			if ((next_pos - StateMachine.AIController.transform.position).sqrMagnitude <= acceptance_radius * acceptance_radius)
 			{
 				path.RemoveAt(0);
 			}
 			else
 			{
-				StateMachine.AIController.Mover.MoveTowards(next_pos, SpeedMultiplier, SpeedMultiplier);
+				float speed = SpeedMultiplier.GetValue(StateMachine);
+				StateMachine.AIController.Mover.MoveTowards(next_pos, speed, speed);
 			}
 		}
 
@@ -50,7 +52,7 @@ namespace Core.Characters.AI
 			Gizmos.color = Color.blue;
 
 			//  draw destination
-			Gizmos.DrawWireSphere(path[path.Count - 1].Position, AcceptanceRadius);
+			Gizmos.DrawWireSphere(path[path.Count - 1].Position, AcceptanceRadius.GetValue(StateMachine));
 
 			//  draw path
 			Vector3 previous_pos = path[0].Position;
