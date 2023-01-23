@@ -10,6 +10,9 @@ namespace HoldUp
         [SerializeField]
         private Inventory inventory;
 
+        [SerializeField]
+        private Damageable damageable;
+
         public Inventory Inventory => inventory;
 
         public Vector2 LastPerformedDirection { get; private set; }
@@ -95,6 +98,13 @@ namespace HoldUp
                     AimDirection = Vector2.zero;
                 }
             }
+        }
+
+        public override void ClearEffects()
+        {
+            base.ClearEffects();
+
+            damageable.ResetLife();
         }
 
         void OnDestroy()
