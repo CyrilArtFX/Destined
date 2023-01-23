@@ -7,12 +7,21 @@ namespace HoldUp
     [AddComponentMenu("Scripts/HoldUp Camera Follow")]
     public class CameraFollow : MonoBehaviour
     {
+        [SerializeField]
+        private bool autoUpdatePlayers = false;
+        [SerializeField]
         private bool followActivated = false;
+
         private List<Transform> playersTransforms = new();
 
         void Update()
         {
-            if(followActivated)
+            if (autoUpdatePlayers && playersTransforms.Count != PlayersManager.instance.GetNumberOfPlayers())
+            {
+                SetTargets(PlayersManager.instance.GetPlayers());
+            }
+
+            if(followActivated && playersTransforms.Count > 0)
             {
                 Vector3 centered_position = Vector3.zero;
                 foreach (Transform player_transform in playersTransforms)
@@ -31,11 +40,17 @@ namespace HoldUp
 
         public void EnableFollowMode(List<Player> players)
         {
+            SetTargets(players);
+            followActivated = true;
+        }
+
+        public void SetTargets(List<Player> players)
+        {
+            playersTransforms.Clear();
             foreach (Player player in players)
             {
                 playersTransforms.Add(player.transform);
             }
-            followActivated = true;
         }
 
         public void DisableFollowMode()
