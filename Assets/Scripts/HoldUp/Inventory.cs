@@ -91,7 +91,7 @@ namespace HoldUp
             }
             else
             {
-                if(!currentItem.IsDefaultItem)
+                if(currentItem && !currentItem.IsDefaultItem)
                 {
                     DropItem();
                 }

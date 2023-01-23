@@ -100,7 +100,7 @@ MonoBehaviour:
   IsDefaultItem: 0
   ItemOnGround: {fileID: 8414630596500377582, guid: d0f69a65d1714b64c8dabeb69678de1e, type: 3}
   associatedObject: {fileID: 325030540862295101, guid: e1bbead7f74393d41a581e0e8b2132a6, type: 3}
-  throwingPower: 250
+  throwingPower: 300
   throwingPowerCurve:
     serializedVersion: 2
     m_Curve:
@@ -125,5 +125,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  throwingTimeForMinimalPower: 5
+  throwingTimeForMinimalPower: 2
+  explosionRadius: 2
+  explosionDamages: 0
   remoteSprite: {fileID: -874998806, guid: 0a7dfaa8e5c665e4491fe31d8ab0c5c6, type: 3}

@@ -15,6 +15,9 @@ namespace HoldUp
         private float throwingTimeForMinimalPower;
 
         [SerializeField]
+        private float explosionRadius, explosionDamages;
+
+        [SerializeField]
         private Sprite remoteSprite;
 
 
@@ -41,7 +44,7 @@ namespace HoldUp
             {
                 objectToThrow = GameObject.Instantiate(associatedObject.gameObject, GameManager.instance.transform).GetComponent<ThrowingObject>();
                 objectToThrow.transform.position = transform.position;
-                objectToThrow.Initialize(throwingPower, Direction, throwingPowerCurve, throwingTimeForMinimalPower, playerController.GetComponent<Collider2D>());
+                objectToThrow.Initialize(throwingPower, Direction, throwingPowerCurve, throwingTimeForMinimalPower, playerController.GetComponent<Collider2D>(), explosionRadius);
 
                 renderer.sprite = remoteSprite;
                 remote = true;
@@ -59,6 +62,12 @@ namespace HoldUp
             {
                 base.Drop();
             }
+        }
+
+        void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, explosionRadius);
         }
     }
 }
