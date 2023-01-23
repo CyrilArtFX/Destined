@@ -55,7 +55,7 @@ namespace Core.Characters.AI
 		public readonly Dictionary<string, object> Properties = new();
 		public readonly List<AIState> States = new();
 
-		private int currentStateID = 0;
+		private int currentStateID = -1;
 
 		void Awake()
 		{
@@ -109,19 +109,17 @@ namespace Core.Characters.AI
 
 		public bool NextState()
 		{
-			while (currentStateID < States.Count)
+			while (currentStateID + 1 < States.Count)
 			{
-				AIState state = States[currentStateID];
+				AIState state = States[++currentStateID];
 				if (!state.CanRun(state)) 
-				{
-					currentStateID++;
 					continue;
-				};
 
 				SetState(state);
 				return true;
 			}
 
+			currentStateID = -1;
 			return false;
 		}
 
