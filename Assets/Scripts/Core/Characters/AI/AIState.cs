@@ -57,6 +57,12 @@ namespace Core.Characters.AI
 			return task;
 		}
 
+		public void AddTasks( params AITask[] tasks )
+		{
+			foreach (AITask task in tasks)
+				AddTask(task);
+		}
+
 		public bool SetTask( AITask task )
 		{
 			if ( !task.CanRun( task ) )

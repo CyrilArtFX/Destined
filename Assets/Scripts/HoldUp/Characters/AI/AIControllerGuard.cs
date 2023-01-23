@@ -37,21 +37,17 @@ namespace HoldUp.Characters.AI
 			//  create patrol state
 			state = StateMachine.AddState("Patrol");
 			state.CanRun = (state) => State == AIControllerState.Patrol;
-			state.AddTask(
+			state.AddTasks(
 				new AITaskSetNextWaypoint()
 				{
 					Waypoints = patrolWaypoints,
 					PosKey = MOVE_POS_KEY,
-				}
-			);
-			state.AddTask(
+				},
 				new AITaskMoveTo()
 				{
 					SpeedMultiplier = new(0.5f),
 					Position = new(MOVE_POS_KEY),
-				} 
-			);
-			state.AddTask(
+				},
 				new AITaskWait()
 				{
 					Time = new(PATROL_WAIT_TIME_KEY),
