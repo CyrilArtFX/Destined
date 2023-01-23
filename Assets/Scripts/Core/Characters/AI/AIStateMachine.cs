@@ -27,6 +27,17 @@ namespace Core.Characters.AI
 			IsProperty = false;
 		}
 
+		public void SetValue(AIStateMachine machine, T value)
+		{
+			if (IsProperty)
+			{ 
+				machine.SetProperty(Key, value);
+				return;
+			}
+
+			Value = value;
+		}
+
 		public T GetValue(AIStateMachine machine)
 		{
 			if (IsProperty)

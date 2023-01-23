@@ -7,7 +7,7 @@ namespace Core.Characters.AI
 		public Transform[] Waypoints;
 		public int CurrentWaypointID = 0;
 
-		public string PosKey;
+		public AIProperty<Vector2> Position;
 
 		public override void OnStart()
 		{
@@ -19,7 +19,7 @@ namespace Core.Characters.AI
 				return;
 			}
 
-			StateMachine.SetProperty(PosKey, (Vector2) Waypoints[CurrentWaypointID].position);
+			Position.SetValue(StateMachine, (Vector2) Waypoints[CurrentWaypointID].position);
 			CurrentWaypointID = (CurrentWaypointID + 1) % Waypoints.Length;
 
 			End(true);
