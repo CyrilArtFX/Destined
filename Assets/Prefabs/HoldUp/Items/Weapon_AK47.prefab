@@ -230,7 +230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDefaultItem: 0
-  ItemOnGround: {fileID: 7107347836230690416, guid: fa2f4eec36b14d841813e4bee8933ca9, type: 3}
+  ItemOnGround: {fileID: 7107347836230690416, guid: fade6ca367321f24fb32235fcff35067, type: 3}
   fireRate: 10
   automaticWeapon: 1
   recoilCurve:
