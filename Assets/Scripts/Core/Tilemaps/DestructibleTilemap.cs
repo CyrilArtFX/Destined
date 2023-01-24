@@ -1,4 +1,4 @@
-using System.Collections;
+using Core.Astar2D;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -9,10 +9,23 @@ namespace Core.Tilemaps
     {
         private Tilemap tilemap;
 
+        [SerializeField]
+        private TilemapData tilemapData;
+
+        private HashSet<TileBase> destructiblesTiles = new();
+
 
         private void Awake()
         {
             tilemap = GetComponent<Tilemap>();
+
+            if(tilemapData)
+            {
+                foreach(TileBase tile in tilemapData.destructiblesTiles)
+                {
+                    destructiblesTiles.Add(tile);
+                }
+            }
         }
 
 
@@ -23,6 +36,8 @@ namespace Core.Tilemaps
             int minSearchY = Mathf.FloorToInt(center.y - radius);
             int maxSearchY = Mathf.CeilToInt(center.y + radius);
 
+            bool tilesDestroyed = false;
+
             for(int x = minSearchX; x <= maxSearchX; x++)
             {
                 for(int y = minSearchY; y <= maxSearchY; y++)
@@ -30,9 +45,18 @@ namespace Core.Tilemaps
                     if(Vector2.Distance(center, new Vector2(x, y)) <= radius)
                     {
                         Vector3Int tilePos = new Vector3Int(x, y, 0);
-                        tilemap.SetTile(tilePos, null);
+                        TileBase tile = tilemap.GetTile(tilePos);
+                        if (tile && destructiblesTiles.Contains(tile))
+                        {
+                            tilemap.SetTile(tilePos, null);
+                            tilesDestroyed = true;
+                        }
                     }
                 }
+            }
+            if (tilesDestroyed)
+            {
+                Grid2D.Instance.Refresh();
             }
         }
     }
