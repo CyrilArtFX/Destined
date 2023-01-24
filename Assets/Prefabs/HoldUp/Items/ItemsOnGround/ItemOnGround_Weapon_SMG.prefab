@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7107347836230690416}
   - component: {fileID: 3964737564935521109}
   m_Layer: 10
-  m_Name: ItemOnGround_Weapon_AK47
+  m_Name: ItemOnGround_Weapon_SMG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: -2009574621
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1898835600, guid: c41ce54c43ac59641980f3c3e7d7d134, type: 3}
+  m_Sprite: {fileID: -1218578611, guid: c41ce54c43ac59641980f3c3e7d7d134, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d0ecb14f377b3c46bc8fbc8a8060804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Item: {fileID: 4930200477163738560, guid: fe35299bcb6354347b7ce6d652012c7d, type: 3}
+  Item: {fileID: 4930200477163738560, guid: 33936d4b98a7c314fa22779871080ea3, type: 3}
 --- !u!58 &3964737564935521109
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -112,6 +112,6 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.2, y: 0.1}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.3

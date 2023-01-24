@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4496058418514930714}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.642, y: 0.097, z: 0}
+  m_LocalPosition: {x: 0.473, y: 0.062, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -143,7 +143,7 @@ GameObject:
   - component: {fileID: 4930200477163738562}
   - component: {fileID: 4930200477163738560}
   m_Layer: 0
-  m_Name: Weapon_AK47
+  m_Name: Weapon_SMG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -206,7 +206,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1898835600, guid: c41ce54c43ac59641980f3c3e7d7d134, type: 3}
+  m_Sprite: {fileID: -1218578611, guid: c41ce54c43ac59641980f3c3e7d7d134, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -230,8 +230,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDefaultItem: 0
-  ItemOnGround: {fileID: 7107347836230690416, guid: fa2f4eec36b14d841813e4bee8933ca9, type: 3}
-  fireRate: 10
+  ItemOnGround: {fileID: 7107347836230690416, guid: fade6ca367321f24fb32235fcff35067, type: 3}
+  fireRate: 6
   automaticWeapon: 1
   recoilCurve:
     serializedVersion: 2
@@ -258,10 +258,10 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   timeForMaxRecoil: 8
-  recoilPower: 45
+  recoilPower: 30
   bullet: {fileID: -1455292350417118654, guid: f591eef7c0e06c7408b4fd4fced0e052, type: 3}
   bulletSpeed: 0.3
-  bulletRange: 7
+  bulletRange: 5
   bulletDamages: 1
   bulletSpawnPos: {fileID: 2613662984291765994}
   redLine: {fileID: 1606540253603035603}
