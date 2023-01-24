@@ -38,13 +38,19 @@ namespace HoldUp
             {
                 objectToThrow.Explode();
 
-                playerController.Inventory.DestroyItemInHand();
+                if(inventory)
+                {
+                    inventory.DestroyItemInHand();
+                }
             }
             else
             {
                 objectToThrow = GameObject.Instantiate(associatedObject.gameObject, GameManager.instance.transform).GetComponent<ThrowingObject>();
                 objectToThrow.transform.position = transform.position;
-                objectToThrow.Initialize(throwingPower, Direction, throwingPowerCurve, throwingTimeForMinimalPower, playerController.GetComponent<Collider2D>(), explosionRadius, explosionDamages);
+                if (owner.TryGetComponent(out Collider2D ownerCollider))
+                {
+                    objectToThrow.Initialize(throwingPower, direction, throwingPowerCurve, throwingTimeForMinimalPower, ownerCollider, explosionRadius, explosionDamages);
+                }
 
                 renderer.sprite = remoteSprite;
                 remote = true;

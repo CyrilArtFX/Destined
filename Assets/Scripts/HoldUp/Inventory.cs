@@ -25,7 +25,7 @@ namespace HoldUp
         {
             playerController = controller;
             currentItem = GameObject.Instantiate(defaultItem.gameObject, transform).GetComponent<Item>();
-            currentItem.Initialize(playerController);
+            currentItem.Initialize(playerController.gameObject, this);
         }
 
         public void DisableInventory()
@@ -44,7 +44,7 @@ namespace HoldUp
             }
             Destroy(currentItem.gameObject);
             currentItem = GameObject.Instantiate(itemToEquip.Item.gameObject, transform).GetComponent<Item>();
-            currentItem.Initialize(playerController);
+            currentItem.Initialize(playerController.gameObject, this);
             Destroy(itemToEquip.gameObject);
         }
 
@@ -53,7 +53,7 @@ namespace HoldUp
             currentItem.Drop();
             Destroy(currentItem.gameObject);
             currentItem = GameObject.Instantiate(defaultItem.gameObject, transform).GetComponent<Item>();
-            currentItem.Initialize(playerController);
+            currentItem.Initialize(playerController.gameObject, this);
         }
 
         public void UseItemPressed()
@@ -103,7 +103,12 @@ namespace HoldUp
         {
             Destroy(currentItem.gameObject);
             currentItem = GameObject.Instantiate(defaultItem.gameObject, transform).GetComponent<Item>();
-            currentItem.Initialize(playerController);
+            currentItem.Initialize(playerController.gameObject, this);
+        }
+
+        public Item GetItemInHand()
+        {
+            return currentItem;
         }
 
 

@@ -59,9 +59,13 @@ namespace HoldUp
 
         private void Death()
         {
-            if(deathMode == DeathMode.Destroy)
+            switch(deathMode)
             {
-                Destroy(gameObject);
+                case DeathMode.Destroy:
+                    Destroy(gameObject);
+                    break;
+                case DeathMode.Respawnable:
+                    break;
             }
         }
     }

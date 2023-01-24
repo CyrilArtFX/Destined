@@ -14,16 +14,13 @@ namespace HoldUp
 
         public Inventory Inventory => inventory;
 
-        public Vector2 LastPerformedDirection { get; private set; }
-        public Vector2 AimDirection { get; private set; }
-
-
-        private bool mousePressed;
-        private float onWaitForMouseReset;
+        private Vector2 lastPerformedDirection;
+        private Vector2 aimDirection;
+        private bool aimWithJoystick;
 
         void Start()
         {
-            LastPerformedDirection = Vector2.right;
+            lastPerformedDirection = Vector2.right;
 
             inventory.EnableInventory(this);
         }
@@ -40,13 +37,11 @@ namespace HoldUp
                 if (ctx.action.triggered)
                 {
                     inventory.UseItemPressed();
-                    mousePressed = true;
                 }
             }
             if (ctx.action.WasReleasedThisFrame())
             {
                 inventory.UseItemReleased();
-                mousePressed = false;
             }
         }
 
@@ -60,7 +55,8 @@ namespace HoldUp
 
         public void OnMoveRightJoystick(InputAction.CallbackContext ctx)
         {
-            AimDirection = ctx.ReadValue<Vector2>().normalized;
+            aimDirection = ctx.ReadValue<Vector2>().normalized;
+            aimWithJoystick = true;
         }
 
         public void OnMoveMouse(InputAction.CallbackContext ctx)
@@ -68,10 +64,9 @@ namespace HoldUp
             Vector2 mouse_pos = Mouse.current.position.ReadValue();
             mouse_pos = Camera.main.ScreenToWorldPoint(mouse_pos);
 
-            AimDirection = mouse_pos - (Vector2)transform.position;
-            AimDirection.Normalize();
-
-            onWaitForMouseReset = 1.5f;
+            aimDirection = mouse_pos - (Vector2)transform.position;
+            aimDirection.Normalize();
+            aimWithJoystick = false;
         }
 
         void Update()
@@ -84,17 +79,22 @@ namespace HoldUp
 
             if (Direction != Vector2.zero)
             {
-                LastPerformedDirection = Direction.normalized;
+                lastPerformedDirection = Direction.normalized;
             }
 
 
-            //  reset mouse aim direction if mouse don't move
-            if (onWaitForMouseReset > 0.0f && !mousePressed)
+            Inventory.GetItemInHand().SetDirection(aimDirection == Vector2.zero ? lastPerformedDirection : aimDirection);
+
+            Weapon weaponInHand = (Inventory.GetItemInHand() as Weapon);
+            if(weaponInHand)
             {
-                onWaitForMouseReset -= Time.deltaTime;
-                if (onWaitForMouseReset <= 0.0f)
+                if (aimWithJoystick && aimDirection != Vector2.zero)
                 {
-                    AimDirection = Vector2.zero;
+                    weaponInHand.ShowRedLine();
+                }
+                else
+                {
+                    weaponInHand.HideRedLine();
                 }
             }
         }

@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace HoldUp
@@ -35,10 +36,11 @@ namespace HoldUp
         private float recoilTimer;
 
 
-        public override void Initialize(PlayerController controller)
+        public override void Initialize(GameObject ownerActor, Inventory ownerInventory)
         {
-            base.Initialize(controller);
+            base.Initialize(ownerActor, ownerInventory);
             timeBetweenShoots = 1.0f / fireRate;
+            HideRedLine();
         }
 
         public override void OnUsePressed()
@@ -51,10 +53,7 @@ namespace HoldUp
             {
                 if (shootTimer <= 0.0f)
                 {
-                    Bullet bulletObject = GameObject.Instantiate(bullet.gameObject, GameManager.instance.transform).GetComponent<Bullet>();
-                    bulletObject.transform.position = bulletSpawnPos.position;
-                    bulletObject.Initialize(bulletSpeed, Direction.normalized, bulletRange, bulletDamages, playerController.GetComponent<Collider2D>());
-
+                    ShootBullet();
                     shootTimer = timeBetweenShoots;
                 }
             }
@@ -85,9 +84,7 @@ namespace HoldUp
                     Vector2 recoiledDirection = new Vector2(Mathf.Cos(weaponRotation), Mathf.Sin(weaponRotation));
                     recoiledDirection.Normalize();
 
-                    Bullet bulletObject = GameObject.Instantiate(bullet.gameObject, GameManager.instance.transform).GetComponent<Bullet>();
-                    bulletObject.transform.position = bulletSpawnPos.position;
-                    bulletObject.Initialize(bulletSpeed, recoiledDirection, bulletRange, bulletDamages, playerController.GetComponent<Collider2D>());
+                    ShootBullet();
 
                     shootTimer = timeBetweenShoots;
                 }
@@ -106,28 +103,35 @@ namespace HoldUp
                 shootTimer -= Time.deltaTime;
             }
 
-            
+            Rotate(direction);
+        }
 
-
-            Rotate(Direction);
-
-
-            if (playerController.AimDirection != Vector2.zero)
+        public void ShowRedLine()
+        {
+            redLine.enabled = true;
+            RaycastHit2D hitResults = Physics2D.Raycast(bulletSpawnPos.position, bulletSpawnPos.right, redLineMaxDistance, layersBlockingRedLine);
+            if (hitResults)
             {
-                redLine.enabled = true;
-                RaycastHit2D hitResults = Physics2D.Raycast(bulletSpawnPos.position, bulletSpawnPos.right, redLineMaxDistance, layersBlockingRedLine);
-                if (hitResults)
-                {
-                    redLine.SetPosition(1, new Vector3(hitResults.distance, 0.0f, 0.0f));
-                }
-                else
-                {
-                    redLine.SetPosition(1, new Vector3(redLineMaxDistance, 0.0f, 0.0f));
-                }
+                redLine.SetPosition(1, new Vector3(hitResults.distance, 0.0f, 0.0f));
             }
             else
             {
-                redLine.enabled = false;
+                redLine.SetPosition(1, new Vector3(redLineMaxDistance, 0.0f, 0.0f));
+            }
+        }
+
+        public void HideRedLine()
+        {
+            redLine.enabled = false;
+        }
+
+        private void ShootBullet()
+        {
+            Bullet bulletObject = GameObject.Instantiate(bullet.gameObject, GameManager.instance.transform).GetComponent<Bullet>();
+            bulletObject.transform.position = bulletSpawnPos.position;
+            if (owner.TryGetComponent(out Collider2D ownerCollider))
+            {
+                bulletObject.Initialize(bulletSpeed, direction.normalized, bulletRange, bulletDamages, ownerCollider);
             }
         }
     }

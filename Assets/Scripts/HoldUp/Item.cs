@@ -4,16 +4,18 @@ namespace HoldUp
 {
     public abstract class Item : MonoBehaviour
     {
-        public Vector2 Direction => playerController.AimDirection != Vector2.zero ? playerController.AimDirection : playerController.LastPerformedDirection;
+        protected Vector2 direction;
 
         public bool IsDefaultItem;
         public ItemOnGround ItemOnGround;
 
-        protected PlayerController playerController;
+        protected GameObject owner;
+        protected Inventory inventory;
 
-        public virtual void Initialize(PlayerController controller)
+        public virtual void Initialize(GameObject ownerActor, Inventory ownerInventory)
         {
-            playerController = controller;
+            owner = ownerActor;
+            inventory = ownerInventory;
         }
 
         public virtual void OnUsePressed()
@@ -32,7 +34,12 @@ namespace HoldUp
         public virtual void Drop()
         {
             GameObject droppedItem = GameObject.Instantiate(ItemOnGround.gameObject, GameManager.instance.transform);
-            droppedItem.transform.position = playerController.transform.position;
+            droppedItem.transform.position = owner.transform.position;
+        }
+
+        public void SetDirection(Vector2 itemDirection)
+        {
+            direction = itemDirection;
         }
     }
 }

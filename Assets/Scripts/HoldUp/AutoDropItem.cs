@@ -9,7 +9,10 @@ namespace HoldUp
 
         public GameObject AutoDrop()
         {
-            playerController.Inventory.DestroyItemInHand();
+            if(inventory)
+            {
+                inventory.DestroyItemInHand();
+            }
 
             return droppedObject;
         }
