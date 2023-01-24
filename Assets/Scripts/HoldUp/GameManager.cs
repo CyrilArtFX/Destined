@@ -18,10 +18,15 @@ namespace HoldUp
 
         public override void StartGame()
         {
+            PlayersManager.instance.SwitchToPlayMode();
             SceneManager.UnloadSceneAsync(menuScene);
             SceneManager.LoadSceneAsync(gameScene, LoadSceneMode.Additive);
 
             List<Player> players = PlayersManager.instance.GetPlayers();
+            foreach(Player player in players)
+            {
+                player.Controller.ClearEffects();
+            }
 
             gameCamera.EnableFollowMode(players);
         }
