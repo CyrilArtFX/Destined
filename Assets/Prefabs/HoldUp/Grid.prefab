@@ -1193,7 +1193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 503423f08124a944a8039301e45a721e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GridWorldSize: {x: 16, y: 16}
+  GridWorldSize: {x: 32, y: 32}
   NodeRadius: 0.5
   ObstacleLayerMask:
     serializedVersion: 2
@@ -1211,6 +1211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8192ba9233d1ca4785111481a67627a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tilemapData: {fileID: 11400000, guid: fc723880ebe31e04fb99464a3fb7342c, type: 2}
 --- !u!1 &4688381588058127117
 GameObject:
   m_ObjectHideFlags: 0
