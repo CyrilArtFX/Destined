@@ -23,6 +23,9 @@ namespace HoldUp
         [SerializeField]
         private DeathMode deathMode;
 
+        [SerializeField, Tooltip("Only fill if this script is on a player")]
+        private PlayerController playerController;
+
         private float life;
 
         void Start()
@@ -65,6 +68,10 @@ namespace HoldUp
                     Destroy(gameObject);
                     break;
                 case DeathMode.Respawnable:
+                    if(playerController && !playerController.Dead)
+                    {
+                        playerController.SetDead();
+                    }
                     break;
             }
         }

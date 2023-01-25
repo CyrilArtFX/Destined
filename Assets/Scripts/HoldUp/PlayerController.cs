@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,16 +12,35 @@ namespace HoldUp
 
         [SerializeField]
         private Damageable damageable;
+        [SerializeField]
+        private Interactable interactable;
+
+        [SerializeField]
+        private TextMeshPro interactionDisplayText;
+
+        [SerializeField]
+        private float timeForRevive;
+        [SerializeField]
+        private Lifebar reviveBar;
 
         public Inventory Inventory => inventory;
+
+        public bool Dead { get; private set; }
 
         private Vector2 lastPerformedDirection;
         private Vector2 aimDirection;
         private bool aimWithJoystick;
+        private float currentlyRevived;
+
+        private Interactable useableInteraction;
 
         void Start()
         {
             lastPerformedDirection = Vector2.right;
+            Dead = false;
+            interactable.InteractionPossible = false;
+
+            reviveBar.Initialize(timeForRevive);
 
             inventory.EnableInventory(this);
         }
@@ -32,21 +52,36 @@ namespace HoldUp
 
         public void OnUseItemAction(InputAction.CallbackContext ctx)
         {
+            if (Dead) return;
+
             if (ctx.action.WasPressedThisFrame())
             {
                 if (ctx.action.triggered)
                 {
+                    if (useableInteraction && useableInteraction.InteractionPossible)
+                    {
+                        useableInteraction.PressInteraction.Invoke();
+                        return;
+                    }
+
                     inventory.UseItemPressed();
                 }
             }
             if (ctx.action.WasReleasedThisFrame())
             {
+                if (useableInteraction && useableInteraction.InteractionPossible)
+                {
+                    useableInteraction.ReleaseInteraction.Invoke();
+                    return;
+                }
                 inventory.UseItemReleased();
             }
         }
 
         public void OnEquipAndDropAction(InputAction.CallbackContext ctx)
         {
+            if (Dead) return;
+
             if (ctx.action.triggered)
             {
                 inventory.EquipAndDrop();
@@ -71,6 +106,31 @@ namespace HoldUp
 
         void Update()
         {
+            if (currentlyRevived > 0.0f)
+            {
+                currentlyRevived -= Time.deltaTime;
+                reviveBar.ChangeLife(Mathf.Min(timeForRevive - currentlyRevived, timeForRevive));
+                if (currentlyRevived <= 0.0f)
+                {
+                    Revive();
+                }
+            }
+
+            if (Dead)
+            {
+                mover.Move(Vector2.zero);
+                return;
+            }
+
+            if(useableInteraction && useableInteraction.InteractionPossible)
+            {
+                interactionDisplayText.text = useableInteraction.InteractionDisplay;
+            }
+            else
+            {
+                interactionDisplayText.text = "";
+            }
+
             //  move
             if (!InCinematic)
             {
@@ -86,7 +146,7 @@ namespace HoldUp
             Inventory.GetItemInHand().SetDirection(aimDirection == Vector2.zero ? lastPerformedDirection : aimDirection);
 
             Weapon weaponInHand = (Inventory.GetItemInHand() as Weapon);
-            if(weaponInHand)
+            if (weaponInHand)
             {
                 if (aimWithJoystick && aimDirection != Vector2.zero)
                 {
@@ -104,6 +164,73 @@ namespace HoldUp
             base.ClearEffects();
 
             damageable.ResetLife();
+            Dead = false;
+        }
+
+        public void SetDead()
+        {
+            (Inventory.GetItemInHand() as Weapon).HideRedLine();
+            Inventory.UseItemReleased();
+            interactable.InteractionPossible = true;
+            reviveBar.ChangeLife(0.0f);
+
+            if(useableInteraction)
+            {
+                useableInteraction.ReleaseInteraction.Invoke();
+                useableInteraction = null;
+                interactionDisplayText.text = "";
+            }
+
+            Dead = true;
+        }
+
+        public void OnPressRevive()
+        {
+            if(Dead)
+            {
+                currentlyRevived = timeForRevive;
+            }
+        }
+
+        public void OnReleaseRevive()
+        {
+            if (Dead)
+            {
+                currentlyRevived = 0.0f;
+                reviveBar.ChangeLife(0.0f);
+            }
+        }
+
+        private void Revive()
+        {
+            Dead = false;
+            damageable.ResetLife();
+            interactable.InteractionPossible = false;
+        }
+
+        void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (Dead) return;
+
+            if (collision.gameObject.TryGetComponent(out Interactable otherInteractable))
+            {
+                useableInteraction = otherInteractable;
+            }
+        }
+
+        void OnTriggerExit2D(Collider2D collision)
+        {
+            if (Dead) return;
+
+            if (collision.gameObject.TryGetComponent(out Interactable otherInteractable))
+            {
+                if (useableInteraction == otherInteractable)
+                {
+                    useableInteraction.ReleaseInteraction.Invoke();
+                    useableInteraction = null;
+                    interactionDisplayText.text = "";
+                }
+            }
         }
 
         void OnDestroy()
