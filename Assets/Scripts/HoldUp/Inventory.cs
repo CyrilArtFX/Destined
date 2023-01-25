@@ -96,7 +96,21 @@ namespace HoldUp
 
             if(itemInRange)
             {
-                EquipItem(itemInRange);
+                if(currentItem && !currentItem.IsDefaultItem)
+                {
+                    if(currentItem.ItemID == itemInRange.Item.ItemID)
+                    {
+                        DropItem();
+                    }
+                    else
+                    {
+                        EquipItem(itemInRange);
+                    }
+                }
+                else
+                {
+                    EquipItem(itemInRange);
+                }
             }
             else
             {

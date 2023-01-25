@@ -231,6 +231,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsDefaultItem: 0
   ItemOnGround: {fileID: 7107347836230690416, guid: fade6ca367321f24fb32235fcff35067, type: 3}
+  ItemID: 3
   fireRate: 10
   automaticWeapon: 1
   recoilCurve:

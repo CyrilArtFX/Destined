@@ -8,6 +8,7 @@ namespace HoldUp
 
         public bool IsDefaultItem;
         public ItemOnGround ItemOnGround;
+        public int ItemID;
 
         protected GameObject owner;
         protected Inventory inventory;
