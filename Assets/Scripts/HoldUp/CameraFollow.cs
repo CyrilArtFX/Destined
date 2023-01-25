@@ -21,7 +21,7 @@ namespace HoldUp
 
         private List<Transform> playersTransforms = new();
 
-        void Update()
+        void FixedUpdate()
         {
             //  auto update transforms on player count changes
             if (autoUpdatePlayers && playersTransforms.Count != PlayersManager.instance.GetNumberOfPlayers())
