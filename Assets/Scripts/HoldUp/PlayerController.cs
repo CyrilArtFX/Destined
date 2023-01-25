@@ -169,7 +169,12 @@ namespace HoldUp
 
         public void SetDead()
         {
-            (Inventory.GetItemInHand() as Weapon).HideRedLine();
+            Weapon hold_weapon = Inventory.GetItemInHand() as Weapon;
+            if (hold_weapon) 
+            {
+                hold_weapon.HideRedLine();
+            }
+
             Inventory.UseItemReleased();
             interactable.InteractionPossible = true;
             reviveBar.ChangeLife(0.0f);
