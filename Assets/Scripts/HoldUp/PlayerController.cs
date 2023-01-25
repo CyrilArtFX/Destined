@@ -84,7 +84,7 @@ namespace HoldUp
 
             if (ctx.action.triggered)
             {
-                inventory.EquipAndDrop();
+                inventory.EquipAndDrop(false);
             }
         }
 
@@ -176,7 +176,8 @@ namespace HoldUp
                 hold_weapon.HideRedLine();
             }
 
-            Inventory.UseItemReleased();
+            inventory.UseItemReleased();
+            inventory.EquipAndDrop(true);
             interactable.InteractionPossible = true;
             reviveBar.ChangeLife(0.0f);
 

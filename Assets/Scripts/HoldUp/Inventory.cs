@@ -70,8 +70,17 @@ namespace HoldUp
             }
         }
 
-        public void EquipAndDrop()
+        public void EquipAndDrop(bool forceDrop)
         {
+            if(forceDrop)
+            {
+                if (currentItem && !currentItem.IsDefaultItem)
+                {
+                    DropItem();
+                }
+                return;
+            }
+
             itemInRange = null;
 
             Physics2D.queriesHitTriggers = true;
