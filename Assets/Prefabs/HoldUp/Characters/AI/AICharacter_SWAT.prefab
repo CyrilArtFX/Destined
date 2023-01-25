@@ -111,12 +111,12 @@ MonoBehaviour:
   patrolWaitTime: 3
   seeLayerMask:
     serializedVersion: 2
-    m_Bits: 9
+    m_Bits: 4105
   seeCollider: {fileID: 6088705259669564940}
   weapon: {fileID: 1820792659454309801}
   fireObstaclesMask:
     serializedVersion: 2
-    m_Bits: 1025
+    m_Bits: 5121
   startAttackReactionTime: 0.4
   fireDistance: 3
 --- !u!4 &6350564345755318013 stripped

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4688381588022556913}
   - component: {fileID: 4688381588022556924}
   - component: {fileID: 4688381588022556925}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1197,7 +1197,7 @@ MonoBehaviour:
   NodeRadius: 0.5
   ObstacleLayerMask:
     serializedVersion: 2
-    m_Bits: 2049
+    m_Bits: 6144
   CanUseDiagonals: 0
 --- !u!114 &4688381588022556925
 MonoBehaviour:
@@ -1222,7 +1222,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4688381588058127115}
   - component: {fileID: 4688381588058127114}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1269,7 +1269,7 @@ GameObject:
   - component: {fileID: 5183937704689784826}
   - component: {fileID: 3077370420449075717}
   - component: {fileID: 1029318578647707647}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Floors
   m_TagString: Untagged
   m_Icon: {fileID: 0}

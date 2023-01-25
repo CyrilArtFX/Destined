@@ -6,6 +6,7 @@ namespace Core.Characters.AI
 	{
 		public Transform[] Waypoints;
 		public int CurrentWaypointID = 0;
+		public bool SupressWarning = false;
 
 		public AIProperty<Vector2> Position;
 
@@ -13,7 +14,8 @@ namespace Core.Characters.AI
 		{
 			if (Waypoints.Length == 0)
 			{
-				Debug.LogWarning(GetType().FullName + ": no waypoints have been assigned, skipping.");
+				if (!SupressWarning)
+					Debug.LogWarning(GetType().FullName + ": no waypoints have been assigned, skipping.");
 
 				End(false);
 				return;

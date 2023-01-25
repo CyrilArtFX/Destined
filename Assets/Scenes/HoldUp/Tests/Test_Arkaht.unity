@@ -194,10 +194,6 @@ PrefabInstance:
       propertyPath: patrolWaypoints.Array.data[2]
       value: 
       objectReference: {fileID: 289450458}
-    - target: {fileID: 7157469987693628147, guid: bfdd7de4e7dcfd940a52e8b06f472f36, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bfdd7de4e7dcfd940a52e8b06f472f36, type: 3}
 --- !u!1 &289450457
@@ -30425,6 +30421,10 @@ PrefabInstance:
       propertyPath: m_ColliderPaths.Array.data[0].m_ColliderPaths.Array.data[13].Array.data[11].Y
       value: -20000100
       objectReference: {fileID: 0}
+    - target: {fileID: 4688381588022556917, guid: b5bed743a66599441a8c4e8f7f70f318, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 4688381588058127115, guid: b5bed743a66599441a8c4e8f7f70f318, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -30472,6 +30472,14 @@ PrefabInstance:
     - target: {fileID: 4688381588058127117, guid: b5bed743a66599441a8c4e8f7f70f318, type: 3}
       propertyPath: m_Name
       value: Grid
+      objectReference: {fileID: 0}
+    - target: {fileID: 4688381588058127117, guid: b5bed743a66599441a8c4e8f7f70f318, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8031758916840166480, guid: b5bed743a66599441a8c4e8f7f70f318, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5bed743a66599441a8c4e8f7f70f318, type: 3}

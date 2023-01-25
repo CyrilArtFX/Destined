@@ -11,14 +11,6 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 7359105, guid: 93d49d5fcb486754a8f92dcc7464ee25, type: 3}
-    - target: {fileID: 3717755345141351176, guid: 2aea605e01127dd439445651d0d67005, type: 3}
-      propertyPath: m_Size.y
-      value: 0.3778137
-      objectReference: {fileID: 0}
-    - target: {fileID: 3717755345141351176, guid: 2aea605e01127dd439445651d0d67005, type: 3}
-      propertyPath: m_Offset.y
-      value: -0.2496211
-      objectReference: {fileID: 0}
     - target: {fileID: 5387887059634067222, guid: 2aea605e01127dd439445651d0d67005, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -111,12 +103,12 @@ MonoBehaviour:
   patrolWaitTime: 3
   seeLayerMask:
     serializedVersion: 2
-    m_Bits: 9
+    m_Bits: 4105
   seeCollider: {fileID: 6088705259669564940}
   weapon: {fileID: 4503103702740697327}
   fireObstaclesMask:
     serializedVersion: 2
-    m_Bits: 1025
+    m_Bits: 5121
   startAttackReactionTime: 0.4
   fireDistance: 3
 --- !u!4 &6350564345755318013 stripped

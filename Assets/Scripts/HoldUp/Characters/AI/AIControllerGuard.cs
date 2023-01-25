@@ -41,8 +41,6 @@ namespace HoldUp.Characters.AI
 		[SerializeField]
 		private float fireDistance = 3.0f;
 
-		private AIState attackState, searchState, patrolState;
-
 		void Start()
 		{
 			if (weapon != null)
@@ -52,32 +50,22 @@ namespace HoldUp.Characters.AI
 			CurrentState = State.Patrol;
 
 			//  setup properties
-			StateMachine.SetProperty(TARGET_KEY, null);
 			StateMachine.SetProperty(MOVE_POS_KEY, Vector2.one);
 
+			AIState state;
+
 			//  create attack state
-			attackState = StateMachine.AddState("Attack");
-			attackState.CanRun = (state) => CurrentState == State.Attack;
-			/*attackState.OnEnd = (state) => {
-				if (state.Status == AIStatus.Success && Target == null)
-				{
-					CurrentState = State.Patrol;
-				}
-			};*/
-			attackState.AddTasks(
+			state = StateMachine.AddState("Attack");
+			state.CanRun = (state) => CurrentState == State.Attack;
+			state.AddTasks(
 				new AITaskWait()
 				{
 					Time = new(startAttackReactionTime),
 				},
-				new AITaskMoveNearTransform()
+				new AITaskMoveTo()
 				{
 					NearRadius = new(fireDistance),
-					Target = new(TARGET_KEY),
-					OnNullTransform = (state, last_pos) =>
-					{
-						StateMachine.SetProperty(MOVE_POS_KEY, (Vector2) last_pos);
-						CurrentState = State.Search;
-					}
+					Position = new(MOVE_POS_KEY),
 				},
 				new AITaskFire()
 				{
@@ -88,13 +76,13 @@ namespace HoldUp.Characters.AI
 			);
 
 			//  create search state
-			searchState = StateMachine.AddState("Search");
-			searchState.CanRun = (state) => CurrentState == State.Search;
-			searchState.OnEnd = (state) => {
+			state = StateMachine.AddState("Search");
+			state.CanRun = (state) => CurrentState == State.Search;
+			state.OnEnd = (state) => {
 				if (state.Status == AIStatus.Failed) return;
 				CurrentState = State.Patrol;
 			};
-			searchState.AddTasks(
+			state.AddTasks(
 				new AITaskMoveTo()
 				{
 					Position = new(MOVE_POS_KEY),
@@ -106,11 +94,12 @@ namespace HoldUp.Characters.AI
 			);
 
 			//  create patrol state
-			patrolState = StateMachine.AddState("Patrol");
-			patrolState.CanRun = (state) => CurrentState == State.Patrol;
-			patrolState.AddTasks(
+			state = StateMachine.AddState("Patrol");
+			state.CanRun = (state) => CurrentState == State.Patrol;
+			state.AddTasks(
 				new AITaskSetNextWaypoint()
 				{
+					SupressWarning = true,  //  I'm sick of these warnings..
 					Waypoints = patrolWaypoints,
 					Position = new(MOVE_POS_KEY),
 				},
@@ -130,6 +119,11 @@ namespace HoldUp.Characters.AI
 		{
 			Target = target;
 			StateMachine.SetProperty(TARGET_KEY, target != null ? target.transform : null);
+
+			if (target == null)
+			{
+				CurrentState = State.Search;
+			}
 		}
 
 		void Update()
@@ -137,7 +131,12 @@ namespace HoldUp.Characters.AI
 			if (Target != null)
 			{
 				if (Target.Dead)
+				{
 					SetTarget(null);
+					return;
+				}
+
+				StateMachine.SetProperty(MOVE_POS_KEY, (Vector2) Target.transform.position);
 			}
 
 			if (weapon != null)
@@ -186,8 +185,7 @@ namespace HoldUp.Characters.AI
 			//  attack!
 			if (Target == null)
 			{
-				Target = controller;
-				StateMachine.SetProperty(TARGET_KEY, controller.transform);
+				SetTarget(controller);
 				CurrentState = State.Attack;
 			}
 		}
