@@ -1,6 +1,7 @@
 using UnityEngine;
 using Core.Tilemaps;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace HoldUp
 {
@@ -56,6 +57,7 @@ namespace HoldUp
         public void Explode()
         {
             Collider2D[] objectsToExplode = Physics2D.OverlapCircleAll(transform.position, radius);
+            List<Damageable> damageableObjects = new();
             foreach (Collider2D col in objectsToExplode)
             {
                 if (col.gameObject == gameObject) continue;
@@ -68,11 +70,11 @@ namespace HoldUp
 
                 if (col.gameObject.TryGetComponent(out Damageable damageable))
                 {
-                    damageable.DealDamages(damages, transform.position);
+                    damageableObjects.Add(damageable);
                 }
             }
 
-            StartCoroutine(DestroyObject());
+            StartCoroutine(TestForDamageableObjects(damageableObjects));
         }
 
         void Update()
@@ -91,6 +93,36 @@ namespace HoldUp
         void OnCollisionEnter2D(Collision2D collision)
         {
             timer = Mathf.Min(timer + 0.5f, timeForMinimalPower);
+        }
+
+        private IEnumerator TestForDamageableObjects(List<Damageable> damageableObjects)
+        {
+            yield return new WaitForEndOfFrame();
+            yield return new WaitForEndOfFrame();
+
+
+            foreach (Damageable damageableObject in damageableObjects)
+            {
+                bool objectProtected = false;
+
+                RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, damageableObject.transform.position - transform.position, radius);
+                foreach (RaycastHit2D hit in hits)
+                {
+                    if (hit.collider.gameObject == gameObject) continue;
+
+                    if (hit.collider.gameObject != damageableObject.gameObject)
+                    {
+                        objectProtected = true;
+                        break;
+                    }
+                }
+                if (!objectProtected)
+                {
+                    damageableObject.DealDamages(damages, transform.position);
+                }
+            }
+
+            StartCoroutine(DestroyObject());
         }
 
         private IEnumerator DestroyObject()
