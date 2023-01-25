@@ -25,6 +25,7 @@ namespace Core.Players
         private PlayerController controller;
 
         private bool menuMode = true;
+        public bool IsMenuMode => menuMode;
 
         public void InitializePlayer(string newControllerName, int newPlayerIndex)
         {

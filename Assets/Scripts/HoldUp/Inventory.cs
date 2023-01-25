@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 namespace HoldUp
@@ -7,9 +8,6 @@ namespace HoldUp
     {
         [SerializeField]
         private Item defaultItem;
-
-        [SerializeField]
-        private LayerMask itemOnGroundMask;
 
         [SerializeField]
         private float radius;
@@ -74,15 +72,17 @@ namespace HoldUp
 
         public void EquipAndDrop()
         {
+            itemInRange = null;
+
             Physics2D.queriesHitTriggers = true;
-            Collider2D itemOnGround = Physics2D.OverlapCircle(transform.position, radius, itemOnGroundMask);
-            if(itemOnGround)
+            Collider2D[] objectDetected = Physics2D.OverlapCircleAll(transform.position, radius);
+            foreach(Collider2D collider in objectDetected)
             {
-                itemInRange = itemOnGround.GetComponent<ItemOnGround>();
-            }
-            else
-            {
-                itemInRange = null;
+                if(collider.TryGetComponent(out ItemOnGround itemOnGround))
+                {
+                    itemInRange = itemOnGround;
+                    break;
+                }
             }
 
             if(itemInRange)
