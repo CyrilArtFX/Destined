@@ -195,5 +195,11 @@ namespace HoldUp.Characters.AI
 			if (Target != null && Target.gameObject == collision.gameObject)
 				SetTarget(null);
 		}
+
+		void OnDrawGizmosSelected()
+		{
+			Gizmos.color = Color.magenta;
+			Gizmos.DrawWireSphere(transform.position, fireDistance);
+		}
 	}
 }
