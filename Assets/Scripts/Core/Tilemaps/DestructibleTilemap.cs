@@ -13,7 +13,7 @@ namespace Core.Tilemaps
         private TilemapData tilemapData;
 
         private HashSet<TileBase> destructiblesTiles = new();
-
+        private bool shouldRefreshGrid = false;
 
         private void Awake()
         {
@@ -54,10 +54,20 @@ namespace Core.Tilemaps
                     }
                 }
             }
+
             if (tilesDestroyed)
             {
-                Grid2D.Instance.Refresh();
+                shouldRefreshGrid = true;
             }
         }
-    }
+
+		void LateUpdate()
+		{
+			if (shouldRefreshGrid)
+            {
+                Grid2D.Instance.Refresh();
+                shouldRefreshGrid = false;
+            }
+		}
+	}
 }
