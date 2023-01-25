@@ -1,10 +1,17 @@
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace HoldUp
 {
     public class Weapon : Item
     {
+        public Transform Muzzle => bulletSpawnPos;
+        public bool IsAutomatic => automaticWeapon;
+        public float NextShootTime => shootTimer;
+
+        public UnityEvent<Bullet> OnShoot = new();
+
         [SerializeField, Tooltip("The number of shot per seconds of this weapon (can be a decimal number)")]
         private float fireRate;
         [SerializeField]
@@ -133,6 +140,8 @@ namespace HoldUp
             {
                 bulletObject.Initialize(bulletSpeed, direction.normalized, bulletRange, bulletDamages, ownerCollider);
             }
+
+            OnShoot.Invoke(bulletObject);
         }
     }
 }

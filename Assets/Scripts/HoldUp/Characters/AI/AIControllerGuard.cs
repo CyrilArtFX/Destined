@@ -40,6 +40,10 @@ namespace HoldUp.Characters.AI
 		private float startAttackReactionTime = 0.4f;
 		[SerializeField]
 		private float fireDistance = 3.0f;
+		[SerializeField, Tooltip("Additional time applied after a bullet was shot to prevent further shooting")]
+		private float additionalFireCooldown = 1.0f;
+		[SerializeField, Tooltip("For automatic weapons, how much bullets should be shot before applying fire cooldown?")]
+		private int fireCooldownForBurst = 6;
 
 		void Start()
 		{
@@ -71,6 +75,8 @@ namespace HoldUp.Characters.AI
 				{
 					Weapon = weapon,
 					Target = new(TARGET_KEY),
+					AdditionalFireCooldown = new(additionalFireCooldown),
+					FireCooldownForBurst = new(fireCooldownForBurst),
 					ObstaclesLayerMask = fireObstaclesMask,
 				}
 			);
