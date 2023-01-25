@@ -14,6 +14,8 @@ namespace HoldUp
 
         private Vector2 spawnPosition;
 
+        private int numberOfHits = 0;
+
         void Awake()
         {
             rb = GetComponent<Rigidbody2D>();
@@ -45,12 +47,14 @@ namespace HoldUp
 
         void OnCollisionEnter2D(Collision2D collision)
         {
+            if (numberOfHits > 0) return; //  avoid hitting multiple damageables
+
             if(collision.gameObject.TryGetComponent(out Damageable damageable))
             {
                 damageable.DealDamages(damages, transform.position);
             }
 
-
+            numberOfHits++;
             DestroyBullet();
         }
 
