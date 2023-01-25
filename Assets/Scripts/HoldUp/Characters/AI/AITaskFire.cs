@@ -26,9 +26,11 @@ namespace HoldUp.Characters.AI
 
 			Vector3 origin = StateMachine.AIController.transform.position;
 			Vector2 dir = target.position - origin;
-			RaycastHit2D hit = Physics2D.Raycast(origin, dir, dir.magnitude, ObstaclesLayerMask);
-			if (hit)
+			RaycastHit2D[] hits = Physics2D.RaycastAll(origin, dir, dir.magnitude, ObstaclesLayerMask);
+			foreach (RaycastHit2D hit in hits)
 			{
+				if (hit.collider.gameObject == StateMachine.AIController.gameObject) continue;
+
 				Weapon.OnUseReleased();
 				return;
 			}
