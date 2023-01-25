@@ -47,7 +47,7 @@ namespace HoldUp
             //  play damage particles
             if (damageParticlesPrefab != null)
             {
-                ParticleSystem particles = Instantiate(damageParticlesPrefab).GetComponent<ParticleSystem>();
+                ParticleSystem particles = Instantiate(damageParticlesPrefab, GameManager.instance.transform).GetComponent<ParticleSystem>();
                 particles.transform.position = transform.position;
                 particles.transform.eulerAngles = Vector2Utils.GetDirectionAngles(transform.position - origin);
                 particles.Emit( (int) (damages * 3.0f) );
