@@ -5,11 +5,11 @@ namespace HoldUp
 {
     public class Interactable : MonoBehaviour
     {
-        [HideInInspector]
         public bool InteractionPossible;
 
-        public UnityEvent PressInteraction;
-        public UnityEvent ReleaseInteraction;
+        public UnityEvent<PlayerController> PressInteraction;
+        public UnityEvent<PlayerController> ReleaseInteraction;
+        public UnityEvent<PlayerController> ExitZoneInteraction;
 
         public string InteractionDisplay;
     }

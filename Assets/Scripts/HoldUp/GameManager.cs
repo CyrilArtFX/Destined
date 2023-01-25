@@ -30,5 +30,20 @@ namespace HoldUp
 
             gameCamera.EnableFollowMode(players);
         }
+
+        public void ReturnToLobby()
+        {
+            PlayersManager.instance.SwitchToMenuMode();
+            SceneManager.UnloadSceneAsync(gameScene);
+            SceneManager.LoadSceneAsync(menuScene, LoadSceneMode.Additive);
+
+            List<Player> players = PlayersManager.instance.GetPlayers();
+            foreach (Player player in players)
+            {
+                player.Controller.ClearEffects();
+            }
+
+            gameCamera.DisableFollowMode();
+        }
     }
 }

@@ -60,7 +60,7 @@ namespace HoldUp
                 {
                     if (useableInteraction && useableInteraction.InteractionPossible)
                     {
-                        useableInteraction.PressInteraction.Invoke();
+                        useableInteraction.PressInteraction.Invoke(this);
                         return;
                     }
 
@@ -71,7 +71,7 @@ namespace HoldUp
             {
                 if (useableInteraction && useableInteraction.InteractionPossible)
                 {
-                    useableInteraction.ReleaseInteraction.Invoke();
+                    useableInteraction.ReleaseInteraction.Invoke(this);
                     return;
                 }
                 inventory.UseItemReleased();
@@ -122,7 +122,7 @@ namespace HoldUp
                 return;
             }
 
-            if(useableInteraction && useableInteraction.InteractionPossible)
+            if (useableInteraction && useableInteraction.InteractionPossible)
             {
                 interactionDisplayText.text = useableInteraction.InteractionDisplay;
             }
@@ -170,7 +170,7 @@ namespace HoldUp
         public void SetDead()
         {
             Weapon hold_weapon = Inventory.GetItemInHand() as Weapon;
-            if (hold_weapon) 
+            if (hold_weapon)
             {
                 hold_weapon.HideRedLine();
             }
@@ -179,11 +179,16 @@ namespace HoldUp
             interactable.InteractionPossible = true;
             reviveBar.ChangeLife(0.0f);
 
-            if(useableInteraction)
+            if (useableInteraction)
             {
-                useableInteraction.ReleaseInteraction.Invoke();
+                useableInteraction.ExitZoneInteraction.Invoke(this);
                 useableInteraction = null;
                 interactionDisplayText.text = "";
+            }
+
+            if (!player.IsMenuMode)
+            {
+                BankManager.instance.PlayerDead();
             }
 
             Dead = true;
@@ -191,7 +196,7 @@ namespace HoldUp
 
         public void OnPressRevive()
         {
-            if(Dead)
+            if (Dead)
             {
                 currentlyRevived = timeForRevive;
             }
@@ -211,6 +216,11 @@ namespace HoldUp
             Dead = false;
             damageable.ResetLife();
             interactable.InteractionPossible = false;
+
+            if (!player.IsMenuMode)
+            {
+                BankManager.instance.PlayerRevived();
+            }
         }
 
         void OnTriggerEnter2D(Collider2D collision)
@@ -231,7 +241,7 @@ namespace HoldUp
             {
                 if (useableInteraction == otherInteractable)
                 {
-                    useableInteraction.ReleaseInteraction.Invoke();
+                    useableInteraction.ExitZoneInteraction.Invoke(this);
                     useableInteraction = null;
                     interactionDisplayText.text = "";
                 }
