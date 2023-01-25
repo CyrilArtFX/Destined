@@ -59,9 +59,9 @@ namespace HoldUp
 
         public void PlayerWantToLobby(PlayerController controller)
         {
+            controller.Inventory.EquipAndDrop(true);
             controller.transform.position = wantLobbyPosition.position;
             controller.SetInCinematic(true);
-            controller.Inventory.EquipAndDrop(true);
 
             playersWantLobby.Add(controller);
             if (playersWantLobby.Count == playersCount)
