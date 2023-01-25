@@ -9,6 +9,8 @@ namespace HoldUp
     {
         [SerializeField]
         private ParticleSystem particles;
+        [SerializeField]
+        private LayerMask obstaclesLayerMask;
 
         private AnimationCurve powerCurve;
         private float timeForMinimalPower;
@@ -105,7 +107,8 @@ namespace HoldUp
             {
                 bool objectProtected = false;
 
-                RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, damageableObject.transform.position - transform.position, radius);
+                Vector2 dir = damageableObject.transform.position - transform.position;
+                RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, dir, dir.magnitude, obstaclesLayerMask);
                 foreach (RaycastHit2D hit in hits)
                 {
                     if (hit.collider.gameObject == gameObject) continue;

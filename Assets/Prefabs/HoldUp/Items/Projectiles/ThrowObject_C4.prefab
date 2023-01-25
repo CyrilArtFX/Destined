@@ -101,10 +101,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1efe61339c6d93441a20635eae2813f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destructibleTilemapLayer:
-    serializedVersion: 2
-    m_Bits: 2048
   particles: {fileID: 7811859500553386197}
+  obstaclesLayerMask:
+    serializedVersion: 2
+    m_Bits: 4097
 --- !u!58 &878518013228122652
 CircleCollider2D:
   m_ObjectHideFlags: 0
