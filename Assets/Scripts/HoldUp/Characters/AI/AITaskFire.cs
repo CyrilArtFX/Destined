@@ -6,6 +6,7 @@ namespace HoldUp.Characters.AI
 	public class AITaskFire : AITask
 	{
 		public Weapon Weapon;
+		public LayerMask ObstaclesLayerMask;
 		public AIProperty<Transform> Target;
 
 		public override void OnStart()
@@ -20,6 +21,15 @@ namespace HoldUp.Characters.AI
 			if (target == null)
 			{
 				End(true);
+				return;
+			}
+
+			Vector3 origin = StateMachine.AIController.transform.position;
+			Vector2 dir = target.position - origin;
+			RaycastHit2D hit = Physics2D.Raycast(origin, dir, dir.magnitude, ObstaclesLayerMask);
+			if (hit)
+			{
+				Weapon.OnUseReleased();
 				return;
 			}
 

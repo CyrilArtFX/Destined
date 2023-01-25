@@ -35,6 +35,8 @@ namespace HoldUp.Characters.AI
 		[SerializeField]
 		private Weapon weapon;
 		[SerializeField]
+		private LayerMask fireObstaclesMask;
+		[SerializeField]
 		private float startAttackReactionTime = 0.4f;
 		[SerializeField]
 		private float fireDistance = 3.0f;
@@ -81,6 +83,7 @@ namespace HoldUp.Characters.AI
 				{
 					Weapon = weapon,
 					Target = new(TARGET_KEY),
+					ObstaclesLayerMask = fireObstaclesMask,
 				}
 			);
 

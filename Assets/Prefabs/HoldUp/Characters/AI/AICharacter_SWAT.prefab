@@ -108,12 +108,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   patrolWaypoints: []
+  patrolWaitTime: 3
   seeLayerMask:
     serializedVersion: 2
     m_Bits: 9
   seeCollider: {fileID: 6088705259669564940}
-  patrolWaitTime: 3
   weapon: {fileID: 1820792659454309801}
+  fireObstaclesMask:
+    serializedVersion: 2
+    m_Bits: 1025
+  startAttackReactionTime: 0.4
+  fireDistance: 3
 --- !u!4 &6350564345755318013 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8368106468573765860, guid: 2aea605e01127dd439445651d0d67005, type: 3}

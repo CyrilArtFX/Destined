@@ -114,6 +114,9 @@ MonoBehaviour:
     m_Bits: 9
   seeCollider: {fileID: 6088705259669564940}
   weapon: {fileID: 4503103702740697327}
+  fireObstaclesMask:
+    serializedVersion: 2
+    m_Bits: 1025
   startAttackReactionTime: 0.4
   fireDistance: 3
 --- !u!4 &6350564345755318013 stripped
