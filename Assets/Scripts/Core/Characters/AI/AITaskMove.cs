@@ -14,9 +14,8 @@ namespace Core.Characters.AI
 		
 		public override void OnTick(float dt)
 		{
-			if (path.Count == 0)
+			if (path == null || path.Count == 0)
 			{
-				Debug.Log("success from no nodes");
 				End(true);
 				return;
 			}

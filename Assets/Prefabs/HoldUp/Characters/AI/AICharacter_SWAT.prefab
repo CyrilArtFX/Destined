@@ -94,6 +94,7 @@ MonoBehaviour:
   maxLife: 15
   damageParticlesPrefab: {fileID: 4498614656690819735, guid: 80f9b8aea9d62a643a2d36b59d06a642, type: 3}
   deathMode: 0
+  playerController: {fileID: 0}
 --- !u!114 &6409565088248067611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,6 +113,7 @@ MonoBehaviour:
     m_Bits: 9
   seeCollider: {fileID: 6088705259669564940}
   patrolWaitTime: 3
+  weapon: {fileID: 1820792659454309801}
 --- !u!4 &6350564345755318013 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8368106468573765860, guid: 2aea605e01127dd439445651d0d67005, type: 3}
@@ -154,6 +156,11 @@ MonoBehaviour:
   - {fileID: 1124465693, guid: fe32c62c86c8e2346a802fb9294abed7, type: 3}
   - {fileID: -1855661371, guid: fe32c62c86c8e2346a802fb9294abed7, type: 3}
   - {fileID: -1949532663, guid: fe32c62c86c8e2346a802fb9294abed7, type: 3}
+--- !u!4 &7405428941752942863 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5387887059634067222, guid: 2aea605e01127dd439445651d0d67005, type: 3}
+  m_PrefabInstance: {fileID: 3170746201913775641}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5293700143667122107
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -224,5 +231,81 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 598212c7f5eee904885f287e97b7229e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1001 &6714680611365707881
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 7405428941752942863}
+    m_Modifications:
+    - target: {fileID: 4930200477163738562, guid: 33936d4b98a7c314fa22779871080ea3, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4930200477163738562, guid: 33936d4b98a7c314fa22779871080ea3, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -2009574621
+      objectReference: {fileID: 0}
+    - target: {fileID: 4930200477163738563, guid: 33936d4b98a7c314fa22779871080ea3, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4930200477163738563, guid: 33936d4b98a7c314fa22779871080ea3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4930200477163738563, guid: 33936d4b98a7c314fa22779871080ea3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 4930200477163738563, guid: 33936d4b98a7c314fa22779871080ea3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4930200477163738563, guid: 33936d4b98a7c314fa22779871080ea3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4930200477163738563, guid: 33936d4b98a7c314fa22779871080ea3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4930200477163738563, guid: 33936d4b98a7c314fa22779871080ea3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4930200477163738563, guid: 33936d4b98a7c314fa22779871080ea3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4930200477163738563, guid: 33936d4b98a7c314fa22779871080ea3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4930200477163738563, guid: 33936d4b98a7c314fa22779871080ea3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4930200477163738563, guid: 33936d4b98a7c314fa22779871080ea3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4930200477163738565, guid: 33936d4b98a7c314fa22779871080ea3, type: 3}
+      propertyPath: m_Name
+      value: Weapon_SMG
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 33936d4b98a7c314fa22779871080ea3, type: 3}
+--- !u!114 &1820792659454309801 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4930200477163738560, guid: 33936d4b98a7c314fa22779871080ea3, type: 3}
+  m_PrefabInstance: {fileID: 6714680611365707881}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6deca84422923c441b24e723983d332a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

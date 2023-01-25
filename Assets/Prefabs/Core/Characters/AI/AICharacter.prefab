@@ -59,6 +59,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AICharacter
       objectReference: {fileID: 0}
+    - target: {fileID: 3429361060142620941, guid: 3311bf94199e4fb4fa5ddd1f6451e527, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7507196015134540527, guid: 3311bf94199e4fb4fa5ddd1f6451e527, type: 3}
       propertyPath: m_Size.y
       value: 0.3778137

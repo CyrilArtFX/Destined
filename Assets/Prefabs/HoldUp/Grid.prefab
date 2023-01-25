@@ -1197,7 +1197,7 @@ MonoBehaviour:
   NodeRadius: 0.5
   ObstacleLayerMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 2049
   CanUseDiagonals: 0
 --- !u!114 &4688381588022556925
 MonoBehaviour:

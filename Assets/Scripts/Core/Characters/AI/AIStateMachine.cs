@@ -101,6 +101,9 @@ namespace Core.Characters.AI
 
 		public void SetState(AIState state) 
 		{
+			if (CurrentState?.Status == AIStatus.Running)
+				CurrentState.End(false);
+
 			CurrentState = state;
 			CurrentState.Start();
 
@@ -112,7 +115,7 @@ namespace Core.Characters.AI
 			while (currentStateID + 1 < States.Count)
 			{
 				AIState state = States[++currentStateID];
-				if (!state.CanRun(state)) 
+				if (!state.AutoRun || !state.CanRun(state)) 
 					continue;
 
 				SetState(state);

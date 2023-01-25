@@ -9,7 +9,8 @@ namespace Core.Characters.AI
 		public AIState State { get; set; }
 		public AIStateMachine StateMachine { get; set; }
 
-		public Func<AITask, bool> CanRun = ( task ) => true;
+		public Func<AITask, bool> CanRun = (task) => true;
+		public Action<AITask> OnFailed;
 		
 		public void Start()
 		{
@@ -18,15 +19,18 @@ namespace Core.Characters.AI
 			OnStart();
 		}
 
-		public void End( bool is_success )
+		public void End(bool is_success)
 		{
 			Status = is_success ? AIStatus.Success : AIStatus.Failed;
+
+			if (!is_success)
+				OnFailed?.Invoke(this);
 
 			OnEnd();
 		}
 
 		public virtual void OnStart() {}
-		public virtual void OnTick( float dt ) {}
+		public virtual void OnTick(float dt) {}
 		public virtual void OnEnd() {}
 		public virtual void OnDrawGizmos() {}
 

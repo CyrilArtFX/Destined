@@ -34,9 +34,9 @@ namespace Core.Tools
 					EditorGUI.indentLevel++;
 
 					//  show every fields
-					foreach ( FieldInfo info in type.GetFields(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public) )
+					foreach (FieldInfo info in type.GetFields(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public))
 					{
-						EditorGUILayout.TextField(info.Name, info.GetValue(task).ToString());
+						EditorGUILayout.TextField(info.Name, info.GetValue(task)?.ToString());
 					}
 
 					EditorGUI.indentLevel = old_level;

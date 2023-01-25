@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Core.Characters.AI
 {
@@ -9,10 +10,9 @@ namespace Core.Characters.AI
 		public AIProperty<Transform> Target;
 		public AIProperty<Vector3> LastPosition = new(Vector3.zero);
 
-		public bool ShouldFailOnNullTransform = false;
+		public Action<AITaskMoveNearTransform, Vector3> OnNullTransform;
 
 		private Vector3 lastPosition;
-		private bool hasLostTarget = false;
 
 		public override void OnStart()
 		{
@@ -26,14 +26,12 @@ namespace Core.Characters.AI
 			Transform target = Target.GetValue(StateMachine);
 			if (target != null)
 			{
-				hasLostTarget = false;
-
 				lastPosition = target.position;
 				LastPosition.SetValue(StateMachine, lastPosition);
 			}
-			else 
+			else
 			{
-				hasLostTarget = true;
+				OnNullTransform?.Invoke(this, lastPosition);
 
 				End(false);
 				return;
@@ -49,21 +47,19 @@ namespace Core.Characters.AI
 				}
 			}
 
-			//  success on empty path
-			if (path.Count == 0)
-			{
-				Debug.Log("success from no path");
-				End(true);
-				return;
-			}
-
 			//  end moving on near enough from target
-			float near_radius = hasLostTarget ? 0.01f : NearRadius.GetValue(StateMachine);
+			float near_radius = NearRadius.GetValue(StateMachine);
 			float near_radius_sqr = near_radius * near_radius;
 			float dist_from_target = (StateMachine.AIController.transform.position - lastPosition).sqrMagnitude;
 			if (dist_from_target <= near_radius_sqr)
 			{
-				Debug.Log("success from near radius");
+				End(true);
+				return;
+			}
+
+			//  success on empty path
+			if (path.Count == 0)
+			{
 				End(true);
 				return;
 			}

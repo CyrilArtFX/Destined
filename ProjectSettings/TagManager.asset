@@ -15,8 +15,8 @@ TagManager:
   - VisionMask
   - BehindVisionMask
   - Projectile
-  - ItemOnGround
-  - DestructibleTilemap
+  - NPC
+  - Pathfinding
   - 
   - 
   - 

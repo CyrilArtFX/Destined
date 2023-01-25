@@ -26,7 +26,9 @@ namespace Core.Characters.AI
 		public AITask CurrentTask = null;
 		public readonly List<AITask> Tasks = new();
 
+		public bool AutoRun = true;
 		public Func<AIState, bool> CanRun = (state) => true;
+		public Action<AIState> OnEnd;
 
 		public void Start()
 		{
@@ -39,13 +41,15 @@ namespace Core.Characters.AI
 		{
 			Status = is_success ? AIStatus.Success : AIStatus.Failed;
 
+			OnEnd?.Invoke(this);
+
 			if ( CurrentTask != null )
 			{
 				if ( CurrentTask.Status == AIStatus.Running )
 					CurrentTask.OnEnd();
 
 				CurrentTask = null;
-			} 
+			}
 		}
 
 		public T AddTask<T>( T task ) where T : AITask
