@@ -9,9 +9,11 @@ namespace HoldUp
     {
         [SerializeField]
         private Transform playerSpawnPosition;
-
         [SerializeField]
         private Transform wantLobbyPosition;
+
+        [SerializeField]
+        private DepositArea depositArea;
 
         private int playersCount;
         private int playersDead;
@@ -98,7 +100,7 @@ namespace HoldUp
                 playerController.SetInCinematic(true);
             }
             yield return new WaitForSeconds(1.0f);
-            (GameManager.instance as GameManager).ReturnToLobby();
+            (GameManager.instance as GameManager).ReturnToLobby(depositArea.Score);
         }
 
         //  currently the same but we will do different cinematic depending if the players are dead or not
@@ -111,7 +113,7 @@ namespace HoldUp
                 playerController.SetInCinematic(true);
             }
             yield return new WaitForSeconds(1.0f);
-            (GameManager.instance as GameManager).ReturnToLobby();
+            (GameManager.instance as GameManager).ReturnToLobby(depositArea.Score);
         }
     }
 }

@@ -15,6 +15,8 @@ namespace HoldUp
         [SerializeField]
         private CameraFollow gameCamera;
 
+        public int BestScore => PlayerPrefs.GetInt("BestScore");
+
 
         public override void StartGame()
         {
@@ -23,7 +25,7 @@ namespace HoldUp
             SceneManager.LoadSceneAsync(gameScene, LoadSceneMode.Additive);
 
             List<Player> players = PlayersManager.instance.GetPlayers();
-            foreach(Player player in players)
+            foreach (Player player in players)
             {
                 player.Controller.ClearEffects();
             }
@@ -31,8 +33,13 @@ namespace HoldUp
             gameCamera.EnableFollowMode(players);
         }
 
-        public void ReturnToLobby()
+        public void ReturnToLobby(int score)
         {
+            if (score > BestScore)
+            {
+                PlayerPrefs.SetInt("BestScore", score);
+            }
+
             PlayersManager.instance.SwitchToMenuMode();
             SceneManager.UnloadSceneAsync(gameScene);
             SceneManager.LoadSceneAsync(menuScene, LoadSceneMode.Additive);

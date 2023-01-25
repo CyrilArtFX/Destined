@@ -8,6 +8,7 @@ namespace HoldUp
         [SerializeField]
         private TextMeshPro debugText;
 
+        public int Score => itemCounter;
         private int itemCounter;
 
         void Start()
