@@ -35,6 +35,11 @@ namespace HoldUp.Characters.AI
 				new AITaskWait()
 				{
 					Time = new(0.4f),
+				},
+				new AITaskMoveNearTransform()
+				{
+					NearRadius = new(1.5f),
+					Target = new(TARGET_KEY),
 				}
 			);
 

@@ -1,5 +1,54 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1655638436191999864
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6140699866819213306}
+  - component: {fileID: 8280511295309630481}
+  m_Layer: 0
+  m_Name: Inventory
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6140699866819213306
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1655638436191999864}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7405428941752942863}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8280511295309630481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1655638436191999864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c26b00d9efe88964abde03adcf66cb11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultItem: {fileID: 4930200477163738560, guid: a3a5c845f461ca943ba09d14baa7d442, type: 3}
+  itemOnGroundMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  radius: 0
 --- !u!1001 &3170746201913775641
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -153,6 +202,11 @@ MonoBehaviour:
   sprites:
   - {fileID: 7359105, guid: 93d49d5fcb486754a8f92dcc7464ee25, type: 3}
   - {fileID: -71099043, guid: 93d49d5fcb486754a8f92dcc7464ee25, type: 3}
+--- !u!4 &7405428941752942863 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5387887059634067222, guid: 2aea605e01127dd439445651d0d67005, type: 3}
+  m_PrefabInstance: {fileID: 3170746201913775641}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5293700143667122107
 PrefabInstance:
   m_ObjectHideFlags: 0
