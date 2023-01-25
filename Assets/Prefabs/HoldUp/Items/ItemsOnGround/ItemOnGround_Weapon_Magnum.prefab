@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4930200477163738562}
   - component: {fileID: 7107347836230690416}
   - component: {fileID: 3964737564935521109}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: ItemOnGround_Weapon_Magnum
   m_TagString: Untagged
   m_Icon: {fileID: 0}

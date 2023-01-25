@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -513160569722258889}
   - component: {fileID: 4456146213411309865}
   - component: {fileID: 8247602133975118554}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: ItemOnGround_MoneyBag
   m_TagString: Untagged
   m_Icon: {fileID: 0}

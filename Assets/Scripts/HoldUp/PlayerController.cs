@@ -164,6 +164,7 @@ namespace HoldUp
             base.ClearEffects();
 
             damageable.ResetLife();
+            interactable.InteractionPossible = false;
             Dead = false;
         }
 
@@ -230,6 +231,7 @@ namespace HoldUp
             if (collision.gameObject.TryGetComponent(out Interactable otherInteractable))
             {
                 useableInteraction = otherInteractable;
+                inventory.UseItemReleased();
             }
         }
 
