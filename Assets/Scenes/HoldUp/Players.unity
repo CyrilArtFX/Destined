@@ -392,7 +392,7 @@ MonoBehaviour:
   isLagEnabled: 1
   lagSpeed: 4
   autoUpdatePlayers: 1
-  followActivated: 1
+  followActivated: 0
 --- !u!1 &1688445674
 GameObject:
   m_ObjectHideFlags: 0
@@ -644,8 +644,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 374435aa3ac5c2e44b98712e8982d7d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menuScene: Scenes/HoldUp/Tests/Test_Arkaht
-  gameScene: Scenes/HoldUp/Testsu/BankTestCyril
+  menuScene: Scenes/HoldUp/Menu
+  gameScene: Scenes/HoldUp/Tests/Test_Marius
   gameCamera: {fileID: 1589364892}
 --- !u!1 &2103505627
 GameObject:
