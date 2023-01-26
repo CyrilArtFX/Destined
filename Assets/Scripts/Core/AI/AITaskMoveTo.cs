@@ -4,7 +4,7 @@ namespace Core.AI
 {
 	public class AITaskMoveTo : AITaskMove
 	{
-		public AIProperty<float> NearRadius = new(0.5f);
+		public AIProperty<float> NearRadius = new(0.1f);
 		public AIProperty<float> RefreshRadius = new(1.0f);
 		public AIProperty<Vector2> Position;
 
@@ -17,6 +17,8 @@ namespace Core.AI
 			{
 				if (!ComputePathTo(position))
 				{
+					PrintWarning("could not generate path: target position blocked");
+
 					End(false);
 					return;
 				}

@@ -17,10 +17,18 @@ namespace Core.Astar2D
 		{
 			//  get player and target position in grid coords
 			Node2D seeker_node = Grid2D.Instance.GetNodeAt( transform.position );
-			Node2D target_node = Grid2D.Instance.GetNodeAt( target_pos );
-
-			if ( seeker_node == null || target_node == null ) 
+			if (seeker_node == null)
+			{
+				Debug.LogWarning("Pathfinder2D: seeker node is null");
 				return false;
+			}
+
+			Node2D target_node = Grid2D.Instance.GetNodeAt( target_pos );
+			if (target_node == null)
+			{
+				Debug.LogWarning("Pathfinder2D: target node is null");
+				return false;
+			}
 
 			//  setup open & closed sets
 			List<Node2D> open_set = new();
@@ -69,11 +77,12 @@ namespace Core.Astar2D
 				}
 			}
 
+			Debug.LogWarning("Pathfinder2D: path could not be found");
 			return false;
 		}
 
 		//  reverses calculated path so first node is closest to seeker
-		void RetracePath( Node2D start_node, Node2D end_node )
+		void RetracePath(Node2D start_node, Node2D end_node)
 		{
 			Path.Clear();
 

@@ -14,7 +14,15 @@ namespace Core.AI
 		
 		public override void OnTick(float dt)
 		{
-			if (path == null || path.Count == 0)
+			if (path == null)
+			{
+				PrintWarning("path not generated");
+
+				End(false);
+				return;
+			}
+
+			if (path.Count == 0)
 			{
 				End(true);
 				return;
@@ -34,6 +42,11 @@ namespace Core.AI
 				float speed = SpeedMultiplier.GetValue(StateMachine);
 				StateMachine.AIController.Mover.MoveTowards(next_pos, speed, speed);
 			}
+		}
+
+		public override void OnEnd()
+		{
+			path = null;
 		}
 
 		public bool ComputePathTo(Vector2 pos)

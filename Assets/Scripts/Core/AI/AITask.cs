@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Core.AI
 {
@@ -8,6 +9,8 @@ namespace Core.AI
 
 		public AIState State { get; set; }
 		public AIStateMachine StateMachine { get; set; }
+
+		public bool SupressWarning = false;
 
 		public Func<AITask, bool> CanRun = (task) => true;
 		public Action<AITask> OnFailed;
@@ -33,6 +36,15 @@ namespace Core.AI
 		public virtual void OnTick(float dt) {}
 		public virtual void OnEnd() {}
 		public virtual void OnDrawGizmos() {}
+
+		private string FormatPrintText(string text) => GetType().FullName + ": " + text;
+		public void Print(string text) => Debug.Log(FormatPrintText(text));
+		public void PrintWarning(string text) 
+		{
+			if (!SupressWarning) 
+				Debug.LogWarning(FormatPrintText(text));
+		}
+		public void PrintError(string text) => Debug.LogError(FormatPrintText(text));
 
 		public override string ToString() => GetType().Name;
 	}
