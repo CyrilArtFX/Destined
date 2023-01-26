@@ -232,6 +232,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsDefaultItem: 1
   ItemID: 0
+  renderer: {fileID: 4930200477163738562}
   OnShoot:
     m_PersistentCalls:
       m_Calls: []

@@ -12,6 +12,9 @@ namespace HoldUp
         protected GameObject owner;
         protected Inventory inventory;
 
+        [SerializeField]
+        private new SpriteRenderer renderer;
+
         protected bool isHandMode = false;
 
         public virtual void Initialize(GameObject ownerActor, Inventory ownerInventory)
@@ -38,6 +41,16 @@ namespace HoldUp
         {
             GameObject droppedItem = GameObject.Instantiate(gameObject, GameManager.instance.transform);
             droppedItem.transform.position = owner.transform.position;
+        }
+
+        public void HideVisually()
+        {
+            renderer.enabled = false;
+        }
+
+        public void ShowVisually()
+        {
+            renderer.enabled = true;
         }
 
         public bool IsOnGround()

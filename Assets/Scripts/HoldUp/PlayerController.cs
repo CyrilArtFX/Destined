@@ -142,6 +142,7 @@ namespace HoldUp
 
             if (useableInteractions.Count > 0)
                 RefreshInteractionText();
+            UpdateItemVisually();
 
             //  move
             if (!InCinematic)
@@ -326,6 +327,34 @@ namespace HoldUp
                 }
             }
             interactionDisplayText.text = str;
+        }
+
+        private void UpdateItemVisually()
+        {
+            if(useableInteractions.Count > 0)
+            {
+                bool interactionPossible = false;
+                foreach(Interactable interaction in useableInteractions)
+                {
+                    if(interaction.InteractionPossible)
+                    {
+                        interactionPossible = true;
+                        break;
+                    }
+                }
+                if(interactionPossible)
+                {
+                    inventory.GetItemInHand().HideVisually();
+                }
+                else
+                {
+                    inventory.GetItemInHand().ShowVisually();
+                }
+            }
+            else
+            {
+                inventory.GetItemInHand().ShowVisually();
+            }
         }
 
         void OnDestroy()

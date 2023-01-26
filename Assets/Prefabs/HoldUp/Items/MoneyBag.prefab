@@ -99,8 +99,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDefaultItem: 0
-  ItemOnGround: {fileID: 4456146213411309865, guid: a9797a214bfad8a44b6808a7317caf8c, type: 3}
   ItemID: 1
+  renderer: {fileID: 6381404438906725949}
   droppedObject: {fileID: 4785577755019467644, guid: bba380d3777ef924792d4c295700b877, type: 3}
 --- !u!58 &-2095556512912438772
 CircleCollider2D:

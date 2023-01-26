@@ -114,7 +114,7 @@ namespace HoldUp
                 playerController.SetInCinematic(true);
             }
             yield return new WaitForSeconds(1.0f);
-            (GameManager.instance as GameManager).ReturnToLobby(depositArea.Score);
+            (GameManager.instance as GameManager).ReturnToLobby(0);
         }
     }
 }

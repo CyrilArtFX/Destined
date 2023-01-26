@@ -100,6 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsDefaultItem: 0
   ItemID: 2
+  renderer: {fileID: 6323889985182354004}
   associatedObject: {fileID: 325030540862295101, guid: e1bbead7f74393d41a581e0e8b2132a6, type: 3}
   throwingPower: 300
   throwingPowerCurve:

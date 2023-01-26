@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/HoldUp/Menu.unity
     guid: 0f40ff3154ef3514c80f711556b4299d
   - enabled: 1
+    path: Assets/Scenes/HoldUp/Tests/Ld_Marius.unity
+    guid: 400ace07b112b6d41b394ca3941f48d6
+  - enabled: 1
     path: Assets/Scenes/Carroted/Players.unity
     guid: 6d2cfbc98eba2ad4ea8f8193b9fd3c08
   - enabled: 1
@@ -21,7 +24,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Carroted/GameScene.unity
     guid: 1378f17b91d7de34b9e48eed16b2e3e8
   - enabled: 1
-    path: Assets/Scenes/HoldUp/Testsu/BankTestCyril.unity
+    path: Assets/Scenes/HoldUp/Tests/BankTestCyril.unity
     guid: e06faadff451fd44ebd51624e96b555c
   - enabled: 1
     path: Assets/Scenes/HoldUp/Tests/Test_Arkaht.unity
