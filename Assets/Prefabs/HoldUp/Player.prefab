@@ -630,12 +630,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22096b45ba9a6da408dd46aa3d129f2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifebar: {fileID: 260329455207840553}
   maxLife: 20
   deathMode: 1
   regenHealth: 1
-  regenPerSecond: 5
-  timeForTriggerRegen: 3
+  regenPerSecond: 3
+  timeForTriggerRegen: 6
+  lifebar: {fileID: 260329455207840553}
   damageParticlesPrefab: {fileID: 4498614656690819735, guid: 80f9b8aea9d62a643a2d36b59d06a642, type: 3}
   playerController: {fileID: 2874819252109220458}
 --- !u!1 &3725126478040968466

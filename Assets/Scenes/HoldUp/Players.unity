@@ -502,7 +502,7 @@ MonoBehaviour:
   isLagEnabled: 1
   lagSpeed: 4
   autoUpdatePlayers: 1
-  followActivated: 0
+  followActivated: 1
 --- !u!1 &1688445674
 GameObject:
   m_ObjectHideFlags: 0
