@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using Core.AI;
+using Utility;
 
 namespace HoldUp.Characters.AI
 {
@@ -30,6 +31,8 @@ namespace HoldUp.Characters.AI
 		private LayerMask seeLayerMask;
 		[SerializeField]
 		private CircleCollider2D seeCollider;
+		[SerializeField]
+		private Vector2 searchSize = new(3.0f, 3.0f);
 
 		[Header("Attack")]
 		[SerializeField]
@@ -209,7 +212,7 @@ namespace HoldUp.Characters.AI
 		public void SearchAt(Vector2 position)
 		{
 			CurrentState = State.Search;
-			movePosProperty.Value = position;
+			movePosProperty.Value = position + RandomUtils.CenterOffset(searchSize);
 		}
 
 		public void OnSignalReceive(AISignal signal)
