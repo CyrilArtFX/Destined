@@ -186,7 +186,10 @@ namespace HoldUp
 
             damageable.ResetLife();
             interactable.InteractionPossible = false;
-            Dead = false;
+            if(Dead)
+            {
+                Revive();
+            }
         }
 
         public void SetDead()
@@ -218,6 +221,7 @@ namespace HoldUp
                 BankManager.instance.PlayerDead();
             }
 
+            animator.SetBool("IsDead", true);
             Dead = true;
         }
 
@@ -241,8 +245,11 @@ namespace HoldUp
         private void Revive()
         {
             Dead = false;
+            animator.SetBool("IsDead", false);
             damageable.ResetLife();
             interactable.InteractionPossible = false;
+            currentlyRevived = 0.0f;
+            reviveBar.ChangeLife(timeForRevive);
 
             if (!player.IsMenuMode)
             {
