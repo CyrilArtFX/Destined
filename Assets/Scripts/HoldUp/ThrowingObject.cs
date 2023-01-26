@@ -3,6 +3,7 @@ using Core.Tilemaps;
 using System.Collections;
 using System.Collections.Generic;
 using Core.AI;
+using UnityEngine.Rendering.Universal;
 
 namespace HoldUp
 {
@@ -12,6 +13,10 @@ namespace HoldUp
         private ParticleSystem particles;
         [SerializeField]
         private LayerMask obstaclesLayerMask;
+        [SerializeField]
+        private Light2D objectLight;
+        [SerializeField]
+        private AnimationCurve lightRadiusCurve;
 
         private AnimationCurve powerCurve;
         private float timeForMinimalPower;
@@ -24,6 +29,9 @@ namespace HoldUp
         private Vector2 initialVelocity;
         private float initialVelocitySpeed;
         private float timer;
+        private float lightMaxOuterRadius;
+        private float lightTimer;
+        float curveLength;
 
         private bool hasExplode = false;
 
@@ -32,6 +40,8 @@ namespace HoldUp
             cc = GetComponent<CircleCollider2D>();
             rb = GetComponent<Rigidbody2D>();
             sr = GetComponent<SpriteRenderer>();
+            lightMaxOuterRadius = objectLight.pointLightOuterRadius; 
+            curveLength = lightRadiusCurve.keys[lightRadiusCurve.length - 1].time;
         }
 
         public void Initialize(float throwingPower, Vector2 throwingDirection, AnimationCurve throwingPowerCurve,
@@ -118,6 +128,10 @@ namespace HoldUp
             timer = Mathf.Min(timer + Time.deltaTime, timeForMinimalPower);
 
             rb.velocity = rb.velocity.normalized * initialVelocitySpeed * powerCurve.Evaluate(timer / timeForMinimalPower);
+
+            lightTimer += Time.deltaTime;
+            if (lightTimer > curveLength) lightTimer -= curveLength;
+            objectLight.pointLightOuterRadius = lightRadiusCurve.Evaluate(lightTimer) * lightMaxOuterRadius;
         }
 
         void OnCollisionEnter2D(Collision2D collision)
@@ -132,6 +146,7 @@ namespace HoldUp
             rb.velocity = Vector2.zero;
             cc.enabled = false;
             sr.enabled = false;
+            objectLight.enabled = false;
 
             yield return new WaitForEndOfFrame();
             yield return new WaitForEndOfFrame();

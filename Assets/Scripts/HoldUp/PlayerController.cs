@@ -270,7 +270,10 @@ namespace HoldUp
                 }
 
                 useableInteractions.Add(otherInteractable);
-                inventory.UseItemReleased();
+                if(otherInteractable.InteractionPossible)
+                {
+                    inventory.UseItemReleased();
+                }
             }
         }
 
@@ -283,7 +286,10 @@ namespace HoldUp
                 if (useableInteractions.Contains(otherInteractable)) return;
 
                 useableInteractions.Add(otherInteractable);
-                inventory.UseItemReleased();
+                if(otherInteractable.InteractionPossible)
+                {
+                    inventory.UseItemReleased();
+                }
             }
         }
 
