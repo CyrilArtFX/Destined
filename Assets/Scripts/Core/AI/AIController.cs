@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace Core.Characters.AI
+namespace Core.AI
 {
 	[RequireComponent(typeof(AIStateMachine), typeof(CharacterMover), typeof(Pathfinder2D))]
 	public abstract class AIController : MonoBehaviour

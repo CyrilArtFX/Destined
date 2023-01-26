@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Core.Characters.AI
+namespace Core.AI
 {
 	public abstract class AITask
 	{

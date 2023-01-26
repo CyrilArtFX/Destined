@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
-using Core.Characters.AI;
+using Core.AI;
 
 namespace HoldUp.Characters.AI
 {

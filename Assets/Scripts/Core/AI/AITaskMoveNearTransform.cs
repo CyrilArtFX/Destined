@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Core.Characters.AI
+namespace Core.AI
 {
 	public class AITaskMoveNearTransform : AITaskMove
 	{
