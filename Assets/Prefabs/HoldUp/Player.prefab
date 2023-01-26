@@ -733,7 +733,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  InteractionDisplay: 'Revive '
+  InteractionDisplay: Revive
 --- !u!58 &1830306418163834167
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -972,9 +972,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultItem: {fileID: 4930200477163738560, guid: a3a5c845f461ca943ba09d14baa7d442, type: 3}
-  itemOnGroundMask:
-    serializedVersion: 2
-    m_Bits: 1024
   radius: 0.56
 --- !u!1001 &1539360573148465135
 PrefabInstance:
