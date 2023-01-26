@@ -142,6 +142,7 @@ GameObject:
   - component: {fileID: 4930200477163738563}
   - component: {fileID: 4930200477163738562}
   - component: {fileID: 4930200477163738560}
+  - component: {fileID: 471996764774029590}
   m_Layer: 0
   m_Name: Weapon_AK47
   m_TagString: Untagged
@@ -230,8 +231,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDefaultItem: 0
-  ItemOnGround: {fileID: 7107347836230690416, guid: fade6ca367321f24fb32235fcff35067, type: 3}
   ItemID: 3
+  OnShoot:
+    m_PersistentCalls:
+      m_Calls: []
   fireRate: 10
   automaticWeapon: 1
   recoilCurve:
@@ -270,3 +273,19 @@ MonoBehaviour:
   layersBlockingRedLine:
     serializedVersion: 2
     m_Bits: 1
+--- !u!58 &471996764774029590
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4930200477163738565}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.32

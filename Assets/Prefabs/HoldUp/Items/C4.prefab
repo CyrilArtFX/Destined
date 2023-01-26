@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8737598864175974909}
   - component: {fileID: 6323889985182354004}
   - component: {fileID: 4973889870838916982}
+  - component: {fileID: 3289419277766331498}
   m_Layer: 0
   m_Name: C4
   m_TagString: Untagged
@@ -98,7 +99,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDefaultItem: 0
-  ItemOnGround: {fileID: 8414630596500377582, guid: d0f69a65d1714b64c8dabeb69678de1e, type: 3}
   ItemID: 2
   associatedObject: {fileID: 325030540862295101, guid: e1bbead7f74393d41a581e0e8b2132a6, type: 3}
   throwingPower: 300
@@ -130,3 +130,19 @@ MonoBehaviour:
   explosionRadius: 2
   explosionDamages: 20
   remoteSprite: {fileID: -874998806, guid: 0a7dfaa8e5c665e4491fe31d8ab0c5c6, type: 3}
+--- !u!58 &3289419277766331498
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1878148789841033433}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.25

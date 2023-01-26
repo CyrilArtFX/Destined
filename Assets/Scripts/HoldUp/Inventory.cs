@@ -16,14 +16,13 @@ namespace HoldUp
 
         private PlayerController playerController;
 
-        private ItemOnGround itemInRange;
+        private Item itemInRange;
 
 
         public void EnableInventory(PlayerController controller)
         {
             playerController = controller;
-            currentItem = GameObject.Instantiate(defaultItem.gameObject, transform).GetComponent<Item>();
-            currentItem.Initialize(playerController.gameObject, this);
+            EquipItem(defaultItem);
         }
 
         public void DisableInventory()
@@ -34,24 +33,23 @@ namespace HoldUp
             }
         }
 
-        private void EquipItem(ItemOnGround itemToEquip)
+        private void EquipItem(Item itemToEquip)
         {
-            if(!currentItem.IsDefaultItem)
+            if(currentItem)
             {
-                currentItem.Drop();
+                if (!currentItem.IsDefaultItem)
+                {
+                    currentItem.Drop();
+                }
+                Destroy(currentItem.gameObject);
             }
-            Destroy(currentItem.gameObject);
-            currentItem = GameObject.Instantiate(itemToEquip.Item.gameObject, transform).GetComponent<Item>();
+            currentItem = GameObject.Instantiate(itemToEquip.gameObject, transform).GetComponent<Item>();
+            currentItem.transform.localPosition = Vector3.zero;
             currentItem.Initialize(playerController.gameObject, this);
-            Destroy(itemToEquip.gameObject);
-        }
-
-        private void DropItem()
-        {
-            currentItem.Drop();
-            Destroy(currentItem.gameObject);
-            currentItem = GameObject.Instantiate(defaultItem.gameObject, transform).GetComponent<Item>();
-            currentItem.Initialize(playerController.gameObject, this);
+            if(itemToEquip != defaultItem)
+            {
+                Destroy(itemToEquip.gameObject);
+            }
         }
 
         public void UseItemPressed()
@@ -76,7 +74,7 @@ namespace HoldUp
             {
                 if (currentItem && !currentItem.IsDefaultItem)
                 {
-                    DropItem();
+                    EquipItem(defaultItem);
                 }
                 return;
             }
@@ -87,8 +85,9 @@ namespace HoldUp
             Collider2D[] objectDetected = Physics2D.OverlapCircleAll(transform.position, radius);
             foreach(Collider2D collider in objectDetected)
             {
-                if(collider.TryGetComponent(out ItemOnGround itemOnGround))
+                if(collider.TryGetComponent(out Item itemOnGround))
                 {
+                    if (!itemOnGround.IsOnGround()) continue;
                     itemInRange = itemOnGround;
                     break;
                 }
@@ -98,9 +97,9 @@ namespace HoldUp
             {
                 if(currentItem && !currentItem.IsDefaultItem)
                 {
-                    if(currentItem.ItemID == itemInRange.Item.ItemID)
+                    if(currentItem.ItemID == itemInRange.ItemID)
                     {
-                        DropItem();
+                        EquipItem(defaultItem);
                     }
                     else
                     {
@@ -116,7 +115,7 @@ namespace HoldUp
             {
                 if(currentItem && !currentItem.IsDefaultItem)
                 {
-                    DropItem();
+                    EquipItem(defaultItem);
                 }
             }
             Physics2D.queriesHitTriggers = false;
@@ -125,8 +124,7 @@ namespace HoldUp
         public void DestroyItemInHand()
         {
             Destroy(currentItem.gameObject);
-            currentItem = GameObject.Instantiate(defaultItem.gameObject, transform).GetComponent<Item>();
-            currentItem.Initialize(playerController.gameObject, this);
+            EquipItem(defaultItem);
         }
 
         public Item GetItemInHand()

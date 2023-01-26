@@ -1,5 +1,4 @@
 using Core.AI;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -53,6 +52,8 @@ namespace HoldUp
 
         public override void OnUsePressed()
         {
+            if (!isHandMode) return;
+
             if (automaticWeapon)
             {
                 useActionTriggered = true;
@@ -69,6 +70,8 @@ namespace HoldUp
 
         public override void OnUseReleased()
         {
+            if (!isHandMode) return;
+
             if (automaticWeapon)
             {
                 useActionTriggered = false;
@@ -77,6 +80,8 @@ namespace HoldUp
 
         void Update()
         {
+            if (!isHandMode) return;
+
             if (automaticWeapon && useActionTriggered)
             {
                 if (shootTimer <= 0.0f)
@@ -116,6 +121,8 @@ namespace HoldUp
 
         public void ShowRedLine()
         {
+            if (!isHandMode) return;
+
             redLine.enabled = true;
             RaycastHit2D hitResults = Physics2D.Raycast(bulletSpawnPos.position, bulletSpawnPos.right, redLineMaxDistance, layersBlockingRedLine);
             if (hitResults)
@@ -130,11 +137,15 @@ namespace HoldUp
 
         public void HideRedLine()
         {
+            if (!isHandMode) return;
+
             redLine.enabled = false;
         }
 
         private void ShootBullet()
         {
+            if (!isHandMode) return;
+
             Bullet bulletObject = GameObject.Instantiate(bullet.gameObject, GameManager.instance.transform).GetComponent<Bullet>();
             bulletObject.transform.position = bulletSpawnPos.position;
             if (owner.TryGetComponent(out Collider2D ownerCollider))

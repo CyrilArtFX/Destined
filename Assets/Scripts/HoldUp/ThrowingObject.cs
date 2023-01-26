@@ -25,6 +25,8 @@ namespace HoldUp
         private float initialVelocitySpeed;
         private float timer;
 
+        private bool hasExplode = false;
+
         void Awake()
         {
             cc = GetComponent<CircleCollider2D>();
@@ -41,7 +43,8 @@ namespace HoldUp
             radius = explosionRadius;
             damages = explosionDamages;
 
-            Physics2D.IgnoreCollision(cc, ownerCollider);
+            if (ownerCollider)
+                Physics2D.IgnoreCollision(cc, ownerCollider);
 
             ParticleSystem.ShapeModule shape = particles.shape;
             shape.radius = radius * 0.8f;
@@ -59,8 +62,13 @@ namespace HoldUp
 
         public void Explode()
         {
+            if (hasExplode) return;
+            hasExplode = true;
+
+            Physics2D.queriesHitTriggers = true;
             Collider2D[] objectsToExplode = Physics2D.OverlapCircleAll(transform.position, radius);
             List<Damageable> damageableObjects = new();
+            List<GameObject> explosiveObjects = new();
             foreach (Collider2D col in objectsToExplode)
             {
                 if (col.gameObject == gameObject) continue;
@@ -75,6 +83,16 @@ namespace HoldUp
                 {
                     damageableObjects.Add(damageable);
                 }
+
+                if (col.gameObject.TryGetComponent(out ThrowingItem throwingItem))
+                {
+                    explosiveObjects.Add(throwingItem.gameObject);
+                }
+
+                if (col.gameObject.TryGetComponent(out ThrowingObject throwingObject))
+                {
+                    explosiveObjects.Add(throwingObject.gameObject);
+                }
             }
 
             //  AI signal
@@ -85,7 +103,8 @@ namespace HoldUp
                 }
             );
 
-            StartCoroutine(TestForDamageableObjects(damageableObjects));
+            Physics2D.queriesHitTriggers = false;
+            StartCoroutine(TestForDamageableObjects(damageableObjects, explosiveObjects));
         }
 
         void Update()
@@ -106,8 +125,14 @@ namespace HoldUp
             timer = Mathf.Min(timer + 0.5f, timeForMinimalPower);
         }
 
-        private IEnumerator TestForDamageableObjects(List<Damageable> damageableObjects)
+        private IEnumerator TestForDamageableObjects(List<Damageable> damageableObjects, List<GameObject> explosiveObjects)
         {
+            particles.Play();
+
+            rb.velocity = Vector2.zero;
+            cc.enabled = false;
+            sr.enabled = false;
+
             yield return new WaitForEndOfFrame();
             yield return new WaitForEndOfFrame();
 
@@ -134,18 +159,45 @@ namespace HoldUp
                 }
             }
 
+            yield return new WaitForSeconds(0.3f);
+
+            foreach (GameObject explosive in explosiveObjects)
+            {
+                if (!explosive) continue;
+                bool objectProtected = false;
+
+                Vector2 dir = explosive.transform.position - transform.position;
+                RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, dir, dir.magnitude, obstaclesLayerMask);
+                foreach (RaycastHit2D hit in hits)
+                {
+                    if (hit.collider.gameObject == gameObject) continue;
+
+                    if (hit.collider.gameObject != explosive)
+                    {
+                        objectProtected = true;
+                        break;
+                    }
+                }
+                if (!objectProtected)
+                {
+                    if (explosive.TryGetComponent(out ThrowingItem throwingItem))
+                    {
+                        throwingItem.ForceInstantExplosion();
+                    }
+
+                    if (explosive.TryGetComponent(out ThrowingObject throwingObject))
+                    {
+                        throwingObject.Explode();
+                    }
+                }
+            }
+
             StartCoroutine(DestroyObject());
         }
 
         private IEnumerator DestroyObject()
         {
-            particles.Play();
-
-            rb.velocity = Vector2.zero;
-            cc.enabled = false;
-            sr.enabled = false;
-
-            yield return new WaitForSeconds(particles.main.duration + particles.main.startLifetime.constant);
+            yield return new WaitForSeconds(particles.main.duration + particles.main.startLifetime.constant - 0.3f);
 
             Destroy(gameObject);
         }

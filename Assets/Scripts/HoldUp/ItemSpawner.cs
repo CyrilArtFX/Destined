@@ -5,7 +5,7 @@ namespace HoldUp
     public class ItemSpawner : MonoBehaviour
     {
         [SerializeField]
-        private ItemOnGround itemToSpawn;
+        private Item itemToSpawn;
 
         [SerializeField]
         private float spawnDelay;
@@ -14,7 +14,7 @@ namespace HoldUp
         private Transform spawnPosition;
 
         private float timer;
-        private ItemOnGround spawnedItem;
+        private Item spawnedItem;
 
         void Start()
         {

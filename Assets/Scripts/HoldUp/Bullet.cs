@@ -39,7 +39,7 @@ namespace HoldUp
         {
             rb.MovePosition(rb.position + direction * speed);
 
-            if(Vector2.Distance(spawnPosition, transform.position) > range)
+            if (Vector2.Distance(spawnPosition, transform.position) > range)
             {
                 DestroyBullet();
             }
@@ -49,13 +49,33 @@ namespace HoldUp
         {
             if (numberOfHits > 0) return; //  avoid hitting multiple damageables
 
-            if(collision.gameObject.TryGetComponent(out Damageable damageable))
+            if (collision.gameObject.TryGetComponent(out Damageable damageable))
             {
                 damageable.DealDamages(damages, transform.position);
             }
 
+            if (collision.gameObject.TryGetComponent(out PlayerController playerController))
+            {
+                playerController.TryExplodeThrowingItem();
+            }
+
+            if (collision.gameObject.TryGetComponent(out ThrowingObject throwingObject))
+            {
+                throwingObject.Explode();
+            }
+
             numberOfHits++;
             DestroyBullet();
+        }
+
+        void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.gameObject.TryGetComponent(out ThrowingItem item))
+            {
+                item.ForceInstantExplosion();
+                DestroyBullet();
+                return;
+            }
         }
 
         private void DestroyBullet()

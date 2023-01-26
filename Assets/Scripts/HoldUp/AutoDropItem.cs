@@ -9,6 +9,8 @@ namespace HoldUp
 
         public GameObject AutoDrop()
         {
+            if (!isHandMode) return null;
+
             if(inventory)
             {
                 inventory.DestroyItemInHand();

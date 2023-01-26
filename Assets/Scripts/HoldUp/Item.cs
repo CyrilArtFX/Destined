@@ -7,16 +7,18 @@ namespace HoldUp
         protected Vector2 direction;
 
         public bool IsDefaultItem;
-        public ItemOnGround ItemOnGround;
         public int ItemID;
 
         protected GameObject owner;
         protected Inventory inventory;
 
+        protected bool isHandMode = false;
+
         public virtual void Initialize(GameObject ownerActor, Inventory ownerInventory)
         {
             owner = ownerActor;
             inventory = ownerInventory;
+            isHandMode = true;
         }
 
         public virtual void OnUsePressed()
@@ -34,8 +36,13 @@ namespace HoldUp
 
         public virtual void Drop()
         {
-            GameObject droppedItem = GameObject.Instantiate(ItemOnGround.gameObject, GameManager.instance.transform);
+            GameObject droppedItem = GameObject.Instantiate(gameObject, GameManager.instance.transform);
             droppedItem.transform.position = owner.transform.position;
+        }
+
+        public bool IsOnGround()
+        {
+            return !isHandMode;
         }
 
         public void SetDirection(Vector2 itemDirection)

@@ -34,7 +34,9 @@ namespace HoldUp
 
         public override void OnUsePressed()
         {
-            if(remote)
+            if (!isHandMode) return;
+
+            if (remote)
             {
                 objectToThrow.Explode();
 
@@ -55,18 +57,39 @@ namespace HoldUp
                 renderer.sprite = remoteSprite;
                 remote = true;
             }
-
         }
 
         public override void Drop()
         {
-            if(remote)
+            if (!isHandMode) return;
+
+            if (remote)
             {
                 objectToThrow.Explode();
             }
             else
             {
                 base.Drop();
+            }
+        }
+
+        public void ForceInstantExplosion()
+        {
+            if (remote) return;
+
+            objectToThrow = GameObject.Instantiate(associatedObject.gameObject, GameManager.instance.transform).GetComponent<ThrowingObject>();
+            objectToThrow.transform.position = transform.position;
+            objectToThrow.Initialize(0, Vector2.zero, AnimationCurve.Constant(0.0f, 1.0f, 0.0f), 1.0f, null, explosionRadius, explosionDamages);
+            remote = true;
+            objectToThrow.Explode();
+
+            if (inventory)
+            {
+                inventory.DestroyItemInHand();
+            }
+            else
+            {
+                Destroy(gameObject);
             }
         }
 

@@ -171,6 +171,15 @@ namespace HoldUp
             }
         }
 
+        public void TryExplodeThrowingItem()
+        {
+            ThrowingItem item = Inventory.GetItemInHand() as ThrowingItem;
+            if(item)
+            {
+                item.ForceInstantExplosion();
+            }
+        }
+
         public override void ClearEffects()
         {
             base.ClearEffects();
