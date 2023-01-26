@@ -32,14 +32,14 @@ namespace Core.AI
 			Vector3 next_pos = path[0].Position;
 
 			//  check is in acceptance radius
-			float acceptance_radius = AcceptanceRadius.GetValue(StateMachine);
+			float acceptance_radius = AcceptanceRadius.Value;
 			if ((next_pos - StateMachine.AIController.transform.position).sqrMagnitude <= acceptance_radius * acceptance_radius)
 			{
 				path.RemoveAt(0);
 			}
 			else
 			{
-				float speed = SpeedMultiplier.GetValue(StateMachine);
+				float speed = SpeedMultiplier.Value;
 				StateMachine.AIController.Mover.MoveTowards(next_pos, speed, speed);
 			}
 		}
@@ -65,7 +65,7 @@ namespace Core.AI
 			Gizmos.color = Color.blue;
 
 			//  draw destination
-			Gizmos.DrawWireSphere(path[^1].Position, AcceptanceRadius.GetValue(StateMachine));
+			Gizmos.DrawWireSphere(path[^1].Position, AcceptanceRadius.Value);
 
 			//  draw path
 			Vector3 previous_pos = path[0].Position;

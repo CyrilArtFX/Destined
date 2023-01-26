@@ -44,6 +44,9 @@ namespace HoldUp.Characters.AI
 		private float additionalFireCooldown = 1.0f;
 		[SerializeField, Tooltip("For automatic weapons, how much bullets should be shot before applying fire cooldown?")]
 		private int fireCooldownForBurst = 6;
+		
+		private AIProperty<Vector2> movePosProperty;
+		private AIProperty<Transform> targetProperty;
 
 		void Start()
 		{
@@ -54,7 +57,8 @@ namespace HoldUp.Characters.AI
 			CurrentState = State.Patrol;
 
 			//  setup properties
-			StateMachine.SetProperty(MOVE_POS_KEY, Vector2.one);
+			movePosProperty = StateMachine.NewProperty<Vector2>("MovePos");
+			targetProperty = StateMachine.NewProperty<Transform>("Target");
 
 			AIState state;
 
@@ -69,12 +73,12 @@ namespace HoldUp.Characters.AI
 				new AITaskMoveTo()
 				{
 					NearRadius = new(fireDistance),
-					Position = new(MOVE_POS_KEY),
+					Position = movePosProperty,
 				},
 				new AITaskFire()
 				{
 					Weapon = weapon,
-					Target = new(TARGET_KEY),
+					Target = targetProperty,
 					AdditionalFireCooldown = new(additionalFireCooldown),
 					FireCooldownForBurst = new(fireCooldownForBurst),
 					ObstaclesLayerMask = fireObstaclesMask,
@@ -91,7 +95,7 @@ namespace HoldUp.Characters.AI
 			state.AddTasks(
 				new AITaskMoveTo()
 				{
-					Position = new(MOVE_POS_KEY),
+					Position = movePosProperty,
 				},
 				new AITaskWait()
 				{
@@ -107,12 +111,12 @@ namespace HoldUp.Characters.AI
 				{
 					SupressWarning = true,  //  I'm sick of these warnings..
 					Waypoints = patrolWaypoints,
-					Position = new(MOVE_POS_KEY),
+					Position = movePosProperty,
 				},
 				new AITaskMoveTo()
 				{
 					SpeedMultiplier = new(0.5f),
-					Position = new(MOVE_POS_KEY),
+					Position = movePosProperty,
 				},
 				new AITaskWait()
 				{
@@ -124,7 +128,7 @@ namespace HoldUp.Characters.AI
 		public void SetTarget(PlayerController target)
 		{
 			Target = target;
-			StateMachine.SetProperty(TARGET_KEY, target != null ? target.transform : null);
+			targetProperty.Value = target != null ? target.transform : null;
 
 			if (target == null)
 			{
@@ -142,7 +146,7 @@ namespace HoldUp.Characters.AI
 					return;
 				}
 
-				StateMachine.SetProperty(MOVE_POS_KEY, (Vector2) Target.transform.position);
+				movePosProperty.Value = Target.transform.position;
 			}
 
 			if (weapon != null)
@@ -201,7 +205,7 @@ namespace HoldUp.Characters.AI
 			if (CurrentState != State.Patrol) return;
 
 			CurrentState = State.Search;
-			StateMachine.SetProperty(MOVE_POS_KEY, signal.Position);
+			movePosProperty.Value = signal.Position;
 		}
 
 		void OnTriggerExit2D(Collider2D collision)

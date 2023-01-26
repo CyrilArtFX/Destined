@@ -11,7 +11,7 @@ namespace Core.AI
 
 		public override void OnStart()
 		{
-			currentWaitTime = Time.GetValue(StateMachine);
+			currentWaitTime = Time.Value;
 		}
 
 		public override void OnTick(float dt)

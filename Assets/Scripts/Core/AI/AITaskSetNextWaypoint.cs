@@ -19,7 +19,7 @@ namespace Core.AI
 				return;
 			}
 
-			Position.SetValue(StateMachine, (Vector2) Waypoints[CurrentWaypointID].position);
+			Position.Value = Waypoints[CurrentWaypointID].position;
 			CurrentWaypointID = (CurrentWaypointID + 1) % Waypoints.Length;
 
 			End(true);

@@ -28,7 +28,7 @@ namespace HoldUp.Characters.AI
 
 		public override void OnTick( float dt )
 		{
-			Transform target = Target.GetValue(StateMachine);
+			Transform target = Target.Value;
 			if (target == null)
 			{
 				End(true);
@@ -63,9 +63,9 @@ namespace HoldUp.Characters.AI
 
 		void OnWeaponShoot(Bullet bullet)
 		{
-			if (Weapon.IsAutomatic && (fireCooldownForBurst += 1) < FireCooldownForBurst.GetValue(StateMachine)) return;
+			if (Weapon.IsAutomatic && (fireCooldownForBurst += 1) < FireCooldownForBurst.Value) return;
 
-			additionalFireCooldown = AdditionalFireCooldown.GetValue(StateMachine);
+			additionalFireCooldown = AdditionalFireCooldown.Value;
 			fireCooldownForBurst = 0;
 		}
 	}

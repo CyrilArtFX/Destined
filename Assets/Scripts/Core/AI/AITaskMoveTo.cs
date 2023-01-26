@@ -10,7 +10,7 @@ namespace Core.AI
 
 		public override void OnTick(float dt)
 		{
-			Vector3 position = Position.GetValue(StateMachine);
+			Vector3 position = Position.Value;
 
 			//  refresh path
 			if (path == null)
@@ -25,7 +25,7 @@ namespace Core.AI
 			}
 
 			//  end moving on near enough from target
-			float near_radius = NearRadius.GetValue(StateMachine);
+			float near_radius = NearRadius.Value;
 			float near_radius_sqr = near_radius * near_radius;
 			float dist_from_target = (StateMachine.AIController.transform.position - position).sqrMagnitude;
 			if (dist_from_target <= near_radius_sqr)
@@ -42,7 +42,7 @@ namespace Core.AI
 			}
 
 			//  refresh path if target is too far
-			float refresh_radius = RefreshRadius.GetValue(StateMachine);
+			float refresh_radius = RefreshRadius.Value;
 			float refresh_radius_sqr = refresh_radius * refresh_radius;
 			float dist_end_path_to_target = (path[^1].Position - position).sqrMagnitude;
 			if (dist_end_path_to_target > refresh_radius_sqr)
@@ -59,7 +59,7 @@ namespace Core.AI
 			base.OnDrawGizmos();
 
 			Gizmos.color = Color.blue;
-			Gizmos.DrawWireSphere(Position.GetValue(StateMachine), NearRadius.GetValue(StateMachine));
+			Gizmos.DrawWireSphere(Position.Value, NearRadius.Value);
 		}
 	}
 }

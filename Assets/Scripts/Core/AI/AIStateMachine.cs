@@ -9,41 +9,48 @@ namespace Core.AI
 	//  Abstract struct for getting a typed value from either StateMachine properties or const value
 	public struct AIProperty<T>
 	{
-		public bool IsProperty;
-		public string Key;
-		public T Value;
+		public bool IsProperty => Key != null;
 
-		public AIProperty(string key)
+		public string Key;
+
+		public T Value
+		{
+			get 
+			{
+				if (IsProperty) 
+					return StateMachine.GetProperty<T>(Key);
+
+				return storedValue;
+			}
+			set
+			{
+				if (IsProperty)
+					StateMachine.SetProperty(Key, value);
+				else
+					storedValue = value;
+			}
+		}
+		private T storedValue;
+
+		public AIStateMachine StateMachine;
+
+		public AIProperty(AIStateMachine machine, string key)
 		{
 			Key = key;
-			Value = default;
-			IsProperty = true;
+			storedValue = default;
+			StateMachine = machine;
+		}
+
+		public AIProperty(AIStateMachine machine, string key, T value) : this(machine, key)
+		{
+			Value = value;
 		}
 
 		public AIProperty(T value)
 		{
 			Key = null;
-			Value = value;
-			IsProperty = false;
-		}
-
-		public void SetValue(AIStateMachine machine, T value)
-		{
-			if (IsProperty)
-			{ 
-				machine.SetProperty(Key, value);
-				return;
-			}
-
-			Value = value;
-		}
-
-		public T GetValue(AIStateMachine machine)
-		{
-			if (IsProperty)
-				return machine.GetProperty<T>(Key);
-
-			return Value;
+			storedValue = value;
+			StateMachine = null;
 		}
 	}
 
@@ -62,6 +69,14 @@ namespace Core.AI
 			AIController = GetComponent<AIController>();
 		}
 
+		public AIProperty<T> NewProperty<T>(string key)
+		{
+			return new(this, key);
+		}
+		public AIProperty<T> NewProperty<T>(string key, T value)
+		{
+			return new(this, key, value);
+		}
 		public void SetProperty(string key, object value) => Properties[key] = value;
 		public T GetProperty<T>(string key) 
 		{
