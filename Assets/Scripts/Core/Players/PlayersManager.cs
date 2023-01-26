@@ -54,6 +54,7 @@ namespace Core.Players
             if (!menuMode)
             {
                 Destroy(playerInput.gameObject);
+                return;
             }
 
             int sameTypeIndex = 1;

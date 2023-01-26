@@ -62,7 +62,7 @@ namespace HoldUp
             {
                 if (shootTimer <= 0.0f)
                 {
-                    ShootBullet();
+                    ShootBullet(direction);
                     shootTimer = timeBetweenShoots;
                 }
             }
@@ -95,9 +95,8 @@ namespace HoldUp
                     weaponRotation *= Mathf.Deg2Rad;
 
                     Vector2 recoiledDirection = new Vector2(Mathf.Cos(weaponRotation), Mathf.Sin(weaponRotation));
-                    recoiledDirection.Normalize();
 
-                    ShootBullet();
+                    ShootBullet(recoiledDirection);
 
                     shootTimer = timeBetweenShoots;
                 }
@@ -142,7 +141,7 @@ namespace HoldUp
             redLine.enabled = false;
         }
 
-        private void ShootBullet()
+        private void ShootBullet(Vector2 shootDirection)
         {
             if (!isHandMode) return;
 
@@ -150,7 +149,7 @@ namespace HoldUp
             bulletObject.transform.position = bulletSpawnPos.position;
             if (owner.TryGetComponent(out Collider2D ownerCollider))
             {
-                bulletObject.Initialize(bulletSpeed, direction.normalized, bulletRange, bulletDamages, ownerCollider);
+                bulletObject.Initialize(bulletSpeed, shootDirection.normalized, bulletRange, bulletDamages, ownerCollider);
             }
 
             OnShoot.Invoke(bulletObject);

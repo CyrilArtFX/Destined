@@ -261,7 +261,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  timeForMaxRecoil: 8
+  timeForMaxRecoil: 4
   recoilPower: 45
   bullet: {fileID: -1455292350417118654, guid: f591eef7c0e06c7408b4fd4fced0e052, type: 3}
   bulletSpeed: 0.3
