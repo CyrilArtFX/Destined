@@ -365,6 +365,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AICharacter_Guard (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6350564345755318003, guid: bfdd7de4e7dcfd940a52e8b06f472f36, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6350564345755318013, guid: bfdd7de4e7dcfd940a52e8b06f472f36, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -507,6 +511,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AICharacter_SWAT
       objectReference: {fileID: 0}
+    - target: {fileID: 6350564345755318003, guid: 5417ba5477e35a546a93bed621d04610, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6350564345755318013, guid: 5417ba5477e35a546a93bed621d04610, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -563,6 +571,10 @@ PrefabInstance:
     - target: {fileID: 6350564345755318003, guid: 5417ba5477e35a546a93bed621d04610, type: 3}
       propertyPath: m_Name
       value: AICharacter_SWAT (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6350564345755318003, guid: 5417ba5477e35a546a93bed621d04610, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6350564345755318013, guid: 5417ba5477e35a546a93bed621d04610, type: 3}
       propertyPath: m_RootOrder
@@ -678,6 +690,10 @@ PrefabInstance:
     - target: {fileID: 6350564345755318003, guid: 5417ba5477e35a546a93bed621d04610, type: 3}
       propertyPath: m_Name
       value: AICharacter_SWAT (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6350564345755318003, guid: 5417ba5477e35a546a93bed621d04610, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6350564345755318013, guid: 5417ba5477e35a546a93bed621d04610, type: 3}
       propertyPath: m_RootOrder
@@ -800,6 +816,10 @@ PrefabInstance:
     - target: {fileID: 6350564345755318003, guid: 5417ba5477e35a546a93bed621d04610, type: 3}
       propertyPath: m_Name
       value: AICharacter_SWAT (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6350564345755318003, guid: 5417ba5477e35a546a93bed621d04610, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6350564345755318013, guid: 5417ba5477e35a546a93bed621d04610, type: 3}
       propertyPath: m_RootOrder

@@ -214,6 +214,14 @@ namespace HoldUp.Characters.AI
 		{
 			Gizmos.color = Color.magenta;
 			Gizmos.DrawWireSphere(transform.position, fireDistance);
+
+			if (StateMachine != null)
+			{ 
+				Vector2 move_pos = StateMachine.GetProperty<Vector2>(MOVE_POS_KEY);
+				Gizmos.color = Color.green;
+				Gizmos.DrawWireSphere(move_pos, 0.5f);
+				Gizmos.DrawLine(transform.position, move_pos);
+			}
 		}
 	}
 }
