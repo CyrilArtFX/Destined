@@ -2,6 +2,7 @@ using UnityEngine;
 using Core.Tilemaps;
 using System.Collections;
 using System.Collections.Generic;
+using Core.AI;
 
 namespace HoldUp
 {
@@ -75,6 +76,14 @@ namespace HoldUp
                     damageableObjects.Add(damageable);
                 }
             }
+
+            //  AI signal
+            AISignalizer.Emit(
+                new AISignal()
+                {
+                    Position = transform.position,
+                }
+            );
 
             StartCoroutine(TestForDamageableObjects(damageableObjects));
         }

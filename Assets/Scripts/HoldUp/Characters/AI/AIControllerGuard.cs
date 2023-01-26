@@ -196,6 +196,14 @@ namespace HoldUp.Characters.AI
 			}
 		}
 
+		public void OnSignalReceive(AISignal signal)
+		{
+			if (CurrentState != State.Patrol) return;
+
+			CurrentState = State.Search;
+			StateMachine.SetProperty(MOVE_POS_KEY, signal.Position);
+		}
+
 		void OnTriggerExit2D(Collider2D collision)
 		{
 			if (Target != null && Target.gameObject == collision.gameObject)

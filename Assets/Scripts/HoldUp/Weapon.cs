@@ -1,3 +1,4 @@
+using Core.AI;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Events;
@@ -142,6 +143,14 @@ namespace HoldUp
             }
 
             OnShoot.Invoke(bulletObject);
+
+            //  AI signal
+            AISignalizer.Emit(
+                new AISignal()
+                {
+                    Position = bulletObject.transform.position,
+                }
+            );
         }
     }
 }

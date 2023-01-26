@@ -7,6 +7,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1744021962240569328, guid: 2aea605e01127dd439445651d0d67005, type: 3}
+      propertyPath: OnReceive.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1744021962240569328, guid: 2aea605e01127dd439445651d0d67005, type: 3}
+      propertyPath: OnReceive.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1744021962240569328, guid: 2aea605e01127dd439445651d0d67005, type: 3}
+      propertyPath: OnReceive.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6409565088248067611}
+    - target: {fileID: 1744021962240569328, guid: 2aea605e01127dd439445651d0d67005, type: 3}
+      propertyPath: OnReceive.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1744021962240569328, guid: 2aea605e01127dd439445651d0d67005, type: 3}
+      propertyPath: OnReceive.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnSignalReceive
+      objectReference: {fileID: 0}
+    - target: {fileID: 1744021962240569328, guid: 2aea605e01127dd439445651d0d67005, type: 3}
+      propertyPath: OnReceive.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: HoldUp.Characters.AI.AIControllerGuard, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1744021962240569328, guid: 2aea605e01127dd439445651d0d67005, type: 3}
+      propertyPath: OnReceive.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 3542135706957353476, guid: 2aea605e01127dd439445651d0d67005, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -111,6 +139,8 @@ MonoBehaviour:
     m_Bits: 5121
   startAttackReactionTime: 0.4
   fireDistance: 3
+  additionalFireCooldown: 1
+  fireCooldownForBurst: 6
 --- !u!4 &6350564345755318013 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8368106468573765860, guid: 2aea605e01127dd439445651d0d67005, type: 3}
