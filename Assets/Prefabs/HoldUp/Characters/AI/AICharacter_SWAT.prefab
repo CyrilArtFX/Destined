@@ -119,6 +119,8 @@ MonoBehaviour:
     m_Bits: 5121
   startAttackReactionTime: 0.4
   fireDistance: 3
+  additionalFireCooldown: 1
+  fireCooldownForBurst: 6
 --- !u!4 &6350564345755318013 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8368106468573765860, guid: 2aea605e01127dd439445651d0d67005, type: 3}
@@ -144,7 +146,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.25}
   serializedVersion: 2
-  m_Radius: 4
+  m_Radius: 5
 --- !u!114 &2578510709620552508
 MonoBehaviour:
   m_ObjectHideFlags: 0

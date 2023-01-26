@@ -11,6 +11,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 7359105, guid: 93d49d5fcb486754a8f92dcc7464ee25, type: 3}
+    - target: {fileID: 3717755345141351176, guid: 2aea605e01127dd439445651d0d67005, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5387887059634067222, guid: 2aea605e01127dd439445651d0d67005, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -63,6 +67,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: AICharacter_Guard
       objectReference: {fileID: 0}
+    - target: {fileID: 9036795870264514993, guid: 2aea605e01127dd439445651d0d67005, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9206908855328811641, guid: 2aea605e01127dd439445651d0d67005, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2aea605e01127dd439445651d0d67005, type: 3}
 --- !u!1 &6350564345755318003 stripped
@@ -109,8 +121,10 @@ MonoBehaviour:
   fireObstaclesMask:
     serializedVersion: 2
     m_Bits: 5121
-  startAttackReactionTime: 0.4
+  startAttackReactionTime: 0.3
   fireDistance: 3
+  additionalFireCooldown: 1
+  fireCooldownForBurst: 6
 --- !u!4 &6350564345755318013 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8368106468573765860, guid: 2aea605e01127dd439445651d0d67005, type: 3}
@@ -136,7 +150,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.25}
   serializedVersion: 2
-  m_Radius: 4
+  m_Radius: 5
 --- !u!114 &5560436488450418259
 MonoBehaviour:
   m_ObjectHideFlags: 0
