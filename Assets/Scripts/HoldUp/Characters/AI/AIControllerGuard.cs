@@ -200,12 +200,23 @@ namespace HoldUp.Characters.AI
 			}
 		}
 
+		//  NOTE: it do NOT update AITaskSetNextWaypoint, must call this function before Start()
+		public void SetPatrolWaypoints(Transform[] points)
+		{
+			patrolWaypoints = points;
+		}
+
+		public void SearchAt(Vector2 position)
+		{
+			CurrentState = State.Search;
+			movePosProperty.Value = position;
+		}
+
 		public void OnSignalReceive(AISignal signal)
 		{
 			if (CurrentState != State.Patrol) return;
 
-			CurrentState = State.Search;
-			movePosProperty.Value = signal.Position;
+			SearchAt(signal.Position);
 		}
 
 		void OnTriggerExit2D(Collider2D collision)
