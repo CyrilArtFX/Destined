@@ -11,7 +11,7 @@ namespace HoldUp
         {
             if (!isHandMode) return null;
 
-            if(inventory)
+            if (inventory)
             {
                 inventory.DestroyItemInHand();
             }

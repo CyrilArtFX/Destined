@@ -22,7 +22,7 @@ namespace HoldUp
         public void EnableInventory(PlayerController controller)
         {
             playerController = controller;
-            EquipItem(defaultItem);
+            EquipItem(defaultItem, false);
         }
 
         public void DisableInventory()
@@ -33,11 +33,11 @@ namespace HoldUp
             }
         }
 
-        private void EquipItem(Item itemToEquip)
+        private void EquipItem(Item itemToEquip, bool canDrop)
         {
             if(currentItem)
             {
-                if (!currentItem.IsDefaultItem)
+                if (!currentItem.IsDefaultItem && canDrop)
                 {
                     currentItem.Drop();
                 }
@@ -74,7 +74,7 @@ namespace HoldUp
             {
                 if (currentItem && !currentItem.IsDefaultItem)
                 {
-                    EquipItem(defaultItem);
+                    EquipItem(defaultItem, true);
                 }
                 return;
             }
@@ -99,23 +99,23 @@ namespace HoldUp
                 {
                     if(currentItem.ItemID == itemInRange.ItemID)
                     {
-                        EquipItem(defaultItem);
+                        EquipItem(defaultItem, true);
                     }
                     else
                     {
-                        EquipItem(itemInRange);
+                        EquipItem(itemInRange, true);
                     }
                 }
                 else
                 {
-                    EquipItem(itemInRange);
+                    EquipItem(itemInRange, true);
                 }
             }
             else
             {
                 if(currentItem && !currentItem.IsDefaultItem)
                 {
-                    EquipItem(defaultItem);
+                    EquipItem(defaultItem, true);
                 }
             }
             Physics2D.queriesHitTriggers = false;
@@ -124,7 +124,7 @@ namespace HoldUp
         public void DestroyItemInHand()
         {
             Destroy(currentItem.gameObject);
-            EquipItem(defaultItem);
+            EquipItem(defaultItem, false);
         }
 
         public Item GetItemInHand()

@@ -19,11 +19,13 @@ namespace HoldUp
 
         void OnTriggerEnter2D(Collider2D collision)
         {
-            if(collision.gameObject.TryGetComponent<AutoDropItem>(out AutoDropItem item))
+            if (collision.gameObject.TryGetComponent<AutoDropItem>(out AutoDropItem item))
             {
-                item.AutoDrop();
-                itemCounter++;
-                debugText.text = itemCounter.ToString();
+                if (item.AutoDrop())
+                {
+                    itemCounter++;
+                    debugText.text = itemCounter.ToString();
+                }
             }
         }
     }
