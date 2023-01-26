@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
-using Core.Characters.AI;
+using Core.AI;
 
 namespace HoldUp.Characters.AI
 {
@@ -194,6 +194,14 @@ namespace HoldUp.Characters.AI
 				SetTarget(controller);
 				CurrentState = State.Attack;
 			}
+		}
+
+		public void OnSignalReceive(AISignal signal)
+		{
+			if (CurrentState != State.Patrol) return;
+
+			CurrentState = State.Search;
+			StateMachine.SetProperty(MOVE_POS_KEY, signal.Position);
 		}
 
 		void OnTriggerExit2D(Collider2D collision)

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -32,7 +33,7 @@ namespace HoldUp
         private bool aimWithJoystick;
         private float currentlyRevived;
 
-        private Interactable useableInteraction;
+        private List<Interactable> useableInteractions = new();
 
         void Start()
         {
@@ -58,10 +59,18 @@ namespace HoldUp
             {
                 if (ctx.action.triggered)
                 {
-                    if (useableInteraction && useableInteraction.InteractionPossible)
+                    if (useableInteractions.Count > 0)
                     {
-                        useableInteraction.PressInteraction.Invoke(this);
-                        return;
+                        bool interactionDone = false;
+                        foreach (Interactable interaction in useableInteractions)
+                        {
+                            if (interaction.InteractionPossible)
+                            {
+                                interaction.PressInteraction.Invoke(this);
+                                interactionDone = true;
+                            }
+                        }
+                        if (interactionDone) return;
                     }
 
                     inventory.UseItemPressed();
@@ -69,11 +78,20 @@ namespace HoldUp
             }
             if (ctx.action.WasReleasedThisFrame())
             {
-                if (useableInteraction && useableInteraction.InteractionPossible)
+                if (useableInteractions.Count > 0)
                 {
-                    useableInteraction.ReleaseInteraction.Invoke(this);
-                    return;
+                    bool interactionDone = false;
+                    foreach (Interactable interaction in useableInteractions)
+                    {
+                        if (interaction.InteractionPossible)
+                        {
+                            interaction.ReleaseInteraction.Invoke(this);
+                            interactionDone = true;
+                        }
+                    }
+                    if (interactionDone) return;
                 }
+
                 inventory.UseItemReleased();
             }
         }
@@ -122,14 +140,8 @@ namespace HoldUp
                 return;
             }
 
-            if (useableInteraction && useableInteraction.InteractionPossible)
-            {
-                interactionDisplayText.text = useableInteraction.InteractionDisplay;
-            }
-            else
-            {
-                interactionDisplayText.text = "";
-            }
+            if (useableInteractions.Count > 0)
+                RefreshInteractionText();
 
             //  move
             if (!InCinematic)
@@ -180,11 +192,15 @@ namespace HoldUp
             inventory.EquipAndDrop(true);
             interactable.InteractionPossible = true;
             reviveBar.ChangeLife(0.0f);
+            currentlyRevived = 0.0f;
 
-            if (useableInteraction)
+            if (useableInteractions.Count > 0)
             {
-                useableInteraction.ExitZoneInteraction.Invoke(this);
-                useableInteraction = null;
+                foreach (Interactable interaction in useableInteractions)
+                {
+                    interaction.ExitZoneInteraction.Invoke(this);
+                }
+                useableInteractions.Clear();
                 interactionDisplayText.text = "";
             }
 
@@ -198,7 +214,7 @@ namespace HoldUp
 
         public void OnPressRevive()
         {
-            if (Dead)
+            if (Dead && currentlyRevived == 0.0f)
             {
                 currentlyRevived = timeForRevive;
             }
@@ -231,7 +247,26 @@ namespace HoldUp
 
             if (collision.gameObject.TryGetComponent(out Interactable otherInteractable))
             {
-                useableInteraction = otherInteractable;
+                if(useableInteractions.Contains(otherInteractable))
+                {
+                    Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(), collision, true);
+                    return;
+                }
+
+                useableInteractions.Add(otherInteractable);
+                inventory.UseItemReleased();
+            }
+        }
+
+        void OnTriggerStay2D(Collider2D collision)
+        {
+            if (Dead) return;
+
+            if (collision.gameObject.TryGetComponent(out Interactable otherInteractable))
+            {
+                if (useableInteractions.Contains(otherInteractable)) return;
+
+                useableInteractions.Add(otherInteractable);
                 inventory.UseItemReleased();
             }
         }
@@ -242,13 +277,33 @@ namespace HoldUp
 
             if (collision.gameObject.TryGetComponent(out Interactable otherInteractable))
             {
-                if (useableInteraction == otherInteractable)
+                if (useableInteractions.Contains(otherInteractable))
                 {
-                    useableInteraction.ExitZoneInteraction.Invoke(this);
-                    useableInteraction = null;
-                    interactionDisplayText.text = "";
+                    useableInteractions.Remove(otherInteractable);
+                    otherInteractable.ExitZoneInteraction.Invoke(this);
+                    RefreshInteractionText();
                 }
             }
+        }
+
+        private void RefreshInteractionText()
+        {
+            string str = "";
+            if (useableInteractions.Count > 0)
+            {
+                bool notFirstInteraction = false;
+                foreach (Interactable interaction in useableInteractions)
+                {
+                    if (interaction.InteractionPossible)
+                    {
+                        if (notFirstInteraction)
+                            str += " & ";
+                        str += interaction.InteractionDisplay;
+                        notFirstInteraction = true;
+                    }
+                }
+            }
+            interactionDisplayText.text = str;
         }
 
         void OnDestroy()

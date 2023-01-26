@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Core.Characters.AI
+namespace Core.AI
 {
 	public class AITaskMoveTo : AITaskMove
 	{

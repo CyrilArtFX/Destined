@@ -1,4 +1,4 @@
-﻿using Core.Characters.AI;
+﻿using Core.AI;
 using UnityEngine;
 
 namespace HoldUp.Characters.AI

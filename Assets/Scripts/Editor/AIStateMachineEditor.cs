@@ -1,4 +1,4 @@
-﻿using Core.Characters.AI;
+﻿using Core.AI;
 using System;
 using System.Reflection;
 using UnityEditor;

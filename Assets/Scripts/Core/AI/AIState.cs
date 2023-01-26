@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using UnityEditor.VersionControl;
 using UnityEngine;
 
-namespace Core.Characters.AI
+namespace Core.AI
 {
 	public enum AIStatus
 	{

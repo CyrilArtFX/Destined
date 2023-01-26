@@ -391,7 +391,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isLagEnabled: 1
   lagSpeed: 4
-  autoUpdatePlayers: 0
+  autoUpdatePlayers: 1
   followActivated: 0
 --- !u!1 &1688445674
 GameObject:
@@ -645,7 +645,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menuScene: Scenes/HoldUp/Menu
-  gameScene: Scenes/HoldUp/Tests/Test_Marius
+  gameScene: Scenes/HoldUp/Tests/Test_Arkaht
   gameCamera: {fileID: 1589364892}
 --- !u!1 &2103505627
 GameObject:

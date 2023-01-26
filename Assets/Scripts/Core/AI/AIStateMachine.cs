@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace Core.Characters.AI
+namespace Core.AI
 {
 	//  Abstract struct for getting a typed value from either StateMachine properties or const value
 	public struct AIProperty<T>

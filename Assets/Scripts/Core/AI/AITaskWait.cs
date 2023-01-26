@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace Core.Characters.AI
+namespace Core.AI
 {
 	public class AITaskWait : AITask
 	{
