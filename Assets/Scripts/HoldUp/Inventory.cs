@@ -35,7 +35,7 @@ namespace HoldUp
 
         private void EquipItem(Item itemToEquip, bool canDrop)
         {
-            if(currentItem)
+            if (currentItem)
             {
                 if (!currentItem.IsDefaultItem && canDrop)
                 {
@@ -46,7 +46,7 @@ namespace HoldUp
             currentItem = GameObject.Instantiate(itemToEquip.gameObject, transform).GetComponent<Item>();
             currentItem.transform.localPosition = Vector3.zero;
             currentItem.Initialize(playerController.gameObject, this);
-            if(itemToEquip != defaultItem)
+            if (itemToEquip != defaultItem)
             {
                 Destroy(itemToEquip.gameObject);
             }
@@ -54,7 +54,7 @@ namespace HoldUp
 
         public void UseItemPressed()
         {
-            if(currentItem)
+            if (currentItem)
             {
                 currentItem.OnUsePressed();
             }
@@ -62,7 +62,7 @@ namespace HoldUp
 
         public void UseItemReleased()
         {
-            if(currentItem)
+            if (currentItem)
             {
                 currentItem.OnUseReleased();
             }
@@ -70,7 +70,7 @@ namespace HoldUp
 
         public void EquipAndDrop(bool forceDrop)
         {
-            if(forceDrop)
+            if (forceDrop)
             {
                 if (currentItem && !currentItem.IsDefaultItem)
                 {
@@ -83,9 +83,9 @@ namespace HoldUp
 
             Physics2D.queriesHitTriggers = true;
             Collider2D[] objectDetected = Physics2D.OverlapCircleAll(transform.position, radius);
-            foreach(Collider2D collider in objectDetected)
+            foreach (Collider2D collider in objectDetected)
             {
-                if(collider.TryGetComponent(out Item itemOnGround))
+                if (collider.TryGetComponent(out Item itemOnGround))
                 {
                     if (!itemOnGround.IsOnGround()) continue;
                     itemInRange = itemOnGround;
@@ -93,11 +93,11 @@ namespace HoldUp
                 }
             }
 
-            if(itemInRange)
+            if (itemInRange)
             {
-                if(currentItem && !currentItem.IsDefaultItem)
+                if (currentItem && !currentItem.IsDefaultItem)
                 {
-                    if(currentItem.ItemID == itemInRange.ItemID)
+                    if (currentItem.ItemID == itemInRange.ItemID)
                     {
                         EquipItem(defaultItem, true);
                     }
@@ -113,7 +113,7 @@ namespace HoldUp
             }
             else
             {
-                if(currentItem && !currentItem.IsDefaultItem)
+                if (currentItem && !currentItem.IsDefaultItem)
                 {
                     EquipItem(defaultItem, true);
                 }
