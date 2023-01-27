@@ -19,7 +19,6 @@ namespace HoldUp
 
         private string gameScene;
 
-
         public override void StartGame()
         {
             PlayersManager.instance.SwitchToPlayMode();

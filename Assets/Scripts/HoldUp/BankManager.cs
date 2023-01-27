@@ -19,6 +19,9 @@ namespace HoldUp
         private TextMeshProUGUI globalMessageText;
         [SerializeField]
         private GameObject globalMessageBackground;
+        
+        [SerializeField]
+        private Van van;
 
         private int playersCount;
         private int playersDead;
@@ -36,12 +39,43 @@ namespace HoldUp
 
         void Start()
         {
+            StartCoroutine(CoroutineStartPlayerAnimation());
+        }
+
+        IEnumerator CoroutineStartPlayerAnimation()
+        {
             List<Player> players = PlayersManager.instance.GetPlayers();
 
-            foreach (Player player in players)
+            if (van != null)
             {
-                player.transform.position = playerSpawnPosition.position;
-                playerControllers.Add(player.Controller as PlayerController);
+                //  set sprite renderers
+                for (int i = 0; i < van.CharactersRenderers.Length; i++)
+                {
+                    if (i < players.Count)
+                    {
+                        van.CharactersRenderers[i].sprite = players[i].GetSprites().BodySprite;
+                        van.CharactersRenderers[i].enabled = true;
+                    }
+                    else
+                    {
+                        van.CharactersRenderers[i].enabled = false;
+                    }
+                }
+
+                //  wait animation end
+                yield return van.CoroutineStartAnimation();
+            }
+
+            for (int i = 0; i < van.CharactersRenderers.Length; i++)
+            {
+                if (i < players.Count)
+                {
+                    Player player = players[i];
+                    player.transform.position = van.CharactersRenderers[i].transform.position;
+                    playerControllers.Add(player.Controller as PlayerController);
+                }
+
+                van.CharactersRenderers[i].enabled = false;
             }
 
             playersCount = players.Count;
