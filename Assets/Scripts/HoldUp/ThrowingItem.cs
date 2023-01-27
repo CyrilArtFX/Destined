@@ -22,14 +22,8 @@ namespace HoldUp
 
 
 
-        private new SpriteRenderer renderer;
         private bool remote = false;
         private ThrowingObject objectToThrow;
-
-        void Awake()
-        {
-            renderer = GetComponent<SpriteRenderer>();
-        }
 
 
         public override void OnUsePressed()

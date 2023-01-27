@@ -13,7 +13,7 @@ namespace HoldUp
         protected Inventory inventory;
 
         [SerializeField]
-        private new SpriteRenderer renderer;
+        protected new SpriteRenderer renderer;
 
         protected bool isHandMode = false;
 
