@@ -756,7 +756,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menuScene: Scenes/HoldUp/Menu
   gameScenes:
-  - Scenes/HoldUp/Tests/Ld_Marius
+  - Scenes/HoldUp/Tests/Test_LD_Matheys
   gameCamera: {fileID: 1589364892}
 --- !u!1 &2103505627
 GameObject:
