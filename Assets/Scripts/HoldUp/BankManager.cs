@@ -1,6 +1,7 @@
 using Core.Players;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 namespace HoldUp
@@ -14,6 +15,10 @@ namespace HoldUp
 
         [SerializeField]
         private DepositArea depositArea;
+        [SerializeField]
+        private TextMeshProUGUI globalMessageText;
+        [SerializeField]
+        private GameObject globalMessageBackground;
 
         private int playersCount;
         private int playersDead;
@@ -41,6 +46,8 @@ namespace HoldUp
 
             playersCount = players.Count;
             playersDead = 0;
+            globalMessageText.text = "";
+            globalMessageBackground.SetActive(false);
         }
 
         public void PlayerDead()
@@ -95,12 +102,13 @@ namespace HoldUp
 
         private IEnumerator PlayersReturnToLobby()
         {
-            print("players decided to go home");
+            globalMessageBackground.SetActive(true);
+            globalMessageText.text = "Players went back home with what they took.\nScore : " + depositArea.Score;
             foreach (PlayerController playerController in playerControllers)
             {
                 playerController.SetInCinematic(true);
             }
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(2.0f);
             (GameManager.instance as GameManager).ReturnToLobby(depositArea.Score);
         }
 
@@ -108,12 +116,13 @@ namespace HoldUp
 
         private IEnumerator DeathReturnToLobby()
         {
-            print("players are all dead...");
+            globalMessageBackground.SetActive(true);
+            globalMessageText.text = "Players all died...\nScore : 0";
             foreach (PlayerController playerController in playerControllers)
             {
                 playerController.SetInCinematic(true);
             }
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(2.0f);
             (GameManager.instance as GameManager).ReturnToLobby(0);
         }
     }
