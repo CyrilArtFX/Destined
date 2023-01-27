@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 
 namespace HoldUp
@@ -6,25 +5,40 @@ namespace HoldUp
     public class DepositArea : MonoBehaviour
     {
         [SerializeField]
-        private TextMeshPro debugText;
+        private BoxCollider2D visualDepositRect;
+        [SerializeField]
+        private Transform visualDepositTransform;
 
         public int Score => itemCounter;
         private int itemCounter;
 
+
+        private float vsMinX,  vsMaxX, vsMinY, vsMaxY;
+
         void Start()
         {
             itemCounter = 0;
-            debugText.text = itemCounter.ToString();
+
+            vsMinX = visualDepositRect.bounds.center.x - visualDepositRect.bounds.extents.x;
+            vsMaxX = visualDepositRect.bounds.center.x + visualDepositRect.bounds.extents.x;
+            vsMinY = visualDepositRect.bounds.center.y - visualDepositRect.bounds.extents.y;
+            vsMaxY = visualDepositRect.bounds.center.y + visualDepositRect.bounds.extents.y;
         }
 
         void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.gameObject.TryGetComponent<AutoDropItem>(out AutoDropItem item))
             {
-                if (item.AutoDrop())
+                GameObject visualBag = item.AutoDrop();
+                if (visualBag)
                 {
                     itemCounter++;
-                    debugText.text = itemCounter.ToString();
+
+                    float rdmX = Random.Range(vsMinX, vsMaxX);
+                    float rdmY = Random.Range(vsMinY, vsMaxY);
+
+                    GameObject bag = GameObject.Instantiate(visualBag, visualDepositTransform);
+                    bag.transform.position = new Vector2(rdmX, rdmY);
                 }
             }
         }
