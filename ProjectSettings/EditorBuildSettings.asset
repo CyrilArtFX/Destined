@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/HoldUp/Tests/Ld_Marius.unity
     guid: 400ace07b112b6d41b394ca3941f48d6
   - enabled: 1
+    path: Assets/Scenes/HoldUp/Tests/Test_LD_Matheys.unity
+    guid: d779de6f4f0ca6443879858114a8c3b9
+  - enabled: 1
     path: Assets/Scenes/Carroted/Players.unity
     guid: 6d2cfbc98eba2ad4ea8f8193b9fd3c08
   - enabled: 1
