@@ -1,6 +1,7 @@
 using Core.Players;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -44,44 +45,77 @@ namespace HoldUp
 
         IEnumerator CoroutineStartPlayerAnimation()
         {
+            globalMessageText.text = "";
+            globalMessageBackground.SetActive(false);
+
+            //  setup players
             List<Player> players = PlayersManager.instance.GetPlayers();
+            foreach (Player player in players)
+            {
+                player.transform.position = playerSpawnPosition.position;
+                playerControllers.Add(player.Controller as PlayerController);
+            }
 
             if (van != null)
             {
-                //  set sprite renderers
+                //  setup renderers & players
+                List<Transform> animated_characters = new();
                 for (int i = 0; i < van.CharactersRenderers.Length; i++)
                 {
+                    SpriteRenderer renderer = van.CharactersRenderers[i];
                     if (i < players.Count)
                     {
-                        van.CharactersRenderers[i].sprite = players[i].GetSprites().BodySprite;
-                        van.CharactersRenderers[i].enabled = true;
+                        Player player = players[i];
+                        
+                        PlayerController controller = player.Controller as PlayerController;
+                        controller.SetInCinematic(true);
+                        controller.HideVisually();
+
+                        renderer.sprite = player.Renderer.sprite;
+                        renderer.enabled = true;
+                        animated_characters.Add(renderer.transform);
                     }
                     else
                     {
-                        van.CharactersRenderers[i].enabled = false;
+                        renderer.enabled = false;
                     }
                 }
 
+                //  center camera on animated characters
+                CameraFollow camera = (GameManager.instance as GameManager).Camera;
+                camera.SetTargets(animated_characters, true);
+
                 //  wait animation end
                 yield return van.CoroutineStartAnimation();
-            }
 
-            for (int i = 0; i < van.CharactersRenderers.Length; i++)
-            {
-                if (i < players.Count)
+                //  setup players ready
+                for (int i = 0; i < van.CharactersRenderers.Length; i++)
                 {
-                    Player player = players[i];
-                    player.transform.position = van.CharactersRenderers[i].transform.position;
-                    playerControllers.Add(player.Controller as PlayerController);
+                    SpriteRenderer renderer = van.CharactersRenderers[i];
+                    if (i < players.Count)
+                    {
+                        Player player = players[i];
+                        
+                        PlayerController controller = player.Controller as PlayerController;
+                        controller.SetInCinematic(false);
+                        controller.ShowVisually();
+
+                        player.transform.position = renderer.transform.position + new Vector3(0.0f, 0.5f);
+                    }
+
+                    renderer.enabled = false;
                 }
 
-                van.CharactersRenderers[i].enabled = false;
+                //  give camera back to players
+                camera.SetTargets(players);
+            }
+            else
+            {
+                Debug.LogWarning("BankManager: Van == null, no start animation");
             }
 
             playersCount = players.Count;
             playersDead = 0;
-            globalMessageText.text = "";
-            globalMessageBackground.SetActive(false);
         }
 
         public void PlayerDead()

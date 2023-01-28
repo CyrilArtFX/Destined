@@ -6,6 +6,8 @@ namespace Core.Players
 {
     public class PlayerOutOfBound : MonoBehaviour
     {
+        public OutOfBoundIcon OOBIcon { get; private set; }
+
         [SerializeField]
         private GameObject OOBPrefab;
 
@@ -14,42 +16,41 @@ namespace Core.Players
         [SerializeField]
         private Player playerScript;
 
-        private OutOfBoundIcon oobIcon;
-
-
         public void Initialize(Transform oobParent)
         {
-            oobIcon = GameObject.Instantiate(OOBPrefab, oobParent).GetComponent<OutOfBoundIcon>();
-            oobIcon.SetSprite(playerScript.GetSprites().HeadSprite);
-            oobIcon.gameObject.SetActive(false);
+            OOBIcon = GameObject.Instantiate(OOBPrefab, oobParent).GetComponent<OutOfBoundIcon>();
+            OOBIcon.SetSprite(playerScript.GetSprites().HeadSprite);
+            OOBIcon.gameObject.SetActive(false);
         }
 
         void Update()
         {
-            if (playerRenderer.isVisible)
+            if (!OOBIcon) return;
+
+            if (!playerRenderer.enabled || playerRenderer.isVisible)
             {
-                oobIcon.gameObject.SetActive(false);
+                OOBIcon.gameObject.SetActive(false);
             }
             else
             {
-                oobIcon.gameObject.SetActive(true);
+                OOBIcon.gameObject.SetActive(true);
                 Vector3 screenPos = Camera.main.WorldToScreenPoint(playerRenderer.transform.position);
                 Rect screenRect = Camera.main.pixelRect;
                 Vector2 oobIconPos = new Vector2(
                     Mathf.Clamp((screenPos.x / screenRect.width * 1920) - 960, -910, 910), 
                     Mathf.Clamp((screenPos.y / screenRect.height * 1080) - 540, -490, 490)
                     );
-                oobIcon.SetPosition(oobIconPos);
+                OOBIcon.SetPosition(oobIconPos);
 
-                oobIcon.CalculateArrowPosition(playerRenderer.transform.position);
+                OOBIcon.CalculateArrowPosition(playerRenderer.transform.position);
             }
         }
 
         void OnDestroy()
         {
-            if(oobIcon)
+            if(OOBIcon)
             {
-                Destroy(oobIcon.gameObject);
+                Destroy(OOBIcon.gameObject);
             }
         }
     }

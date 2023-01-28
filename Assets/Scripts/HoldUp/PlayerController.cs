@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -27,6 +28,7 @@ namespace HoldUp
         public Inventory Inventory => inventory;
 
         public bool Dead { get; private set; }
+        public bool IsVisible { get; private set; }
 
         private Vector2 lastPerformedDirection;
         private Vector2 aimDirection;
@@ -37,8 +39,10 @@ namespace HoldUp
 
         void Start()
         {
-            lastPerformedDirection = Vector2.right;
+            IsVisible = true;
             Dead = false;
+
+            lastPerformedDirection = Vector2.right;
             interactable.InteractionPossible = false;
 
             reviveBar.Initialize(timeForRevive);
@@ -142,7 +146,9 @@ namespace HoldUp
 
             if (useableInteractions.Count > 0)
                 RefreshInteractionText();
-            UpdateItemVisually();
+
+            if (IsVisible)
+                UpdateItemVisually();
 
             //  move
             if (!InCinematic)
@@ -357,6 +363,24 @@ namespace HoldUp
             }
         }
 
+        public void HideVisually()
+		{
+            IsVisible = false;
+
+            player.Renderer.enabled = false;
+            player.NameText.enabled = false;
+            Inventory.GetItemInHand().HideVisually();
+		}
+
+		public void ShowVisually()
+		{
+            IsVisible = true;
+
+            player.Renderer.enabled = true;
+            player.NameText.enabled = true;
+            Inventory.GetItemInHand().ShowVisually();
+		}
+
         void OnDestroy()
         {
             if (inventory)
@@ -364,5 +388,5 @@ namespace HoldUp
                 inventory.DisableInventory();
             }
         }
-    }
+	}
 }

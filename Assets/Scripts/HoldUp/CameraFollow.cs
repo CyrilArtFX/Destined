@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Core.Players;
+using System.Linq;
 
 namespace HoldUp
 {
@@ -19,56 +20,67 @@ namespace HoldUp
         [SerializeField]
         private bool followActivated = false;
 
-        private List<Transform> playersTransforms = new();
+        private List<Transform> targetsTransforms = new();
 
         void FixedUpdate()
         {
             //  auto update transforms on player count changes
-            if (autoUpdatePlayers && playersTransforms.Count != PlayersManager.instance.GetNumberOfPlayers())
+            if (autoUpdatePlayers && targetsTransforms.Count != PlayersManager.instance.GetNumberOfPlayers())
             {
                 SetTargets(PlayersManager.instance.GetPlayers());
             }
 
-            if(followActivated && playersTransforms.Count > 0)
-            {
-                Vector3 centered_position = Vector3.zero;
-                foreach (Transform player_transform in playersTransforms)
-                {
-                    centered_position += player_transform.position;
-                }
-                centered_position /= playersTransforms.Count;
-                centered_position.z = -10.0f;
-
-                //  apply position
-                if (isLagEnabled)
-                {
-                    transform.position = Vector3.Lerp(transform.position, centered_position, Time.deltaTime * lagSpeed);
-                }
-                else
-                { 
-                    transform.position = centered_position;
-                }
-            }
-            else
+            if(followActivated && targetsTransforms.Count > 0)
+			{
+				//  apply position
+				Vector3 centered_position = GetTargetsCenter();
+				if ( isLagEnabled )
+				{
+					transform.position = Vector3.Lerp( transform.position, centered_position, Time.deltaTime * lagSpeed );
+				}
+				else
+				{
+					transform.position = centered_position;
+				}
+			}
+			else
             {
                 transform.position = new Vector3(0.0f, 0.0f, -10.0f);
             }
         }
 
-        public void EnableFollowMode(List<Player> players)
+		private Vector3 GetTargetsCenter()
+		{
+			Vector3 centered_position = Vector3.zero;
+			foreach ( Transform player_transform in targetsTransforms )
+			{
+				centered_position += player_transform.position;
+			}
+			centered_position /= targetsTransforms.Count;
+			centered_position.z = -10.0f;
+			return centered_position;
+		}
+
+		public void EnableFollowMode(IEnumerable<Player> players)
         {
             SetTargets(players);
             followActivated = true;
         }
 
-        public void SetTargets(List<Player> players)
+        public void SetTargets(IEnumerable<Transform> targets, bool instant_warp_to = false)
         {
-            playersTransforms.Clear();
-            foreach (Player player in players)
+            targetsTransforms.Clear();
+            foreach (Transform target in targets)
             {
-                playersTransforms.Add(player.transform);
+                targetsTransforms.Add(target);
+            }
+
+            if (instant_warp_to && targetsTransforms.Count > 0)
+            {
+                transform.position = GetTargetsCenter();
             }
         }
+        public void SetTargets(IEnumerable<Player> players) => SetTargets(players.Select(player => player.transform));
 
         public void DisableFollowMode()
         {

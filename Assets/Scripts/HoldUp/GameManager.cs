@@ -9,6 +9,8 @@ namespace HoldUp
     [AddComponentMenu("Scripts/HoldUp Game Manager")]
     public class GameManager : Core.GameManager
     {
+        public CameraFollow Camera => gameCamera;
+
         [SerializeField, Scene, Tooltip("Will select randomly one of these maps")]
         protected List<string> gameScenes;
 

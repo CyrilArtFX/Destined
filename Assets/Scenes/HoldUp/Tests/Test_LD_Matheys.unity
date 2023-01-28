@@ -492,6 +492,7 @@ MonoBehaviour:
   depositArea: {fileID: 1631034749}
   globalMessageText: {fileID: 1264573664}
   globalMessageBackground: {fileID: 1178054943}
+  van: {fileID: 2035227530}
 --- !u!4 &213654717
 Transform:
   m_ObjectHideFlags: 0
@@ -1063,7 +1064,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3959354478316963809, guid: ca8d6befb105e7e438be3bf9b00fc7da, type: 3}
   m_PrefabInstance: {fileID: 605038289}
   m_PrefabAsset: {fileID: 0}
---- !u!43 &608515702
+--- !u!43 &635461620
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1412,8 +1413,8 @@ MonoBehaviour:
   - {x: 0.5, y: 0.5, z: 0}
   - {x: 0.5, y: -0.5, z: 0}
   m_ShapePathHash: 0
-  m_Mesh: {fileID: 608515702}
-  m_InstanceId: 48192
+  m_Mesh: {fileID: 635461620}
+  m_InstanceId: 40140
 --- !u!212 &685570331
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -9587,7 +9588,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 534616559587429683, guid: 78b09f98ad147e7488731c528c46aee6, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5582491864223039134, guid: 78b09f98ad147e7488731c528c46aee6, type: 3}
       propertyPath: m_Name
@@ -9639,6 +9640,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78b09f98ad147e7488731c528c46aee6, type: 3}
+--- !u!114 &2035227530 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8202447704291105950, guid: 78b09f98ad147e7488731c528c46aee6, type: 3}
+  m_PrefabInstance: {fileID: 2035227529}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a57ec138cfe01cd4db7d8daf7c37f907, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2045666240
 PrefabInstance:
   m_ObjectHideFlags: 0

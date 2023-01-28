@@ -8,6 +8,8 @@ namespace Core.Players
     public class Player : MonoBehaviour
     {
         public PlayerController Controller => controller;
+        public SpriteRenderer Renderer => spriteRenderer;
+        public TextMeshPro NameText => nameText;
 
         [SerializeField]
         private TextMeshPro nameText;
